@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ETransport</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_home">Home</string>
+    <string name="action_fav">Favoris</string>
+    <string name="title_activity_login">Se connecter</string>
+
+
+    <string name="subscribe"><u>S\'inscrire</u></string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">E-mail</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">S\'authentifier</string>
+    <string name="action_sign_in_forget"><u>S\'authentifier</u></string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="already_member"> <u>D&#233;ja membre</u>  </string>
+    <string name="forget_password"> <u> Mot de passe oublie</u> </string>
+    <string name="title_activity_forgetpass_activity">r&#233;initialiser le mot de passe</string>
+    <string name="BTN_Reset"> R&#233;initialiser le mot de passe </string>
+    <string name="Welcome_text">Bienvenue</string>
+    <string name="Application_version">V 1.0</string>
+
+</resources>

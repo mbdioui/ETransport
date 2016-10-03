@@ -1,0 +1,17 @@
+<tabs>
+    <tab
+        id="@+id/tab_home_client"
+        icon="@drawable/home"
+        title="@string/action_home"
+        barColorWhenSelected="@color/light_blue"/>
+    <tab
+        id="@+id/tab_Paths"
+        icon="@drawable/star"
+        title="@string/action_fav"
+        barColorWhenSelected="@color/orange"/>
+    <tab
+        id="@+id/tab_action_settings"
+        icon="@drawable/ic"
+        title="@string/action_settings"
+        barColorWhenSelected="@color/yellow"/>
+</tabs>

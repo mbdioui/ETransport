@@ -1,0 +1,126 @@
+<ScrollView
+     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:layout_weight="1">
+
+      <LinearLayout
+          android:focusable="true"
+          android:focusableInTouchMode="true"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="1"
+          android:orientation="vertical" >
+
+			<LinearLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal" >
+
+				<AutoCompleteTextView
+				    android:id="@+id/User_l_name"
+				    android:layout_width="90dp"
+				    android:layout_height="wrap_content"
+				    android:layout_marginLeft="65dp"
+				    android:layout_marginTop="30dp"
+				    android:ems="10"
+				    android:hint="Nom" >
+
+				</AutoCompleteTextView>
+
+          <AutoCompleteTextView
+              android:id="@+id/User_f_name"
+              android:layout_width="147dp"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="30dp"
+              android:ems="10"
+              android:hint="Prénom"/>
+
+			</LinearLayout>
+
+          <AutoCompleteTextView
+              android:id="@+id/User_mail"
+              android:layout_width="230dp"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="65dp"
+              android:layout_marginTop="30dp"
+              android:ems="10"
+              android:hint="Email"
+              android:inputType="textWebEmailAddress" />
+
+          <AutoCompleteTextView
+              android:id="@+id/User_password"
+              android:layout_width="230dp"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/NomTextView"
+              android:layout_below="@+id/NomTextView"
+              android:layout_marginLeft="65dp"
+              android:layout_marginTop="30dp"
+              android:drawableRight="@drawable/block"
+              android:ems="10"
+              android:hint="Mot de passe"
+              android:inputType="textWebPassword" />
+
+          <AutoCompleteTextView
+              android:id="@+id/User_password_confirm"
+              android:layout_width="230dp"
+              android:layout_height="wrap_content"
+              android:layout_alignLeft="@+id/MDPTextView"
+              android:layout_below="@+id/MDPTextView"
+              android:layout_marginLeft="65dp"
+              android:layout_marginTop="30dp"
+              android:contentDescription="Confirmer le mot de passe"
+              android:drawableRight="@drawable/block"
+              android:ems="10"
+              android:hint="Confirmer le mot de passe"
+              android:inputType="textWebPassword" />
+
+          <AutoCompleteTextView
+              android:id="@+id/User_phone"
+              android:layout_width="230dp"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="65dp"
+              android:layout_marginTop="30dp"
+              android:ems="10"
+              android:hint="Numéro de téléphone"
+              android:inputType="number" />
+
+              <ToggleButton
+                  android:id="@+id/User_status"
+                  android:layout_width="95dp"
+                  android:layout_height="wrap_content"
+                  android:layout_gravity="center"
+                  android:layout_marginTop="30dp"
+                  android:textOff="Chauffeur"
+                  android:textOn="Affréteur" />
+         
+          <Button
+              android:id="@+id/User_subs"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginTop="30dp"
+              android:text="inscription" />
+
+          <Button
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/BTN_alreadymember"
+              android:layout_gravity="center"
+              android:layout_marginTop="0dp"
+              android:gravity="top|center"
+              android:background="@android:color/transparent"
+              android:text="@string/already_member" />
+
+          <ImageView
+              android:id="@+id/etransport_logo"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:src="@drawable/logo"
+
+              />
+
+      </LinearLayout>
+ 	</ScrollView>

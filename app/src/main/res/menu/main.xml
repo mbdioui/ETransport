@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.etransport.InsertUserActivity" >
+
+    <item
+        android:id="@+id/tab_action_settings"
+        android:icon="@drawable/ic"
+        android:title="@string/action_settings"/>
+    <item
+        android:id="@+id/tab_home_client"
+        android:title="Acceuil"
+        android:icon="@drawable/home"/>
+    <item
+        android:id="@+id/tab_Paths"
+        android:title="Trajets"
+        android:icon="@drawable/star"/>
+
+</menu>
