@@ -9,8 +9,7 @@
     android:textAlignment="center"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.etransport.Form_Home_Client">
+    android:paddingTop="@dimen/activity_vertical_margin">
 
 
     <TextView

@@ -20,8 +20,6 @@ public class MainClient extends Activity {
             public void onTabSelected(@IdRes int tabId) {
                 switch(tabId){
                 case R.id.tab_action_settings :
-
-
                     Form_Settings_Client newFragment = new Form_Settings_Client();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
@@ -31,7 +29,6 @@ public class MainClient extends Activity {
                     transaction.commit();
                         break;
                 case R.id.tab_home_client:
-
                     Form_Home_Client f = new Form_Home_Client();
                     FragmentTransaction FT = getFragmentManager().beginTransaction();
                     FT.replace(R.id.framefragment, f);

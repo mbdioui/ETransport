@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_add__transport"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+            <AutoCompleteTextView
+                    android:id="@+id/Autocomplete_places"
+                    android:hint="adresse"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center_horizontal"
+                    android:drawableEnd="@android:drawable/ic_input_delete"/>
+
+            <!--<EditText-->
+                <!--android:hint="ville"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+                <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
+                <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+                <!--android:gravity="center_horizontal"/>-->
+            <!--<EditText-->
+                <!--android:hint="pays"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+                <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
+                <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+                <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
+                <!--android:gravity="center_horizontal"/>-->
+
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:id="@+id/MapHere"
+            android:layout_width="match_parent"
+            android:layout_height="550sp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@android:drawable/ic_menu_directions"
+            android:layout_gravity="right"
+            android:id="@+id/add_transport1_BTN"/>
+
+    </LinearLayout>
+</ScrollView>

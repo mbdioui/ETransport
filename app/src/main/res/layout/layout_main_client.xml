@@ -4,14 +4,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_main_client"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.etransport.MainClient">
+    android:layout_height="match_parent">
 
     <FrameLayout
+        android:id="@+id/framefragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/framefragment">
-    </FrameLayout>
+        android:layout_above="@+id/Bottbar" />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/myFAB"-->
+        <!--android:layout_width="50dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:src="@drawable/ic_note_add_black_24dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--app:backgroundTint="@color/light_blue"-->
+        <!--app:rippleColor="@color/blue"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_marginRight="5dp" />-->
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/Bottbar"
