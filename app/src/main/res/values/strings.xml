@@ -37,6 +37,11 @@
     <string name="permission_required_toast">Location permission is required for this app.</string>
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
     <string name="BTN_AddPath_label">Add Path</string>
-    <string name="no_places_found">la destination cherché n\'est pas trouvé, essayez encore</string>
+    <string name="no_places_found">la destination cherché n\'est pas trouvé ou dans un pays au déla de la zone de couverture, essayez encore</string>
+    <string name="done">valider</string>
+    <string name="transport_description">veuillez décrire votre trajet</string>
+    <string name="Go_time">Heure de Départ</string>
+    <string name="Arrive_time">Heure d\'arrivé</string>
+    <string name="destination_label">Veuillez saisir votre adresse de destination :</string>
 
 </resources>

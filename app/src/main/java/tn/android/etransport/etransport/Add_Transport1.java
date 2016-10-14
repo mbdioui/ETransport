@@ -44,34 +44,35 @@ import java.util.List;
 
 import utils.Connectivity;
 import utils.GPSTracker;
+import utils.KeyboardUtil;
 import utils.PermissionUtils;
 
 
 public class Add_Transport1 extends Activity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
-        GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMapClickListener,View.OnClickListener {
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleMap.OnMapClickListener, View.OnClickListener {
 
+    private final int REQUEST_location = 100;
+    private final LatLngBounds BOUNDS = new LatLngBounds(
+            new LatLng(32.438329, 11.556740), new LatLng(48.40003249610686, -4.625244140625));
     private GoogleMap mMap;
     private UiSettings mapUIsettings;
-    private final int REQUEST_location = 100;
     private Marker startmarker;
     private Marker destinationmarker;
-    private final LatLngBounds BOUNDS = new LatLngBounds(
-            new LatLng(32.438329,11.556740), new LatLng(48.40003249610686,-4.625244140625));
     private AutoCompleteTextView Autocomplete_place_field;
     private GoogleApiClient mGoogleApiClient;
-    private PlaceArrayAdapter  mPlaceArrayAdapter;
+    private PlaceArrayAdapter mPlaceArrayAdapter;
     private Geocoder geocod; // get ltd,lgt from adress
     private LatLng positiondest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_add__transport);
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.MapHere);
         //TODO check connectivity to internet
-        if(isNetworkAvailable())
+        if (isNetworkAvailable())
             mapFragment.getMapAsync(this);
-        else
-        {
+        else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setMessage("vous devez etre lié à internet pour effectuer cette opération");
             alertDialogBuilder.setPositiveButton("continuez", null);
@@ -83,11 +84,10 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
             });
             AlertDialog alertDialog = alertDialogBuilder.create();
         }
-        ImageButton BTN = (ImageButton)findViewById(R.id.add_transport1_BTN);
+        ImageButton BTN = (ImageButton) findViewById(R.id.add_transport1_BTN);
         BTN.setOnClickListener(this);
 
     }
-
 
 
     private boolean isNetworkAvailable() {
@@ -99,51 +99,48 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (!PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_FINE_LOCATION))
-        {
-            if(isChild())
-            {Intent i = new  Intent(Add_Transport1.this,getParent().getClass());
-            startActivity(i);
-            this.finish();}
-            else
+        if (!PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (isChild()) {
+                Intent i = new Intent(Add_Transport1.this, getParent().getClass());
+                startActivity(i);
+                this.finish();
+            } else
                 finish();
-        }
-        else
-            if (Connectivity.Checkinternet(this))
+        } else if (Connectivity.Checkinternet(this))
             setupmap();
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         mMap = map;
-        if(PermissionUtils.canMakeSmores())
-        {
+        if (PermissionUtils.canMakeSmores()) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                 ActivityCompat.requestPermissions(Add_Transport1.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_location);
             else
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_location);
-        }
-        else
-        map.setMyLocationEnabled(true);
+        } else
+            map.setMyLocationEnabled(true);
         GPSTracker gps = new GPSTracker(this);
-        if(Connectivity.Checkinternet(this))
-        {
-            gps.getLocation();
+        if (Connectivity.Checkinternet(this)) {
+            Location loc=gps.getLocation();
+            LatLng actuellocation;
             mapUIsettings = map.getUiSettings();
-
-    //		LatLng école = new LatLng(47.6410701, 6.844562);
-            LatLng actuellocation= new LatLng(gps.getLatitude(),gps.getLongitude());
-
+            //		LatLng école = new LatLng(47.6410701, 6.844562);
+            if (loc!=null)
+                actuellocation = new LatLng(loc.getLatitude(), loc.getLongitude());
+            else
+                actuellocation = new LatLng(35.769233,10.819574);
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(actuellocation, 13));
 
-            MarkerOptions startmarkerop= new MarkerOptions()
+            MarkerOptions startmarkerop = new MarkerOptions()
                     .title("Location")
                     .draggable(true)
                     .snippet("START LOCATION")
                     .position(actuellocation)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
             startmarker = map.addMarker(startmarkerop);
-            startmarker.setDraggable(true);}
+            startmarker.setDraggable(true);
+        }
     }
 
     private void setupmap() {
@@ -153,7 +150,7 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
         mapUIsettings.setTiltGesturesEnabled(false);
         mMap.setOnMapClickListener(this);
         //check location option enabled
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED )
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             mMap.setMyLocationEnabled(true);
 
         mGoogleApiClient = new GoogleApiClient.Builder(Add_Transport1.this)
@@ -163,7 +160,7 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
                 .addOnConnectionFailedListener(this)
                 .build();
         mGoogleApiClient.connect();
-        Autocomplete_place_field =(AutoCompleteTextView) findViewById(R.id.Autocomplete_places);
+        Autocomplete_place_field = (AutoCompleteTextView) findViewById(R.id.Autocomplete_places);
         Autocomplete_place_field.setThreshold(3);
         mPlaceArrayAdapter = new PlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
                 BOUNDS, null);
@@ -175,28 +172,38 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
             }
         });
 
-            //semi automatic place search
+        //semi automatic place search
         Autocomplete_place_field.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             //choix d'emplacement
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
                 final String placeId = String.valueOf(item.placeId);
+                String Country = "";
                 PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
                         .getPlaceById(mGoogleApiClient, placeId);
                 geocod = new Geocoder(getApplicationContext());
+                
                 try {
-                    List<Address> add= geocod.getFromLocationName(item.description.toString(),10);
-                    if (add.size()>0)
-                    {  int i =0;
-                        while (!add.get(i).hasLatitude()||!add.get(i).hasLongitude())
-                        {i++;}
-                        if(i<add.size())
-                        {
-                            Address location = add.get(i);
+                    Address location = null;
+                    List<Address> add = geocod.getFromLocationName(item.description.toString(), 10);
+                    if (add.size() > 0) {
+                        int i = 0;
+                        while (!add.get(i).hasLatitude() || !add.get(i).hasLongitude()) {
+                            i++;
+                        }
+                        if (i < add.size()) {
+                            location = add.get(i);
+                            Country = location.getCountryName();
+                        }
+                        if (Country.equals("Tunisia")||Country.equals("France")) {
+                            //check existance of the city
+
                             LatLng ltlng = new LatLng(location.getLatitude(), location.getLongitude());
-                            destinationmarker=  mMap.addMarker(new MarkerOptions()
-                                    .title(location.getAddressLine(0))
+                            if (destinationmarker != null)
+                                destinationmarker.remove();
+                            destinationmarker = mMap.addMarker(new MarkerOptions()
+                                    .title(location.getLocality())
                                     .snippet("destination place")
                                     .position(ltlng)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
@@ -204,19 +211,18 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
                             destinationmarker.setDraggable(true);
                             positiondest = destinationmarker.getPosition();
                             zoomOutFit();
-                            Autocomplete_place_field.setEnabled(false);
+                            Autocomplete_place_field.clearFocus();
+                            KeyboardUtil.hideKeyboard(Add_Transport1.this);
+
+                        }
+                         else {
+                            Toast.makeText(Add_Transport1.this, getString(R.string.no_places_found), Toast.LENGTH_LONG).show();
+                            clear();
                             Autocomplete_place_field.clearFocus();
 
                         }
                     }
-                    else
-                        {
-                            Toast.makeText(Add_Transport1.this,getString(R.string.no_places_found),Toast.LENGTH_LONG).show();
-                            clear();
-                        }
-
-                }
-                catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
@@ -229,39 +235,38 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
                 if (!hasFocus)
                     v.clearFocus();
                 else
-                clear();
+                    clear();
             }
         });
     }
 
     //event clear text typing
-    private void clear()
-    {
+    private void clear() {
         Autocomplete_place_field.setText("");
         Autocomplete_place_field.requestFocus();
     }
 
-    private void zoomOutFit()
-    {
-        if(startmarker!=null)
-        {LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        LatLng Latlng1 =new LatLng(startmarker.getPosition().latitude, startmarker.getPosition().longitude);
-        LatLng Latlng2 =new LatLng(destinationmarker.getPosition().latitude, destinationmarker.getPosition().longitude);
-        builder.include(Latlng1);
-        builder.include(Latlng2);
-        LatLngBounds bounds = builder.build();
-        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 180));
+    private void zoomOutFit() {
+        if (startmarker != null) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            LatLng Latlng1 = new LatLng(startmarker.getPosition().latitude, startmarker.getPosition().longitude);
+            LatLng Latlng2 = new LatLng(destinationmarker.getPosition().latitude, destinationmarker.getPosition().longitude);
+            builder.include(Latlng1);
+            builder.include(Latlng2);
+            LatLngBounds bounds = builder.build();
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 180));
         }
     }
 
     public void removestartMarker() {
-        if(startmarker != null) {
+        if (startmarker != null) {
             startmarker.remove();
             startmarker = null;
         }
     }
+
     public void removedestMarker() {
-        if(destinationmarker != null) {
+        if (destinationmarker != null) {
             destinationmarker.remove();
             destinationmarker = null;
         }
@@ -290,26 +295,42 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
     public void onMapClick(LatLng point) {
 
         removedestMarker();
-
+        Address adr;
         //Convert LatLng to Location
         Location location = new Location("Test");
         location.setLatitude(point.latitude);
         location.setLongitude(point.longitude);
-//		  location.setTime(new Date().getTime()); //Set time as current Date
-        Toast.makeText(getApplicationContext(),location.toString(),Toast.LENGTH_LONG).show();
+        Geocoder geo = new Geocoder(getApplicationContext());
+        try {
+            List<Address> list=geo.getFromLocation(location.getLatitude(),location.getLongitude(),2);
+            if (list.size()>0 && list!=null) {
+              adr = list.get(0);
 
-        //Convert Location to LatLng
-        LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-        MarkerOptions markerOptions = new MarkerOptions()
-                .position(newLatLng)
-                .title(newLatLng.toString());
-        destinationmarker = mMap.addMarker(markerOptions);
+//		  location.setTime(new Date().getTime()); //Set time as current Date
+                if (adr.getCountryName().equals("France")||adr.getCountryName().equals("Tunisia"))
+                    //Convert Location to LatLng
+                { LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                         MarkerOptions markerOptions = new MarkerOptions()
+                        .position(newLatLng)
+                        .title(adr.getLocality());
+                destinationmarker = mMap.addMarker(markerOptions);}
+                else
+                {
+                    Toast.makeText(getApplicationContext(),getString(R.string.no_places_found), Toast.LENGTH_LONG).show();
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void onClick(View v) {
-        Intent transportPage2 = new Intent(Add_Transport1.this,Add_Transport2.class);
+        Intent transportPage2 = new Intent(Add_Transport1.this, Add_Transport2.class);
+        if(destinationmarker!=null)
+        transportPage2.putExtra("Destination_Place", destinationmarker.getPosition());
+        transportPage2.putExtra("Start_place",startmarker.getPosition());
         startActivity(transportPage2);
     }
 }

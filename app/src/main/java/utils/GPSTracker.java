@@ -68,8 +68,15 @@ public class GPSTracker extends Service implements LocationListener {
 						this.canGetLocation=false;
 	            } else {
 	                this.canGetLocation = true;
+					if (PermissionUtils.canMakeSmores()) {
 						if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
 						{ locationManager.requestLocationUpdates(
+								LocationManager.NETWORK_PROVIDER,
+								MIN_TIME_BW_UPDATES,
+								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);}
+					}
+					else
+					{ locationManager.requestLocationUpdates(
 	                            LocationManager.NETWORK_PROVIDER,
 	                            MIN_TIME_BW_UPDATES,
 	                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);}
