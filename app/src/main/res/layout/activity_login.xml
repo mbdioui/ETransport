@@ -81,5 +81,7 @@
                 android:text="@string/subscribe" />
 
         </LinearLayout>
+
     </ScrollView>
+
 </LinearLayout>

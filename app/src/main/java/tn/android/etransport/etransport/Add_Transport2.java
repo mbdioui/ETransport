@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -26,6 +27,17 @@ public class Add_Transport2 extends Activity {
             LatLng startlatlnt = (LatLng) B.get("Start_place");
 
         }
+        //close button
+        ImageButton close_btn=(ImageButton) findViewById(R.id.close_BTN2);
+        close_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity activity = Add_Transport2.this;
+                Intent intent= new Intent(activity,MainClient.class);
+                startActivity(intent);
+                activity.finish();
+            }
+        });
     }
     private void SetUp()
     {

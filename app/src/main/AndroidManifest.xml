@@ -21,7 +21,7 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@style/App_theme"
+        android:theme="@style/Theme.AppCompat"
         android:name="utils.UserInfos">
         <activity
             android:name=".InsertUserActivity"
@@ -34,7 +34,13 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
         <activity
             android:name=".Forgetpass_activity"
             android:label="@string/title_activity_forgetpass_activity">

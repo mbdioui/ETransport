@@ -25,7 +25,6 @@ public class Splash_screen extends Activity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-            animation.reset();
             Intent intent= new Intent(getApplicationContext(),MainClient.class);
             startActivity(intent);
             }
