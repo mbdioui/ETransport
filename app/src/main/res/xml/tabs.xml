@@ -13,5 +13,5 @@
         id="@+id/tab_action_settings"
         icon="@drawable/ic"
         title="@string/action_settings"
-        barColorWhenSelected="@color/yellow"/>
+        barColorWhenSelected="@color/light_purple"/>
 </tabs>

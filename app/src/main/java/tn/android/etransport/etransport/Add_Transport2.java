@@ -9,11 +9,11 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
-
 public class Add_Transport2 extends Activity {
     private DatePicker simpleDatePicker;
     private Button submit;
+    private String destVille;
+    private String startVille;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +23,8 @@ public class Add_Transport2 extends Activity {
         Bundle B =intent.getExtras();
         if( B != null)
         {
-            LatLng deslatlnt = (LatLng) B.get("Destination_Place");
-            LatLng startlatlnt = (LatLng) B.get("Start_place");
+            destVille= (String) B.get("Destination_Place");
+            startVille = (String) B.get("Start_place");
 
         }
         //close button

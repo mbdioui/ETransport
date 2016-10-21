@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="light_purple" type="color">#9575CD
-    </item>
+    <item name="light_purple" type="color">#9575CD</item>
     <item name="purple" type="color">#4A148C</item>
     <item name="pink_purple" type="color">#880E4F</item>
     <item name="light_blue" type="color">#64B5F6</item>
@@ -9,4 +8,5 @@
     <item name="black" type="color">#000000</item>
     <item name="orange" type="color">#F57C00</item>
     <item name="yellow" type="color">#FFFF00</item>
+
 </resources>

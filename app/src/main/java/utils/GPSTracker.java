@@ -29,8 +29,8 @@ public class GPSTracker extends Service implements LocationListener {
 	    boolean canGetLocation = false;
 
 	    Location location; // Location
-	    double latitude; // Latitude
-	    double longitude; // Longitude
+	    double latitude=0; // Latitude
+	    double longitude=0; // Longitude
 
 		Location lastlocation;
 	    // The minimum distance to change Updates in meters
@@ -58,35 +58,65 @@ public class GPSTracker extends Service implements LocationListener {
 	                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 	            // Getting network status
-	            isNetworkEnabled = Connectivity.Checkinternet(mContext);
+				isNetworkEnabled = locationManager
+						.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
 
-
-	            if (!isGPSEnabled || !isNetworkEnabled) {
+	            if (!isGPSEnabled && !isNetworkEnabled) {
 	                // No network provider is enabled
+					location = new Location("");
+					location.setLatitude(35.769233);
+					location.setLongitude(10.819574);
 						this.canGetLocation=false;
+
 	            } else {
 	                this.canGetLocation = true;
 					if (PermissionUtils.isMarshMellow()) {
-						if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-						{ locationManager.requestLocationUpdates(
+						if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED||
+								ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+						{if(isGPSEnabled)
+						{
+							locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+							locationManager.requestLocationUpdates(
+								LocationManager.GPS_PROVIDER,
+								MIN_TIME_BW_UPDATES,
+								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);}
+						else if (isNetworkEnabled)
+							locationManager.requestLocationUpdates(
+									LocationManager.NETWORK_PROVIDER,
+									MIN_TIME_BW_UPDATES,
+									MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+						}
+					}
+					else
+					{ if(isGPSEnabled)
+						locationManager.requestLocationUpdates(
+								LocationManager.GPS_PROVIDER,
+								MIN_TIME_BW_UPDATES,
+								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+					else if (isNetworkEnabled)
+						locationManager.requestLocationUpdates(
 								LocationManager.NETWORK_PROVIDER,
 								MIN_TIME_BW_UPDATES,
 								MIN_DISTANCE_CHANGE_FOR_UPDATES, this);}
-					}
-					else
-					{ locationManager.requestLocationUpdates(
-	                            LocationManager.NETWORK_PROVIDER,
-	                            MIN_TIME_BW_UPDATES,
-	                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);}
-	                    Log.d("Network", "Network");
+	                    Log.d("Network", "GETING POSITION");
 	                    if (locationManager != null) {
-	                        location = locationManager
-	                                .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+							if (isNetworkEnabled)
+							location = locationManager
+									.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+							else if (isGPSEnabled){
+								locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+								location = locationManager
+										.getLastKnownLocation(LocationManager.GPS_PROVIDER);}
 	                        if (location != null) {
 	                            latitude = location.getLatitude();
 	                            longitude = location.getLongitude();
 	                        }
+							else
+							{
+								latitude= 35.769231;
+								longitude= 10.819741;
+							}
 	                    }
 
 	                // If GPS enabled, get latitude/longitude using GPS Services
@@ -175,7 +205,7 @@ public class GPSTracker extends Service implements LocationListener {
 
 	@Override
 	public void onLocationChanged(Location location) {
-		lastlocation  = getLocation();
+//		lastlocation  = getLocation();
 	}
 
 	@Override

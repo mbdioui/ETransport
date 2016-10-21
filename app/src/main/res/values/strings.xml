@@ -29,7 +29,7 @@
     <string name="Welcome_text">Bienvenue</string>
     <string name="Application_version">V 1.0</string>
     <string name="title_activity_maps">Map</string>
-    <string name="google_maps_key">AIzaSyADlVvpw3_k1KaUVp9Z-ZtfjMoY8Yh9VZI</string>
+    <string name="google_maps_key">AIzaSyAekHtGgMH5mqveWlRpYAocsg55CK3aW5I</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main2">Main2Activity</string>

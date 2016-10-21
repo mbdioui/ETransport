@@ -1,90 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_add__transport"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin">
-
-        <ImageButton
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:id="@+id/close_BTN"
-            android:layout_marginTop="10dp"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
-
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/close_BTN"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="8dp"
-            android:textSize="18sp"
-            android:id="@+id/label_places"
-            android:text="@string/destination_label"/>
-
-        <AutoCompleteTextView
-            android:id="@+id/Autocomplete_places"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:drawableEnd="@android:drawable/ic_input_delete"
-            android:layout_marginTop="15dp"
-            android:layout_below="@id/label_places"
-            android:gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:hint="adresse"/>
-
-
-        <!--<EditText-->
-        <!--android:hint="ville"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
-        <!--android:gravity="center_horizontal"/>-->
-        <!--<EditText-->
-        <!--android:hint="pays"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
-        <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
-        <!--android:gravity="center_horizontal"/>-->
-
-
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/MapHere"
-            android:name="com.google.android.gms.maps.MapFragment"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="550sp"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@id/Autocomplete_places"/>
-
-        <ImageButton
-            android:id="@+id/add_transport1_BTN"
-            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@id/MapHere"
-            android:src="@android:drawable/ic_menu_directions" />
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin">
 
-    </RelativeLayout>
+            <ImageButton
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/close_BTN"
+                android:layout_marginTop="10dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/close_BTN"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="8dp"
+                android:textSize="18sp"
+                android:id="@+id/label_places"
+                android:text="@string/destination_label"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/Autocomplete_places"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:drawableEnd="@android:drawable/ic_input_delete"
+                android:layout_marginTop="15dp"
+                android:layout_below="@id/label_places"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:hint="adresse"/>
+
+
+            <!--<EditText-->
+            <!--android:hint="ville"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+            <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
+            <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+            <!--android:gravity="center_horizontal"/>-->
+            <!--<EditText-->
+            <!--android:hint="pays"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
+            <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
+            <!--android:layout_marginTop="@dimen/activity_vertical_margin"-->
+            <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
+            <!--android:gravity="center_horizontal"/>-->
+
+
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/MapHere"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="550sp"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/Autocomplete_places"/>
+
+            <ImageButton
+                android:id="@+id/add_transport1_BTN"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/MapHere"
+                android:src="@android:drawable/ic_menu_directions" />
+
+        </RelativeLayout>
     </ScrollView>
 </android.support.design.widget.CoordinatorLayout>

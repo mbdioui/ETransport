@@ -1,11 +1,25 @@
 package Beans;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by mohamed salah on 18/10/2016.
  */
 public class Role {
     private int id;
     private String user_role;
+
+    public Role(JSONObject userJsonObject) {
+
+        try {
+            setId(userJsonObject.getInt(""));
+            setUser_role(userJsonObject.getString(""));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     public int getId() {
         return id;

@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_main_client"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <FrameLayout
-        android:id="@+id/framefragment"
+    <RelativeLayout
+        android:id="@+id/layout_main_client"
         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/framefragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/Bottbar" />
+
+        <com.roughike.bottombar.BottomBar
+            android:id="@+id/Bottbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            app:bb_inActiveTabColor="@android:color/white"
+            app:bb_activeTabColor="@color/blue"
+            app:bb_titleTextAppearance="@style/MyText"
+            app:bb_showShadow="true"
+            app:bb_tabXmlResource="@xml/tabs" />
+
+    </RelativeLayout>
+    <ListView
+        android:id="@+id/navList"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:layout_above="@+id/Bottbar" />
-
-
-
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/Bottbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        app:bb_inActiveTabColor="@color/black"
-        app:bb_activeTabColor="@color/blue"
-        app:bb_titleTextAppearance="@style/MyText"
-        app:bb_showShadow="true"
-        app:bb_tabXmlResource="@xml/tabs" />
-
-</RelativeLayout>
+        android:layout_gravity="left|start"
+        android:background="@color/light_blue">
+    </ListView>
+</android.support.v4.widget.DrawerLayout>

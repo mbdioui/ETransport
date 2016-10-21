@@ -72,7 +72,7 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
         setContentView(R.layout.layout_add__transport);
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.MapHere);
         Autocomplete_place_field = (AutoCompleteTextView) findViewById(R.id.Autocomplete_places);
-        //TODO check connectivity to internet
+        //check connectivity
         if (Connectivity.Checkinternet(this))
             mapFragment.getMapAsync(this);
         else {
@@ -93,6 +93,9 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
+        //check GPS
+        if(!Connectivity.checkGPS(this))
+            startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),11);
         //close button
         ImageButton close_btn=(ImageButton) findViewById(R.id.close_BTN);
         close_btn.setOnClickListener(new View.OnClickListener() {
@@ -111,8 +114,8 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
             public void onClick(View v) {
                 Intent transportPage2 = new Intent(Add_Transport1.this, Add_Transport2.class);
                 if(destinationmarker!=null && startmarker != null) {
-                    transportPage2.putExtra("Destination_Place", destinationmarker.getPosition());
-                    transportPage2.putExtra("Start_place", startmarker.getPosition());
+                    transportPage2.putExtra("Destination_Place", destinationmarker.getTitle());
+                    transportPage2.putExtra("Start_place", startmarker.getTitle());
                 }
                 startActivity(transportPage2);
             }
@@ -128,26 +131,60 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
         {
             WifiManager wifiManager = (WifiManager)
                     getSystemService(Context.WIFI_SERVICE);
-            if(!Connectivity.Checkinternet(Add_Transport1.this))
+            if(Connectivity.Checkinternet(Add_Transport1.this))
             {
+//                Intent intent1 = new Intent(getApplicationContext(),Add_Transport1.class);
+//                Activity ac=getParent();
+//                ac.finish();
+//                startActivity(intent1);
                 Intent intent1 = getIntent();
                 finish();
                 startActivity(intent1);
             }
-        }      }
+            else
+            {
+                Activity activity = Add_Transport1.this;
+                Intent intent= new Intent(activity,MainClient.class);
+                startActivity(intent);
+                activity.finish();
+            }
+        }
+        else
+            if(requestCode==11)
+            {
+                if(Connectivity.checkGPS(Add_Transport1.this))
+                {
+                    Intent intent1 = getIntent();
+                    finish();
+                    startActivity(intent1);
+                }
+                else
+                {
+                    Activity activity = Add_Transport1.this;
+                    Intent intent= new Intent(activity,MainClient.class);
+                    startActivity(intent);
+                    activity.finish();
+                }
+            }
+    }
 
-    //Check internet connexion if it's ok go ahead else finish the activity
+    //Check internet connexion and GPS if it's ok go ahead else finish the activity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (!PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_FINE_LOCATION) &&
             ! PermissionUtils.isPermissionGranted(permissions,grantResults,Manifest.permission.ACCESS_COARSE_LOCATION)) {
-            if (isChild()) {
-                Intent i = new Intent(Add_Transport1.this, getParent().getClass());
+            if(isChild())
+            {
+                Intent i = new  Intent(Add_Transport1.this,getParent().getClass());
                 startActivity(i);
                 this.finish();
-            } else
+            }
+            else
                 finish();
         }
+        else
+        if (Connectivity.Checkinternet(this))
+            setupmap();
     }
 
 
@@ -158,36 +195,55 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
 
         if (PermissionUtils.isMarshMellow()) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                    && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-                ActivityCompat.requestPermissions(Add_Transport1.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_location);
+                    || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(Add_Transport1.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION
+                        ,Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_location);
+            }
+            else
+                setupmap();
         }
         else
-         map.setMyLocationEnabled(true);
+        { map.setMyLocationEnabled(true);
+         setupmap();}
+
+    }
+
+    private void setupmap() {
 
 
+        String ville;
         GPSTracker gps = new GPSTracker(this);
-        if (Connectivity.Checkinternet(this)) {
-            Location loc=gps.getLocation();
-            LatLng actuellocation;
-            mapUIsettings = map.getUiSettings();
+        if (Connectivity.Checkinternet(this))
+        {
+            LatLng actuellocation = null;
+            mapUIsettings = MapForm.getUiSettings();
             //trying to reach actuel location
-            if (loc!=null)
-                actuellocation = new LatLng(loc.getLatitude(), loc.getLongitude());
-            else
-                actuellocation = new LatLng(35.769233,10.819574);
-            Address adr=null;
-            Geocoder geo = new Geocoder(getApplicationContext());
-            String ville="non identifié";
-            try {
-                List<Address> list=geo.getFromLocation(actuellocation.latitude,actuellocation.longitude,2);
-                if (list.size()>0 && list!=null) {
-                    adr = list.get(0);
-                    ville=adr.getLocality();}
+            while(gps.getLatitude()==0 || gps.getLongitude()==0)
+            {}
+            if (gps.getLongitude()!=0 &&  gps.getLatitude()!=0)
+            {
+                actuellocation = new LatLng(gps.getLatitude(), gps.getLongitude());
+                Address adr=null;
+                Geocoder geo = new Geocoder(Add_Transport1.this);
+                ville="non identifié";
+                try {
+                    List<Address> list = geo.getFromLocation(actuellocation.latitude,actuellocation.longitude,1);
+                    if (list.size()>0 && list!=null) {
+                        adr = list.get(0);
+                        ville=adr.getLocality();}
                 }
-            catch (IOException e) {
-                e.printStackTrace();
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(actuellocation, 15));
+            else
+            {
+                actuellocation = new LatLng(35.769231, 10.819741);
+                ville="Monastir";
+            }
+            MapForm.moveCamera(CameraUpdateFactory.newLatLngZoom(actuellocation, 15));
 
             MarkerOptions startmarkerop = new MarkerOptions()
                     .title(ville)
@@ -195,13 +251,9 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
                     .snippet("START LOCATION")
                     .position(actuellocation)
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-            startmarker = map.addMarker(startmarkerop);
-            setupmap();
+            startmarker = MapForm.addMarker(startmarkerop);}
 
-        }
-    }
 
-    private void setupmap() {
         // enable zoom options & disable gesture iténeraire
         mapUIsettings.setZoomControlsEnabled(true);
         mapUIsettings.setZoomGesturesEnabled(true);
@@ -232,7 +284,13 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
                 acomplete.setHint("exemple : le Louvre");
             }
         });
-
+        //change focus event
+        Autocomplete_place_field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                clear();
+            }
+        });
         //semi automatic place search
         Autocomplete_place_field.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -267,7 +325,9 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
                                                                 .title(location.getLocality())
                                                                 .snippet("destination place")
                                                                 .position(ltlng)
+                                                                .draggable(true)
                                                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+
                                         zoomOutFit();
                                         Autocomplete_place_field.clearFocus();
                                         KeyboardUtil.hideKeyboard(Add_Transport1.this);
@@ -434,5 +494,5 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
 
     }
 
-
+//TODO disable GPS after exiting activity (Location Manager)
 }

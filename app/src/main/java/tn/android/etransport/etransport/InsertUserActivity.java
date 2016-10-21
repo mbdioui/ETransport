@@ -34,6 +34,7 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//TODO : Change layout to fit with Landscape view
 		setContentView(R.layout.insert_user);
 		Button subButton =(Button) findViewById(R.id.User_subs);
 		Button already_member = (Button) findViewById(R.id.BTN_alreadymember);

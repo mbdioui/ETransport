@@ -14,18 +14,28 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import Beans.User;
+import utils.UserInfos;
+
 public class LoginUserTask extends AsyncTask<String, String, String> {
 	Context cntx;
 	String responseBody;
 	String Auth=null;
-	String user;
+	User user;
+	String UserString;
+
+
 	ProgressDialog progdialog;
+	JSONArray UserJsonArray;
+	JSONObject UserJsonObject;
+
 	public Context getCntx() {
 		return cntx;
 	}
@@ -80,9 +90,14 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 		try {
 			json = new JSONObject(result);
 			if(json.getString("error").equals("0")) {
-				Toast.makeText(cntx, "user authentified", Toast.LENGTH_LONG).show();
-				user = json.getString("user").toString();
-				this.Auth="ok";
+				UserString = json.getString("user").toString();
+				UserJsonArray = json.getJSONArray("user");
+				UserJsonObject = UserJsonArray.getJSONObject(0);
+				user = new User(UserJsonObject);
+				//TODO GETTING ROLE OF USER
+				UserInfos.setConnecteduser(user);
+				Toast.makeText(cntx,"Welcome :"+user.getF_name().toString().toUpperCase(),Toast.LENGTH_LONG).show();
+				this.Auth = "ok";
 			}
 				else
 			if(json.getString("error").equals("1"))

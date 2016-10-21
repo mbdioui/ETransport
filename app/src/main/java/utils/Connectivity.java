@@ -1,6 +1,7 @@
 package utils;
 
 import android.content.Context;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -18,4 +19,14 @@ public class Connectivity {
         return (activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting());
     }
+    //TODO check position activation
+    public static boolean checkGPS (Context context)
+    {
+        LocationManager lm =
+                (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+
+        return  lm.isProviderEnabled( LocationManager.GPS_PROVIDER );
+    }
+
+
 }
