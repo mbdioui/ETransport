@@ -5,7 +5,6 @@ package tn.android.etransport.etransport;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,10 +19,11 @@ import utils.Links;
 public class Forgetpass_activity extends Activity implements View.OnClickListener {
 
     private static final Logger logger = Logger.getLogger(LoginActivity.class.getName());
-    EditText mail;
-    EditText Mdp;
-    EditText Confirm_Mdp;
-
+    private EditText mail;
+    private EditText Mdp;
+    private EditText Confirm_Mdp;
+    private Button authentification_BTN;
+    private Button cancel_BTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,8 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
         Button reset_button = (Button) findViewById(R.id.Reset_button);
         reset_button.setOnClickListener(this);
 
-        Button authentification_BTN= (Button) findViewById(R.id.BTN_forgetpassword_connect);
+        cancel_BTN =(Button) findViewById(R.id.cancel_reset_password_BTN);
+        authentification_BTN= (Button) findViewById(R.id.BTN_forgetpassword_connect);
         authentification_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +44,7 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
                 Forgetpass_activity.this.finish();
             }
         });
+        cancel_BTN.setOnClickListener(this);
      }
 
     @Override
@@ -52,12 +54,12 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setMessage("veuillez remplir tous les champs");
             alertDialogBuilder.setPositiveButton("Continuez", null);
-            alertDialogBuilder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
+//            alertDialogBuilder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    finish();
+//                }
+//            });
             AlertDialog alertDialog = alertDialogBuilder.create();
             if(!mail.getText().toString().equals("") && !Mdp.getText().toString().equals("") && !Confirm_Mdp.getText().toString().equals("")) {
                 if (Mdp.getText().toString().equals(Confirm_Mdp.getText().toString())) {
@@ -73,7 +75,6 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
                     Mdp.setText("");
                     Confirm_Mdp.setText("");
                     Confirm_Mdp.setError("mot de passe et confirmation non conforme",getResources().getDrawable(R.drawable.ic_info_black_24dp));
-                    ;
                 }
 
             }
@@ -81,10 +82,13 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
             {
                 alertDialog.show();
             }
-
-
         }
-
+        else if(v.getId() == R.id.cancel_reset_password_BTN)
+        {
+            Intent intentparent = new Intent(this,MainClient.class);
+            startActivity(intentparent);
+            this.finish();
+        }
     }
 
     private void clearall() {

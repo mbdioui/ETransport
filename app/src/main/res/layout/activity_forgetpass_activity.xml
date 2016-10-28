@@ -57,5 +57,12 @@
             android:background="@android:color/transparent"
             android:text="@string/action_sign_in_forget" />
     </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Annuler"
+        android:id="@+id/cancel_reset_password_BTN"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

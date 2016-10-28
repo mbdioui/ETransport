@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/nav_reset_password"
+                android:icon="@drawable/ic_autorenew_white_24dp"
+                android:title="Réinitialiser le mot de passe" />
+            <item
+                android:id="@+id/nav_disconnect"
+                android:icon="@android:drawable/presence_offline"
+                android:title="Se deconnecter"
+                />
+        </group>
+      <item android:title="Transport">
+        <menu>
+            <item
+                android:id="@+id/publish_transport"
+                android:title="Publier un trajet" />
+        </menu>
+        </item>
+</menu>

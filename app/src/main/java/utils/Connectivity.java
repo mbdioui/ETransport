@@ -19,7 +19,6 @@ public class Connectivity {
         return (activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting());
     }
-    //TODO check position activation
     public static boolean checkGPS (Context context)
     {
         LocationManager lm =

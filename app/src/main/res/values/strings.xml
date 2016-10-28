@@ -44,5 +44,8 @@
     <string name="Arrive_time">Heure d\'arrivé</string>
     <string name="destination_label">Veuillez saisir votre adresse de destination :</string>
     <string name="long_text">Bonjour, tout le monde bla bla ablalbalblalbjakjs^ùjasjfhmasfnouzmlkqmksfhoQSNVnvôi§LNMlkakjfakazlflazllklaflnlkx!lkcnùlaflknazzknl,!lmqkcalsl,s</string>
+    <string name="suspended_connection">Connection suspendu</string>
+    <string name="lavel_date_go">veuillez choisir la date de départ</string>
+    <string name="label_date_arrival">veuillez choisir la date d\'arrivé estimée</string>
 
 </resources>

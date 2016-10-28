@@ -32,8 +32,8 @@ public class LoginActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button subButton = (Button) findViewById(R.id.email_sign_in_button);
-        user_mail = (AutoCompleteTextView)findViewById(R.id.email);
-        user_password = (EditText)findViewById(R.id.password);
+        user_mail = (AutoCompleteTextView) findViewById(R.id.email);
+        user_password = (EditText) findViewById(R.id.password);
         subButton.setOnClickListener(this);
         Button already_member = (Button) findViewById(R.id.BTN_forgetpassword);
         already_member.setOnClickListener(new OnClickListener() {
@@ -63,14 +63,14 @@ public class LoginActivity extends Activity implements OnClickListener {
         alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+             finish();
             }
         });
         AlertDialog alertDialog = alertDialogBuilder.create();
         if(!user_mail.getText().toString().equals("") && !user_password.getText().toString().equals(""))
         {
             LoginUserTask log_User = new LoginUserTask(LoginActivity.this);
-            log_User.setCntx(getApplicationContext());
+            log_User.setCntx(LoginActivity.this);
             log_User.execute(Links.getRootFolder()+"userconnexion.php", user_mail.getText().toString()
                     ,user_password.getText().toString());
             KeyboardUtil.hideKeyboard(LoginActivity.this);

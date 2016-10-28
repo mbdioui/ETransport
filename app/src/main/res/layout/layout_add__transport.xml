@@ -5,7 +5,8 @@
     android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/scroll_transport1">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,6 +22,7 @@
                 android:layout_alignParentRight="true"
                 android:id="@+id/close_BTN"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
                 android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
             <TextView
@@ -28,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/close_BTN"
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:textSize="18sp"
                 android:id="@+id/label_places"
@@ -64,23 +66,40 @@
             <!--android:layout_marginBottom="@dimen/activity_vertical_margin"-->
             <!--android:gravity="center_horizontal"/>-->
 
-
-            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/MapHere"
-                android:name="com.google.android.gms.maps.MapFragment"
+            <ScrollView
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="550sp"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollmap"
+                android:layout_below="@id/Autocomplete_places">
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="fill_parent"
+                    android:layout_height="390dp"
+                    android:orientation="vertical" >
+                    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/MapHere"
+                        android:name="com.google.android.gms.maps.MapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="390sp"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_alignParentLeft="true"/>
+                </LinearLayout>
+            </ScrollView>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/scrollmap"
                 android:layout_alignParentLeft="true"
-                android:layout_below="@id/Autocomplete_places"/>
-
+                android:id="@+id/camera_position_BTN"
+                android:src="@android:drawable/ic_menu_camera"/>
             <ImageButton
                 android:id="@+id/add_transport1_BTN"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:layout_below="@id/MapHere"
+                android:layout_below="@id/scrollmap"
                 android:src="@android:drawable/ic_menu_directions" />
 
         </RelativeLayout>

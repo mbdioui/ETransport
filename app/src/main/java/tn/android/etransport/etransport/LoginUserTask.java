@@ -3,6 +3,7 @@ package tn.android.etransport.etransport;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -25,16 +26,17 @@ import Beans.User;
 import utils.UserInfos;
 
 public class LoginUserTask extends AsyncTask<String, String, String> {
-	Context cntx;
-	String responseBody;
-	String Auth=null;
-	User user;
-	String UserString;
+	private Context cntx;
+	private String responseBody;
+	private String Auth=null;
+	private User user;
+	private String  UserString;
 
 
-	ProgressDialog progdialog;
-	JSONArray UserJsonArray;
-	JSONObject UserJsonObject;
+	private ProgressDialog progdialog;
+	private JSONArray UserJsonArray;
+	private JSONObject UserJsonObject;
+	private Activity activityparent;
 
 	public Context getCntx() {
 		return cntx;
@@ -47,7 +49,7 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 	public LoginUserTask(Activity act) {
 		super();
 		progdialog = new ProgressDialog(act);
-
+		activityparent=act;
 	}
 
 	@Override
@@ -96,8 +98,11 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 				user = new User(UserJsonObject);
 				//TODO GETTING ROLE OF USER
 				UserInfos.setConnecteduser(user);
+				UserInfos.IsConnected=true;
 				Toast.makeText(cntx,"Welcome :"+user.getF_name().toString().toUpperCase(),Toast.LENGTH_LONG).show();
-				this.Auth = "ok";
+				Intent intent= new Intent(activityparent,MainClient.class);
+				activityparent.startActivity(intent);
+				activityparent.finish();
 			}
 				else
 			if(json.getString("error").equals("1"))

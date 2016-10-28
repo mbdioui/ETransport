@@ -10,6 +10,9 @@ import Beans.User;
  */
 
  public class UserInfos extends Application{
+    private static User  connecteduser;
+    public static Boolean IsConnected = false;
+
     public final static User getConnecteduser() {
         return connecteduser;
     }
@@ -17,8 +20,5 @@ import Beans.User;
     public final static void setConnecteduser(User connecteduser) {
         UserInfos.connecteduser = connecteduser;
     }
-
-    private static User  connecteduser;
-
 
 }

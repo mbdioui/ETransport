@@ -30,22 +30,46 @@
         <!--android:layout_alignParentRight="true"-->
         <!--android:layout_marginBottom="15dp"-->
         <!--android:layout_marginTop="15dp"/>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lavel_date_go"
+        android:id="@+id/label_date_go"
+        android:layout_below="@+id/close_BTN2"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"/>
+
     <DatePicker
-        android:id="@+id/dates_transport"
+        android:id="@+id/dates_transport_go"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:datePickerMode="spinner"
-        android:layout_below="@id/close_BTN"/>
+        android:layout_below="@id/label_date_go"/>
         <!--android:layout_toLeftOf="@+id/times"-->
         <!--android:layout_alignBottom="@+id/times"-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_date_arrival"
+        android:id="@+id/label_date_arrive"
+        android:layout_below="@+id/dates_transport_go"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"/>
 
+    <DatePicker
+        android:id="@+id/dates_transport_arrival"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:datePickerMode="spinner"
+        android:layout_below="@id/label_date_arrive"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Go_time"
         android:id="@+id/label_time_go"
-        android:layout_below="@+id/dates_transport"
+        android:layout_below="@+id/dates_transport_arrival"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="10dp"/>
     <TimePicker
