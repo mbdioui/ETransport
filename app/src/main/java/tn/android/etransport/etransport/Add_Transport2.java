@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
+import utils.KeyboardUtil;
+import utils.Links;
 
 public class Add_Transport2 extends Activity {
     private DatePicker Date_go;
@@ -24,6 +27,7 @@ public class Add_Transport2 extends Activity {
     private String startposition;
     private String Time_go_String="";
     private String Time_arrival_String="";
+    private EditText Transport_text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,35 +63,31 @@ public class Add_Transport2 extends Activity {
         submit = (Button) findViewById(R.id.BTN_transport_done);
         Date_arrival = (DatePicker) findViewById(R.id.dates_transport_arrival);
         Time_go = (TimePicker) findViewById(R.id.times_go);
+//        Time_go.setHour(System.c);
         Time_arrival= (TimePicker) findViewById(R.id.times_arrive);
-        Time_go.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                Time_go_String = String.valueOf(hourOfDay).toString() + ":" + String.valueOf(minute).toString();
-            }
-        } );
-        Time_arrival.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                Time_arrival_String= String.valueOf(hourOfDay).toString() + ":" + String.valueOf(minute).toString();
-            }
-        } );
+        Transport_text =(EditText) findViewById(R.id.description_transport);
         // perform click event on submit button
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get the values for day of month , month and year from a date picker
-                if(Time_go_String.equals(""))
-                        Time_go_String= String.valueOf(Time_go.getHour())+ ":" +String.valueOf(Time_go.getMinute());
+                //check if the time go were changed
+                Time_go_String= String.valueOf(Time_go.getHour())+ ":" +String.valueOf(Time_go.getMinute());
                 Time_go_String= Date_go.getYear()+"-"+(Date_go.getMonth()+1)+"-"+Date_go.getDayOfMonth()+" "+Time_go_String;
+
+                Time_arrival_String= String.valueOf(Time_arrival.getHour())+ ":" +String.valueOf(Time_arrival.getMinute());
+                Time_arrival_String= Date_arrival.getYear()+"-"+(Date_arrival.getMonth()+1)+"-"+Date_arrival.getDayOfMonth()+" "+Time_arrival_String;
                 // display the values by using a toast
-                Toast.makeText(getApplicationContext(),Time_go_String, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(),Time_arrival_String, Toast.LENGTH_LONG).show();
+                InsertTransportTask user_transport_task = new InsertTransportTask(Add_Transport2.this,getApplicationContext());
+//                user_transport_task.execute(Links.getRootFolder()+"inserttransport.php", String.valueOf(UserInfos.getConnecteduser().getId()),
+//                        Time_go_String,Time_arrival_String,Transport_text.getText().toString(),
+//                        startVille,destVille,startCountry,destCountry,startposition,destposition);
+                user_transport_task.setParentactivity(Add_Transport2.this);
+                user_transport_task.execute(Links.getRootFolder()+"inserttransport.php", "7",
+                        Time_go_String,Time_arrival_String,Transport_text.getText().toString(),
+                        startVille,destVille,startCountry,destCountry,startposition,destposition);
+                KeyboardUtil.hideKeyboard(Add_Transport2.this);
                 clearall();
-                //InsertTransportTask user_insert_task = new InsertTransportTask(Add_Transport2.this,getApplicationContext());
-                //pass context in parameter
-//                user_insert_task.execute(Links.getRootFolder()+"inserttransport.php", sprenom, sname, smail
-//                        , smdp, phone, status);
-//                KeyboardUtil.hideKeyboard(Add_Transport2.this);
             }
         });
     }
@@ -96,6 +96,7 @@ public class Add_Transport2 extends Activity {
     {
         Time_arrival_String="";
         Time_go_String="";
+        Transport_text.setText("");
     }
 
 

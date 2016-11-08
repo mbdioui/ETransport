@@ -38,7 +38,7 @@ public class ResetPasswordUserTask extends AsyncTask<String, String, String> {
 	}
 	public ResetPasswordUserTask(Activity act)
 	{
-		progdialog = new ProgressDialog(act);
+		progdialog = new ProgressDialog(act,R.style.NewDialog);
 	}
 	@Override
 	protected String doInBackground(String... params) {

@@ -22,9 +22,18 @@ public class User {
     private String mail;
     private String password;
     private String phone;
+    private String address;
     private int active;
     private String confirmation_code;
     private Role user_role;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public Date getDate_inscrip() {
         return date_inscrip;
@@ -136,6 +145,7 @@ public class User {
             this.phone=Json.getString("user_phone");
             this.confirmation_code=Json.getString("user_confirmation_code");
             this.status=Json.getInt("user_status");
+            this.address=Json.getString("user_adress_1");
             String datestring = Json.getString("user_date");
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.FRANCE);
             try {

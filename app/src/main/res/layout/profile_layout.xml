@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nom et Prenom :"
+        android:textSize="20sp"
+        android:id="@+id/label_user_name"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
+    <EditText
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_size"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/label_user_name"
+        android:background="@drawable/buttonshape"
+        android:id="@+id/edit_user_f_name"
+        android:layout_marginBottom="@dimen/between_fields_vertical_margin"/>
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size"
+        android:background="@drawable/buttonshape"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@id/edit_user_f_name"
+        android:layout_toEndOf="@+id/edit_user_f_name"
+        android:id="@+id/edit_user_l_name"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/between_fields_vertical_margin"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Téléphone:"
+        android:textSize="20sp"
+        android:layout_below="@id/edit_user_f_name"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/label_phone"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_size"
+        android:background="@drawable/buttonshape"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/label_phone"
+        android:inputType="phone"
+        android:id="@+id/edit_telephone"
+        android:layout_marginBottom="@dimen/between_fields_vertical_margin"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Adresse:"
+        android:textSize="20sp"
+        android:layout_below="@id/edit_telephone"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/label_address"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/text_size"
+        android:background="@drawable/buttonshape"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/label_address"
+        android:id="@+id/edit_address"
+        android:layout_marginBottom="@dimen/between_fields_vertical_margin"/>
+    <Button
+        android:id="@+id/update_profile_BTN"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/edit_address"
+        android:layout_height="wrap_content"
+        android:text="Mettre à jour"
+        android:textSize="16sp"
+        android:layout_width="wrap_content">
+
+    </Button>
+
+
+
+
+</RelativeLayout>

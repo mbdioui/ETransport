@@ -28,7 +28,7 @@ public class MainClient extends Activity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main_client);
-        nav = (NavigationView) findViewById(R.id.nvView);
+        nav = (NavigationView) findViewById(R.id.naviguationView);
         if(UserInfos.IsConnected) {
             // TODO change naviguation view
             nav.getMenu().clear();

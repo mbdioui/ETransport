@@ -7,8 +7,8 @@
     <string name="action_fav">Favoris</string>
     <string name="title_activity_login">Se connecter</string>
 
-
-    <string name="subscribe"><u>S\'inscrire</u></string>
+    <string name="deconnexion">Êtes vous sûr de vouloir se déconnecter ?</string>
+    <string name="subscribe"><u>Pas encore membre ? S\'inscrire</u></string>
     <!-- Strings related to login -->
     <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Mot de passe</string>
@@ -47,5 +47,7 @@
     <string name="suspended_connection">Connection suspendu</string>
     <string name="lavel_date_go">veuillez choisir la date de départ</string>
     <string name="label_date_arrival">veuillez choisir la date d\'arrivé estimée</string>
+    <string name="geting_position_error">Erreur durant la récupération de l\'emplacement</string>
+    <string name="action_save">save</string>
 
 </resources>

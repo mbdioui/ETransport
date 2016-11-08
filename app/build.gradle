@@ -32,5 +32,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-places:9.6.1'
     compile 'com.android.support:design:23.4.0'
     compile 'com.google.android.gms:play-services-location:9.6.1'
+    compile 'com.github.clans:fab:1.6.2'
     testCompile 'junit:junit:4.12'
 }

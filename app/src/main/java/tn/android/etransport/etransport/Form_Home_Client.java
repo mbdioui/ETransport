@@ -23,8 +23,10 @@ public class Form_Home_Client extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.layout_form_home_client,container,false);
         Add_transport_BTN = (FloatingActionButton) v.findViewById(R.id.button_transport);
-        if(UserInfos.getConnecteduser()==null)
+        if(UserInfos.getConnecteduser()==null) {
             Add_transport_BTN.setEnabled(false);
+            Add_transport_BTN.setBackgroundTintList(getResources().getColorStateList(R.color.Gray));
+        }
         Add_transport_BTN.setOnClickListener(new View.OnClickListener()
         {
             @Override

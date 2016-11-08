@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coordinator_layout_client"
     android:layout_width="match_parent"
@@ -13,16 +14,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
                 <android.support.design.widget.NavigationView
-                    android:id="@+id/nvView"
+                    android:id="@+id/naviguationView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_gravity="start"
-                    android:background="@color/light_blue"
+                    android:background="@color/blue_gray"
+                    app:itemTextColor="@color/White"
                     app:menu="@menu/drawer_view" />
     </android.support.v4.widget.DrawerLayout>
         <com.roughike.bottombar.BottomBar
             android:id="@+id/Bottbar"
             android:layout_width="match_parent"
+            app:bb_badgeBackgroundColor="@color/White"
             android:layout_height="60dp"
             android:layout_gravity="bottom"
             app:bb_inActiveTabColor="@android:color/white"

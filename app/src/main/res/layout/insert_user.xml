@@ -1,97 +1,109 @@
-<ScrollView
+<FrameLayout
      xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollView1"
+	android:focusableInTouchMode="true"
+	android:focusable="true"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
-    android:layout_weight="1">
+    android:layout_height="wrap_content">
 
-      <LinearLayout
-          android:focusable="true"
-          android:focusableInTouchMode="true"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_weight="1"
-          android:orientation="vertical" >
+	<android.support.v4.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:focusableInTouchMode="true"
+		android:layout_marginLeft="@dimen/activity_horizontal_margin"
+		android:layout_marginRight="@dimen/activity_horizontal_margin">
 
-			<LinearLayout
-			    android:layout_width="match_parent"
-			    android:layout_height="wrap_content"
-			    android:orientation="horizontal" >
+		  <AutoCompleteTextView
+			  android:id="@+id/User_l_name"
+			  android:layout_width="65dp"
+			  android:gravity="center"
+			  android:textSize="@dimen/text_size"
+			  android:layout_alignParentTop="true"
+			  android:layout_alignParentLeft="true"
+			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
+			  android:layout_height="wrap_content"
+			  android:layout_marginTop="@dimen/activity_vertical_margin"
+			  android:background="@drawable/buttonshape"
+			  android:hint="Nom" >
 
-				<AutoCompleteTextView
-				    android:id="@+id/User_l_name"
-				    android:layout_width="90dp"
-				    android:layout_height="wrap_content"
-				    android:layout_marginLeft="65dp"
-				    android:layout_marginTop="30dp"
-				    android:ems="10"
-				    android:hint="Nom" >
+		  </AutoCompleteTextView>
 
-				</AutoCompleteTextView>
-
-          <AutoCompleteTextView
-              android:id="@+id/User_f_name"
-              android:layout_width="147dp"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="30dp"
-              android:ems="10"
+		  <AutoCompleteTextView
+			  android:id="@+id/User_f_name"
+			  android:layout_width="0dp"
+			  android:textSize="@dimen/text_size"
+			  android:gravity="center"
+			  android:layout_alignParentRight="true"
+			  android:layout_toRightOf="@id/User_l_name"
+			  android:layout_alignBaseline="@id/User_l_name"
+			  android:layout_height="wrap_content"
+			  android:background="@drawable/buttonshape"
               android:hint="Prénom"/>
 
-			</LinearLayout>
 
           <AutoCompleteTextView
               android:id="@+id/User_mail"
-              android:layout_width="230dp"
+			  android:layout_width="fill_parent"
+			  android:gravity="center"
+			  android:textSize="@dimen/text_size"
+			  android:layout_below="@id/User_l_name"
+			  android:layout_alignParentLeft="true"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="65dp"
-              android:layout_marginTop="30dp"
-              android:ems="10"
+			  android:background="@drawable/buttonshape"
+			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
               android:hint="Email"
               android:inputType="textWebEmailAddress" />
 
           <AutoCompleteTextView
               android:id="@+id/User_password"
-              android:layout_width="230dp"
+			  android:gravity="center"
+			  android:textSize="@dimen/text_size"
+			  android:background="@drawable/buttonshape"
+			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
+			  android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:layout_alignLeft="@+id/NomTextView"
-              android:layout_below="@+id/NomTextView"
-              android:layout_marginLeft="65dp"
-              android:layout_marginTop="30dp"
-              android:drawableRight="@drawable/block"
-              android:ems="10"
+              android:layout_alignParentLeft="true"
+              android:layout_below="@+id/User_mail"
               android:hint="Mot de passe"
               android:inputType="textWebPassword" />
 
           <AutoCompleteTextView
               android:id="@+id/User_password_confirm"
-              android:layout_width="230dp"
+			  android:gravity="center"
+			  android:textSize="@dimen/text_size"
+			  android:background="@drawable/buttonshape"
+			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
+			  android:layout_width="fill_parent"
               android:layout_height="wrap_content"
-              android:layout_alignLeft="@+id/MDPTextView"
-              android:layout_below="@+id/MDPTextView"
-              android:layout_marginLeft="65dp"
-              android:layout_marginTop="30dp"
+              android:layout_alignParentLeft="true"
+              android:layout_below="@+id/User_password"
               android:contentDescription="Confirmer le mot de passe"
-              android:drawableRight="@drawable/block"
-              android:ems="10"
               android:hint="Confirmer le mot de passe"
               android:inputType="textWebPassword" />
 
           <AutoCompleteTextView
               android:id="@+id/User_phone"
-              android:layout_width="230dp"
+			  android:layout_width="fill_parent"
+			  android:textSize="@dimen/text_size"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="65dp"
-              android:layout_marginTop="30dp"
-              android:ems="10"
+			  android:background="@drawable/buttonshape"
+			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
+			  android:layout_below="@id/User_password_confirm"
+			  android:layout_alignParentLeft="true"
+			  android:gravity="center"
               android:hint="Numéro de téléphone"
               android:inputType="number" />
 
               <ToggleButton
                   android:id="@+id/User_status"
-                  android:layout_width="95dp"
+                  android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_gravity="center"
-                  android:layout_marginTop="30dp"
+                  android:layout_centerHorizontal="true"
+				  android:layout_below="@id/User_phone"
+				  android:layout_marginTop="30dp"
                   android:textOff="Chauffeur"
                   android:textOn="Affréteur" />
          
@@ -99,7 +111,8 @@
               android:id="@+id/User_subs"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_gravity="center"
+			  android:layout_centerHorizontal="true"
+			  android:layout_below="@id/User_status"
               android:layout_marginTop="30dp"
               android:text="inscription" />
 
@@ -107,7 +120,8 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:id="@+id/BTN_alreadymember"
-              android:layout_gravity="center"
+			  android:layout_centerHorizontal="true"
+			  android:layout_below="@id/User_subs"
               android:layout_marginTop="0dp"
               android:gravity="top|center"
               android:background="@android:color/transparent"
@@ -117,10 +131,10 @@
               android:id="@+id/etransport_logo"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:src="@drawable/logo"
+			  android:layout_centerHorizontal="true"
+			  android:layout_below="@id/BTN_alreadymember"
+              android:src="@drawable/logo" />
 
-              />
-
-      </LinearLayout>
- 	</ScrollView>
+	</RelativeLayout>
+	</android.support.v4.widget.NestedScrollView>
+</FrameLayout>

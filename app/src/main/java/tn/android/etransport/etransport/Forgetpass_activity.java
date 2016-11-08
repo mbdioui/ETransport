@@ -85,7 +85,7 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
         }
         else if(v.getId() == R.id.cancel_reset_password_BTN)
         {
-            Intent intentparent = new Intent(this,MainClient.class);
+            Intent intentparent = new Intent(this,Home_affreteur_activity.class);
             startActivity(intentparent);
             this.finish();
         }

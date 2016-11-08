@@ -4,6 +4,8 @@ package tn.android.etransport.etransport;
  */
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -18,17 +20,35 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class InsertUserTask extends AsyncTask<String, String, String> {
+import Beans.User;
+import utils.UserInfos;
 
-	Context context;
-	String responseBody;
-	ProgressDialog progdialog;
+public class UpdateUserTask extends AsyncTask<String, String, String> {
+
+	private Context context;
+	private String responseBody;
+	private ProgressDialog progdialog;
+	private Activity parentactivity;
+	private String UserString;
+	private JSONArray UserJsonArray;
+	private JSONObject UserJsonObject;
+	private User user;
+
+	public Activity getParentactivity() {
+		return parentactivity;
+	}
+
+	public void setParentactivity(Activity parentactivity) {
+		this.parentactivity = parentactivity;
+	}
+
 	public Context getCntx() {
 		return context;
 	}
@@ -37,9 +57,11 @@ public class InsertUserTask extends AsyncTask<String, String, String> {
 		this.context = context;
 	}
 
-	public InsertUserTask(Activity activity)
+	public UpdateUserTask(Activity activity, Context context)
 	{
+		setParentactivity(activity);
 		progdialog = new ProgressDialog(activity,R.style.NewDialog);
+		this.context=context;
 	}
 
 	@Override
@@ -51,13 +73,12 @@ public class InsertUserTask extends AsyncTask<String, String, String> {
 	            // set up post data
 	            ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 	          
-	            nameValuePair.add(new BasicNameValuePair("sprenom", params[1]));
-	            nameValuePair.add(new BasicNameValuePair("snom", params[2]));
-	            nameValuePair.add(new BasicNameValuePair("smail",params[3]));
-	
-	            nameValuePair.add(new BasicNameValuePair("smdp",params[4]));
-	            nameValuePair.add(new BasicNameValuePair("sphone",params[5]));
-	            nameValuePair.add(new BasicNameValuePair("status",params[6]));
+	            nameValuePair.add(new BasicNameValuePair("user_id", params[1]));
+	            nameValuePair.add(new BasicNameValuePair("user_f_name", params[2]));
+	            nameValuePair.add(new BasicNameValuePair("user_l_name",params[3]));
+	            nameValuePair.add(new BasicNameValuePair("user_phone",params[4]));
+	            nameValuePair.add(new BasicNameValuePair("address",params[5]));
+
 	            //Encode and set entity
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePair, HTTP.UTF_8));
 	            HttpResponse response = client.execute(post);
@@ -89,10 +110,23 @@ public class InsertUserTask extends AsyncTask<String, String, String> {
 		try {
 			json = new JSONObject(result);
 			if(json.getString("error").equals("0"))
-				Toast.makeText(context,"Insertion Done",Toast.LENGTH_LONG).show();
+			{
+				UserString = json.getString("user").toString();
+				UserJsonArray = json.getJSONArray("user");
+				UserJsonObject = UserJsonArray.getJSONObject(0);
+				if (UserJsonArray != null) {
+					user = new User(UserJsonObject);
+					UserInfos.setConnecteduser(null);
+					UserInfos.setConnecteduser(user);
+					UserInfos.IsConnected = true;
+					Toast.makeText(context,"profil mis à jour", Toast.LENGTH_LONG).show();
+					reload();
+				}
+
+			}
 			else
-			if(json.getString("error").equals("2"))
-				Toast.makeText(context,"Mail already exist",Toast.LENGTH_LONG).show();
+			if(json.getString("error").equals("501"))
+				Toast.makeText(context,"Request Error",Toast.LENGTH_LONG).show();
 			//  String id=json.getString("client_id").toString();
 			else
 			if(json.getString("error").equals("-1"))
@@ -100,6 +134,14 @@ public class InsertUserTask extends AsyncTask<String, String, String> {
 		}
 		catch (JSONException e)        {}
 
+	}
+	private void reload()
+	{
+		Fragment currentFragment = parentactivity.getFragmentManager().findFragmentById(R.id.fragment_affreteur);
+		FragmentTransaction fragTransaction =   (parentactivity).getFragmentManager().beginTransaction();
+		fragTransaction.detach(currentFragment);
+		fragTransaction.attach(currentFragment);
+		fragTransaction.commit();
 	}
 	
 	

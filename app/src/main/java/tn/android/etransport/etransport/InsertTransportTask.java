@@ -6,6 +6,7 @@ package tn.android.etransport.etransport;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -26,9 +27,19 @@ import java.util.ArrayList;
 
 public class InsertTransportTask extends AsyncTask<String, String, String> {
 
-	Context context;
-	String responseBody;
-	ProgressDialog progdialog;
+	private Context context;
+	private String responseBody;
+	private ProgressDialog progdialog;
+	private Activity parentactivity;
+
+	public Activity getParentactivity() {
+		return parentactivity;
+	}
+
+	public void setParentactivity(Activity parentactivity) {
+		this.parentactivity = parentactivity;
+	}
+
 	public Context getCntx() {
 		return context;
 	}
@@ -39,7 +50,7 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 
 	public InsertTransportTask(Activity activity,Context context)
 	{
-		progdialog = new ProgressDialog(activity);
+		progdialog = new ProgressDialog(activity,R.style.NewDialog);
 		this.context=context;
 	}
 
@@ -52,13 +63,17 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 	            // set up post data
 	            ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 	          
-	            nameValuePair.add(new BasicNameValuePair("sprenom", params[1]));
-	            nameValuePair.add(new BasicNameValuePair("snom", params[2]));
-	            nameValuePair.add(new BasicNameValuePair("smail",params[3]));
-	
-	            nameValuePair.add(new BasicNameValuePair("smdp",params[4]));
-	            nameValuePair.add(new BasicNameValuePair("sphone",params[5]));
-	            nameValuePair.add(new BasicNameValuePair("status",params[6]));
+	            nameValuePair.add(new BasicNameValuePair("user_id", params[1]));
+	            nameValuePair.add(new BasicNameValuePair("date_go", params[2]));
+	            nameValuePair.add(new BasicNameValuePair("date_arrival",params[3]));
+	            nameValuePair.add(new BasicNameValuePair("text",params[4]));
+	            nameValuePair.add(new BasicNameValuePair("city_from",params[5]));
+	            nameValuePair.add(new BasicNameValuePair("city_to",params[6]));
+				nameValuePair.add(new BasicNameValuePair("country_from",params[7]));
+				nameValuePair.add(new BasicNameValuePair("country_to",params[8]));
+				nameValuePair.add(new BasicNameValuePair("address_from",params[9]));
+				nameValuePair.add(new BasicNameValuePair("address_to",params[10]));
+
 	            //Encode and set entity
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePair, HTTP.UTF_8));
 	            HttpResponse response = client.execute(post);
@@ -90,7 +105,12 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 		try {
 			json = new JSONObject(result);
 			if(json.getString("error").equals("0"))
+			{
 				Toast.makeText(context,"Insertion Done",Toast.LENGTH_LONG).show();
+				Intent intent = new Intent(parentactivity,MainClient.class);
+				parentactivity.startActivity(intent);
+				parentactivity.finish();
+			}
 			else
 			if(json.getString("error").equals("501"))
 				Toast.makeText(context,"Request Error",Toast.LENGTH_LONG).show();

@@ -3,7 +3,7 @@
         id="@+id/tab_home_client"
         icon="@drawable/home"
         title="@string/action_home"
-        barColorWhenSelected="@color/light_blue"/>
+        barColorWhenSelected="@color/blue_gray"/>
     <tab
         id="@+id/tab_Paths"
         icon="@drawable/star"

@@ -17,6 +17,8 @@ import android.widget.EditText;
 
 import java.util.logging.Logger;
 
+import utils.AlertDialogCustom;
+import utils.Connectivity;
 import utils.KeyboardUtil;
 import utils.Links;
 
@@ -57,23 +59,24 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     @Override
     public void onClick(View v)
-    {   AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("veuillez entrez le login et le mot de passe");
-        alertDialogBuilder.setPositiveButton("continuez", null);
-        alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-             finish();
-            }
-        });
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        if(!user_mail.getText().toString().equals("") && !user_password.getText().toString().equals(""))
-        {
-            LoginUserTask log_User = new LoginUserTask(LoginActivity.this);
-            log_User.setCntx(LoginActivity.this);
-            log_User.execute(Links.getRootFolder()+"userconnexion.php", user_mail.getText().toString()
-                    ,user_password.getText().toString());
-            KeyboardUtil.hideKeyboard(LoginActivity.this);
+    {
+        if(Connectivity.Checkinternet(this)) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("veuillez entrez le login et le mot de passe");
+            alertDialogBuilder.setPositiveButton("continuez", null);
+            alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            if (!user_mail.getText().toString().equals("") && !user_password.getText().toString().equals("")) {
+                LoginUserTask log_User = new LoginUserTask(LoginActivity.this);
+                log_User.setCntx(LoginActivity.this);
+                log_User.execute(Links.getRootFolder() + "userconnexion.php", user_mail.getText().toString()
+                        , user_password.getText().toString());
+                KeyboardUtil.hideKeyboard(LoginActivity.this);
 //            while (log_User.Auth==null)
 //            {}
 //            if (log_User.Auth.equals("ok"))
@@ -83,12 +86,21 @@ public class LoginActivity extends Activity implements OnClickListener {
 //                LoginActivity.this.finish();
 //            }
 
+            } else {
+                alertDialog.show();
+            }
         }
+        //no connectivity to the internet
         else
         {
-            alertDialog.show();
+            AlertDialogCustom.show(this,"vous devez etre lié à internet");
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finishAffinity();
     }
 
 }

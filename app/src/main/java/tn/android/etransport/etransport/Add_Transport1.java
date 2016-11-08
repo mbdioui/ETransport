@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -18,11 +19,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -49,6 +52,8 @@ import utils.Connectivity;
 import utils.GPSTracker;
 import utils.KeyboardUtil;
 import utils.PermissionUtils;
+
+import static android.support.design.widget.Snackbar.make;
 
 
 public class Add_Transport1 extends Activity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback,
@@ -127,9 +132,9 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
-        //check GPS
-        if(!Connectivity.checkGPS(this))
-            startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS),11);
+        //check GPS //TODO demand access to location settings
+//        if(!Connectivity.checkGPS(this))
+//            startActivityForResult(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),11);
         //close button
         ImageButton close_btn=(ImageButton) findViewById(R.id.close_BTN);
         close_btn.setOnClickListener(new View.OnClickListener() {
@@ -273,8 +278,10 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
                         if (adr.getMaxAddressLineIndex()<=1)
                             ville=adr.getAddressLine(0);
                         else
-                        {   startposition = adr.getAddressLine(0);}
-                            ville=adr.getAddressLine(1);}
+                        {   startposition = adr.getAddressLine(0);
+                            ville=adr.getAddressLine(1);
+                        }
+                    }
                 }
                 catch (IOException e)
                 {
@@ -375,7 +382,7 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
                                         if (destinationmarker != null)
                                              destinationmarker.remove();
                                          destinationmarker = MapForm.addMarker(new MarkerOptions()
-                                                                .title(location.getAddressLine(1))
+                                                                .title(ville)
                                                                 .snippet("destination place")
                                                                 .position(ltlng)
                                                                 .draggable(false)
@@ -458,7 +465,7 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
         Autocomplete_place_field.clearFocus();
 //        Toast.makeText(Add_Transport1.this, getString(R.string.no_places_found), Toast.LENGTH_LONG).show();
         CoordinatorLayout coord= (CoordinatorLayout) findViewById(R.id.layout_add__transport);
-        Snackbar.make(coord, R.string.no_places_found,Snackbar.LENGTH_SHORT).show();
+        make(coord, R.string.no_places_found,Snackbar.LENGTH_SHORT).show();
     }
 
     //event clear text typing
@@ -510,63 +517,77 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
         mPlaceArrayAdapter.setGoogleApiClient(null);
         Log.e("add_transport", "Google Places API connection suspended.");
         CoordinatorLayout coord = (CoordinatorLayout) findViewById(R.id.layout_add__transport);
-        Snackbar.make(coord, R.string.suspended_connection, Snackbar.LENGTH_SHORT).show();
+        make(coord, R.string.suspended_connection, Snackbar.LENGTH_SHORT).show();
     }
     //  TODO progress dialog option while the process is running
     @Override
     public void onMapClick(LatLng point) {
-        removedestMarker();
-        Address adr;
-        //Convert LatLng to Location
-        Location location = new Location("Test");
-        location.setLatitude(point.latitude);
-        location.setLongitude(point.longitude);
-        String ville="inconnue";
-        Geocoder geo = new Geocoder(getApplicationContext());
-        if (Connectivity.Checkinternet(this))
-        {
-            try
-          {
-            List<Address> list = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 2);
-            if (list.size() > 0 && list != null)
-            {
-                adr = list.get(0);
-                if (adr.getMaxAddressLineIndex()<=1)
-                    ville=adr.getAddressLine(0);
-                else
-                {   destposition = adr.getAddressLine(0);
-                    ville=adr.getAddressLine(1);
-                    Destination_Country=adr.getCountryName();
-                }
+            removedestMarker();
+            Address adr;
+            //Convert LatLng to Location
+            Location location = new Location("Test");
+            location.setLatitude(point.latitude);
+            location.setLongitude(point.longitude);
+            String ville = "inconnue";
+            Geocoder geo = new Geocoder(getApplicationContext());
+            if (Connectivity.Checkinternet(this)) {
+                try {
+                    List<Address> list = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 2);
+                    if (list.size() > 0 && list != null) {
+                        adr = list.get(0);
+                        if (adr.getMaxAddressLineIndex() <= 1)
+                            ville = adr.getAddressLine(0);
+                        else {
+                            destposition = adr.getAddressLine(0);
+                            ville = adr.getAddressLine(1);
+                            Destination_Country = adr.getCountryName();
+                        }
 //		        location.setTime(new Date().getTime()); //Set time as current Date
-                if (adr.getCountryName().equals("France") || adr.getCountryName().equals("Tunisie") || adr.getCountryName().equals("Tunisia"))
-                //Convert Location to LatLng
-                {
-                    LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                    MarkerOptions markerOptions = new MarkerOptions()
-                            .position(newLatLng)
-                            .draggable(false)
-                            .title(ville)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    destinationmarker = MapForm.addMarker(markerOptions);
-                    cameraBTN.setEnabled(true);
-                    BTN_Addtransport1.setEnabled(true);
-                    zoomOutFit();
-                    Autocomplete_place_field.clearFocus();
-                    KeyboardUtil.hideKeyboard(Add_Transport1.this);
-                }
-                else
-                {
+                        if (adr.getCountryName().equals("France") || adr.getCountryName().equals("Tunisie") || adr.getCountryName().equals("Tunisia"))
+                        //Convert Location to LatLng
+                        {
+                            LatLng newLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                            MarkerOptions markerOptions = new MarkerOptions()
+                                    .position(newLatLng)
+                                    .draggable(false)
+                                    .title(ville)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                            destinationmarker = MapForm.addMarker(markerOptions);
+                            cameraBTN.setEnabled(true);
+                            BTN_Addtransport1.setEnabled(true);
+                            zoomOutFit();
+                            Autocomplete_place_field.clearFocus();
+                            KeyboardUtil.hideKeyboard(Add_Transport1.this);
+                        } else {
+
 //                    Toast.makeText(getApplicationContext(),getString(R.string.no_places_found), Toast.LENGTH_LONG).show();
+                            CoordinatorLayout coord = (CoordinatorLayout) findViewById(R.id.layout_add__transport);
+                            Snackbar snackbar = Snackbar.make(coord, R.string.no_places_found, Snackbar.LENGTH_LONG);
+                            View snackBarView = snackbar.getView();
+                            snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.blue_gray));
+                            TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_text);
+                            tv.setTextColor(Color.WHITE);
+                            snackbar.show();
+                        }
+                    } else {
+                        CoordinatorLayout coord = (CoordinatorLayout) findViewById(R.id.layout_add__transport);
+                        Snackbar.make(coord, R.string.geting_position_error, Snackbar.LENGTH_LONG).show();
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
                     CoordinatorLayout coord = (CoordinatorLayout) findViewById(R.id.layout_add__transport);
-                    Snackbar.make(coord, R.string.no_places_found, Snackbar.LENGTH_SHORT).show();
+                    Snackbar snackbar = Snackbar.make(coord,"un erreur est survenue lors de la récupération de la position"
+                            , Snackbar.LENGTH_LONG);
+                    View snackBarView = snackbar.getView();
+                    snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.blue_gray)); // snackbar background color
+                    snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.White));
+                    snackbar.show();
                 }
             }
-          }
-            catch (IOException e)
-            { e.printStackTrace();}
-        }
+
     }
+
 
 //TODO disable GPS after exiting activity (Location Manager)
 }

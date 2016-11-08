@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto">
+
+        <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/btn_naviguation_view"-->
+        <!--android:layout_gravity="left"-->
+        <!--android:src="@drawable/ic"-->
+        <!--android:background="@null"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentTop="true" />-->
+
+        <ImageButton
+            android:id="@+id/profile_button"
+            android:layout_width="180dp"
+            android:src="@drawable/ic_portrait_black_24dp"
+            android:background="@drawable/tileshape"
+            android:layout_height="160dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
+        <ImageButton
+            android:id="@+id/History_BTN"
+            android:layout_width="wrap_content"
+            android:layout_height="98dp"
+            android:src="@drawable/ic_history_black_24dp"
+            android:background="@drawable/tileshape"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="2dp"
+            android:layout_toRightOf="@+id/profile_button"
+            android:layout_alignTop="@id/profile_button"
+            android:layout_alignParentRight="true"
+            android:foregroundGravity="center_horizontal"
+            android:layout_toEndOf="@+id/profile_button"/>
+
+        <ImageButton
+            android:id="@+id/Image3"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:background="@drawable/tileshape"
+            android:layout_height="58dp"
+            android:foregroundGravity="center_horizontal"
+            android:layout_alignBottom="@id/profile_button"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/profile_button"
+            android:layout_below="@+id/History_BTN"/>
+
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/menu1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+
+            fab:menu_labels_style="@style/MenuLabelsStyle"
+            fab:menu_labels_ellipsize="end"
+            fab:menu_labels_singleLine="true"
+            fab:menu_backgroundColor="@android:color/transparent"
+            fab:menu_colorNormal="@color/light_blue"
+            fab:menu_colorPressed="@color/blue">
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/MenuButtonsStyle"
+                android:src="@android:drawable/ic_input_add"
+                fab:fab_size="mini"
+                fab:fab_label="Ajouter Une Demande"/>
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/MenuButtonsStyle"
+                android:src="@android:drawable/ic_menu_search"
+                fab:fab_size="mini"
+                fab:fab_label="Rechercher un trajet" />
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </RelativeLayout>
+

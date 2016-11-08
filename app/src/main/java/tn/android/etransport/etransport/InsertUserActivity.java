@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import utils.AlertDialogCustom;
 import utils.Connectivity;
 import utils.KeyboardUtil;
 import utils.Links;
@@ -83,13 +84,7 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 			//fields check
 			if(sprenom.isEmpty()||sname.isEmpty()||smail.isEmpty()||smdp.isEmpty()||phone.isEmpty())
 			{
-				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-				alertDialogBuilder.setMessage("vérifier les champs manquants");
-				alertDialogBuilder.setTitle("informations");
-				alertDialogBuilder.setIcon(R.drawable.ic_info_black_24dp);
-				alertDialogBuilder.setPositiveButton("ok",null);
-				alertDialogBuilder.create();
-				alertDialogBuilder.show();
+				AlertDialogCustom.show(this,"veuillez remplir tous les champs");
 			}
 			else
 			{  //pass verification

@@ -48,7 +48,7 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 
 	public LoginUserTask(Activity act) {
 		super();
-		progdialog = new ProgressDialog(act);
+		progdialog = new ProgressDialog(act,R.style.NewDialog);
 		activityparent=act;
 	}
 
@@ -100,7 +100,7 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 				UserInfos.setConnecteduser(user);
 				UserInfos.IsConnected=true;
 				Toast.makeText(cntx,"Welcome :"+user.getF_name().toString().toUpperCase(),Toast.LENGTH_LONG).show();
-				Intent intent= new Intent(activityparent,MainClient.class);
+				Intent intent= new Intent(activityparent,Home_affreteur_activity.class);
 				activityparent.startActivity(intent);
 				activityparent.finish();
 			}
@@ -114,6 +114,8 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 		catch (JSONException e)        {}
 
 	}
+
+
 	
 	
 }

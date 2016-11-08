@@ -8,5 +8,7 @@
     <item name="black" type="color">#000000</item>
     <item name="orange" type="color">#F57C00</item>
     <item name="yellow" type="color">#FFFF00</item>
-
+    <item name="Gray" type="color">#BDBDBD</item>
+    <item name="White" type="color">#FAFAFA</item>
+    <item name="blue_gray" type="color">#B0BEC5</item>
 </resources>

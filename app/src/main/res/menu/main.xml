@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.etransport.InsertUserActivity" >
+    tools:activitycontext="com.example.etransport.InsertUserActivity" >
 
     <item
         android:id="@+id/tab_action_settings"
