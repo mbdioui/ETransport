@@ -1,7 +1,9 @@
 <FrameLayout
      xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scrollView1"
 	android:focusableInTouchMode="true"
+	android:background="@drawable/bg3"
 	android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -18,7 +20,7 @@
 
 		  <AutoCompleteTextView
 			  android:id="@+id/User_l_name"
-			  android:layout_width="65dp"
+			  android:layout_width="95dp"
 			  android:gravity="center"
 			  android:textSize="@dimen/text_size"
 			  android:layout_alignParentTop="true"
@@ -106,15 +108,22 @@
 				  android:layout_marginTop="30dp"
                   android:textOff="Chauffeur"
                   android:textOn="Affréteur" />
-         
-          <Button
-              android:id="@+id/User_subs"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-			  android:layout_centerHorizontal="true"
-			  android:layout_below="@id/User_status"
-              android:layout_marginTop="30dp"
-              android:text="inscription" />
+
+		<com.rey.material.widget.Button
+			android:background="@drawable/buttonshapebackgroundcolored"
+			app:rd_cornerRadius="35dp"
+			app:rd_enable="true"
+			app:rd_backgroundColor="@color/White"
+			android:textColor="@color/White"
+			android:layout_gravity="center"
+			app:rd_delayClick="afterRelease"
+			android:id="@+id/User_subs"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerHorizontal="true"
+			android:layout_below="@id/User_status"
+			android:layout_marginTop="30dp"
+			android:text="inscription" />
 
           <Button
               android:layout_width="wrap_content"

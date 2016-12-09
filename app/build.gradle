@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.3"
+        buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "tn.android.etransport.etransport"
         minSdkVersion 17
@@ -33,5 +33,17 @@ dependencies {
     compile 'com.android.support:design:23.4.0'
     compile 'com.google.android.gms:play-services-location:9.6.1'
     compile 'com.github.clans:fab:1.6.2'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'com.squareup:android-times-square:1.6.5@aar'
+    compile 'com.beardedhen:androidbootstrap:2.3.0'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
+    compile 'com.github.rey5137:material:1.2.4'
+    compile 'com.github.d-max:spots-dialog:0.7@aar'
+    compile ('com.github.ganfra:material-spinner:1.1.1'){
+        exclude group: 'com.nineoldandroids', module: 'library'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+    }
+    compile 'com.github.Q42:AndroidScrollingImageView:1.2'
+    compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.6'
     testCompile 'junit:junit:4.12'
 }

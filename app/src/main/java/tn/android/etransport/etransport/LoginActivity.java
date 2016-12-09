@@ -5,8 +5,6 @@ package tn.android.etransport.etransport;
  */
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -61,22 +59,12 @@ public class LoginActivity extends Activity implements OnClickListener {
     public void onClick(View v)
     {
         if(Connectivity.Checkinternet(this)) {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setMessage("veuillez entrez le login et le mot de passe");
-            alertDialogBuilder.setPositiveButton("continuez", null);
-            alertDialogBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            AlertDialog alertDialog = alertDialogBuilder.create();
             if (!user_mail.getText().toString().equals("") && !user_password.getText().toString().equals("")) {
                 LoginUserTask log_User = new LoginUserTask(LoginActivity.this);
                 log_User.setCntx(LoginActivity.this);
                 log_User.execute(Links.getRootFolder() + "userconnexion.php", user_mail.getText().toString()
                         , user_password.getText().toString());
-                KeyboardUtil.hideKeyboard(LoginActivity.this);
+                KeyboardUtil.hideKeyboard(this);
 //            while (log_User.Auth==null)
 //            {}
 //            if (log_User.Auth.equals("ok"))
@@ -87,7 +75,7 @@ public class LoginActivity extends Activity implements OnClickListener {
 //            }
 
             } else {
-                alertDialog.show();
+                AlertDialogCustom.show(this,"veuillez remplir tous les champs");
             }
         }
         //no connectivity to the internet

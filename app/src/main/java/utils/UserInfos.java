@@ -2,6 +2,9 @@ package utils;
 
 import android.app.Application;
 
+import com.beardedhen.androidbootstrap.TypefaceProvider;
+import com.rey.material.app.ThemeManager;
+
 import Beans.User;
 
 
@@ -12,6 +15,12 @@ import Beans.User;
  public class UserInfos extends Application{
     private static User  connecteduser;
     public static Boolean IsConnected = false;
+    //Bootstrap library
+    @Override public void onCreate() {
+        super.onCreate();
+        ThemeManager.init(this, 1, 0, null);
+        TypefaceProvider.registerDefaultIconSets();
+    }
 
     public final static User getConnecteduser() {
         return connecteduser;

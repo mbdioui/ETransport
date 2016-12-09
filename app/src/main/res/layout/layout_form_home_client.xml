@@ -11,7 +11,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
 
-    <ImageButton
+    <com.rey.material.widget.ImageButton
+        app:rd_enable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"

@@ -4,9 +4,9 @@ package tn.android.etransport.etransport;
  */
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -28,13 +28,14 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import Beans.User;
+import dmax.dialog.SpotsDialog;
 import utils.UserInfos;
 
 public class UpdateUserTask extends AsyncTask<String, String, String> {
 
 	private Context context;
 	private String responseBody;
-	private ProgressDialog progdialog;
+	private AlertDialog progdialog;
 	private Activity parentactivity;
 	private String UserString;
 	private JSONArray UserJsonArray;
@@ -60,7 +61,7 @@ public class UpdateUserTask extends AsyncTask<String, String, String> {
 	public UpdateUserTask(Activity activity, Context context)
 	{
 		setParentactivity(activity);
-		progdialog = new ProgressDialog(activity,R.style.NewDialog);
+		progdialog = new SpotsDialog(activity,R.style.CustomSpotDialog);
 		this.context=context;
 	}
 
@@ -97,7 +98,6 @@ public class UpdateUserTask extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		progdialog.setMessage("changement en cours");
 		progdialog.show();
 
 	}

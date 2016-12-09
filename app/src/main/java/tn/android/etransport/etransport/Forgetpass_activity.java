@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 import utils.KeyboardUtil;
 import utils.Links;
+import utils.UserInfos;
 
 public class Forgetpass_activity extends Activity implements View.OnClickListener {
 
@@ -23,7 +24,7 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
     private EditText Mdp;
     private EditText Confirm_Mdp;
     private Button authentification_BTN;
-    private Button cancel_BTN;
+    private com.rey.material.widget.Button cancel_BTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
         Button reset_button = (Button) findViewById(R.id.Reset_button);
         reset_button.setOnClickListener(this);
 
-        cancel_BTN =(Button) findViewById(R.id.cancel_reset_password_BTN);
+        cancel_BTN =(com.rey.material.widget.Button) findViewById(R.id.cancel_reset_password_BTN);
         authentification_BTN= (Button) findViewById(R.id.BTN_forgetpassword_connect);
         authentification_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,9 +86,14 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
         }
         else if(v.getId() == R.id.cancel_reset_password_BTN)
         {
-            Intent intentparent = new Intent(this,Home_affreteur_activity.class);
+            if(UserInfos.getConnecteduser()!=null)
+            {Intent intentparent = new Intent(this,Home_affreteur_activity.class);
             startActivity(intentparent);
-            this.finish();
+            this.finish();}
+            else if(UserInfos.getConnecteduser()==null)
+            {Intent cnxintent=new Intent(this,LoginActivity.class);
+            startActivity(cnxintent);
+            this.finish();}
         }
     }
 

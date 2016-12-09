@@ -8,10 +8,12 @@
 
     <TextView
         android:layout_width="match_parent"
+        android:gravity="left"
         android:layout_height="wrap_content"
         android:text="Nom et Prenom :"
         android:textSize="20sp"
         android:id="@+id/label_user_name"
+        android:layout_marginTop="80dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"/>
     <EditText
@@ -42,6 +44,7 @@
         android:textSize="20sp"
         android:layout_below="@id/edit_user_f_name"
         android:layout_alignParentLeft="true"
+        android:gravity="left"
         android:id="@+id/label_phone"/>
     <EditText
         android:layout_width="match_parent"
@@ -58,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Adresse:"
+        android:gravity="left"
         android:textSize="20sp"
         android:layout_below="@id/edit_telephone"
         android:layout_alignParentLeft="true"
@@ -72,16 +76,23 @@
         android:layout_below="@id/label_address"
         android:id="@+id/edit_address"
         android:layout_marginBottom="@dimen/between_fields_vertical_margin"/>
-    <Button
+    <com.rey.material.widget.Button
         android:id="@+id/update_profile_BTN"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/edit_address"
+        android:background="@drawable/buttonshapebackgroundcolored"
+        app:rd_cornerRadius="35dp"
+        app:rd_backgroundColor="@color/White"
+        android:textColor="@color/White"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:rd_delayClick="afterRelease"
         android:text="Mettre à jour"
-        android:textSize="16sp"
-        android:layout_width="wrap_content">
+        app:rd_enable="true"
+        android:textSize="@dimen/text_size">
 
-    </Button>
+    </com.rey.material.widget.Button>
 
 
 

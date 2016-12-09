@@ -36,7 +36,7 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.insert_user);
-		Button subButton =(Button) findViewById(R.id.User_subs);
+		com.rey.material.widget.Button subButton =(com.rey.material.widget.Button) findViewById(R.id.User_subs);
 		Button already_member = (Button) findViewById(R.id.BTN_alreadymember);
 		already_member.setOnClickListener(this);
 		subButton.setOnClickListener(this);
@@ -48,7 +48,7 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		if (!Connectivity.Checkinternet(getApplicationContext()))
 		{
-			AlertDialog.Builder alertbuilder= new AlertDialog.Builder(this);
+			AlertDialog.Builder alertbuilder= new AlertDialog.Builder(this,R.style.dialog_theme);
 			alertbuilder.setMessage("Vérifier votre connection");
 			alertbuilder.setIcon(R.drawable.ic_info_black_24dp);
 			alertbuilder.setPositiveButton("Ok",null);

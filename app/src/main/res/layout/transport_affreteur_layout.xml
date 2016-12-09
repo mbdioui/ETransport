@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/add_transport_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/light_blue"
+        app:tabTextColor="@color/White"
+        app:tabGravity="fill"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_below="@id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.rey.material.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/submit_transport_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        app:fab_backgroundColor="@color/light_blue"
+        app:fab_iconSrc="@android:drawable/stat_sys_upload_done" />
+
+</RelativeLayout>
+
+
+
+

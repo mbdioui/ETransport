@@ -42,6 +42,7 @@ public class PlaceArrayAdapter
         mBounds = bounds;
         mPlaceFilter = filter;
     }
+
  
     public void setGoogleApiClient(GoogleApiClient googleApiClient) {
         if (googleApiClient == null || !googleApiClient.isConnected()) {

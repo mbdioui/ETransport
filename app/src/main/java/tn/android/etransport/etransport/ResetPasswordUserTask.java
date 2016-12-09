@@ -5,7 +5,7 @@ package tn.android.etransport.etransport;
  */
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -24,11 +24,13 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 public class ResetPasswordUserTask extends AsyncTask<String, String, String> {
 
 	Context context;
 	String responseBody;
-	ProgressDialog progdialog;
+	AlertDialog progdialog;
 	public Context getCntx() {
 		return context;
 	}
@@ -38,7 +40,7 @@ public class ResetPasswordUserTask extends AsyncTask<String, String, String> {
 	}
 	public ResetPasswordUserTask(Activity act)
 	{
-		progdialog = new ProgressDialog(act,R.style.NewDialog);
+		progdialog = new SpotsDialog(act,R.style.CustomSpotDialog);
 	}
 	@Override
 	protected String doInBackground(String... params) {
@@ -69,7 +71,6 @@ public class ResetPasswordUserTask extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		progdialog.setMessage("changement en cours");
 		progdialog.show();
 	}
 

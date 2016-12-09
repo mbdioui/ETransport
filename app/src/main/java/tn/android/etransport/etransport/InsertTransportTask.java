@@ -4,7 +4,7 @@ package tn.android.etransport.etransport;
  */
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -25,11 +25,13 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import dmax.dialog.SpotsDialog;
+
 public class InsertTransportTask extends AsyncTask<String, String, String> {
 
 	private Context context;
 	private String responseBody;
-	private ProgressDialog progdialog;
+	private AlertDialog progdialog;
 	private Activity parentactivity;
 
 	public Activity getParentactivity() {
@@ -50,7 +52,7 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 
 	public InsertTransportTask(Activity activity,Context context)
 	{
-		progdialog = new ProgressDialog(activity,R.style.NewDialog);
+		progdialog = new SpotsDialog(activity,R.style.CustomSpotDialog);
 		this.context=context;
 	}
 
@@ -62,19 +64,40 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
         try {
 	            // set up post data
 	            ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-	          
-	            nameValuePair.add(new BasicNameValuePair("user_id", params[1]));
-	            nameValuePair.add(new BasicNameValuePair("date_go", params[2]));
-	            nameValuePair.add(new BasicNameValuePair("date_arrival",params[3]));
-	            nameValuePair.add(new BasicNameValuePair("text",params[4]));
-	            nameValuePair.add(new BasicNameValuePair("city_from",params[5]));
-	            nameValuePair.add(new BasicNameValuePair("city_to",params[6]));
-				nameValuePair.add(new BasicNameValuePair("country_from",params[7]));
-				nameValuePair.add(new BasicNameValuePair("country_to",params[8]));
-				nameValuePair.add(new BasicNameValuePair("address_from",params[9]));
-				nameValuePair.add(new BasicNameValuePair("address_to",params[10]));
+	          /*  $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
+					$date_go_ini=isset($_POST['date_go']) ? $_POST['date_go'] :'';
+					$date_arrival_ini=isset($_POST['date_arrival']) ? $_POST['date_arrival'] :'';
+					$date_go_min_ini=isset($_POST['date_go_min']) ? $_POST['date_go_min'] :'';
+					$date_go_max_ini=isset($_POST['date_go_max']) ? $_POST['date_go_max'] :'';
+					$date_arrival_min_ini=isset($_POST['date_arrival_min']) ? $_POST['date_arrival_min'] :'';
+					$date_arrival_max_ini=isset($_POST['date_arrival_max']) ? $_POST['date_arrival_max'] :'';
+					$text=isset($_POST['text']) ? addslashes($_POST['text']) :'';
+					$address_from=isset($_POST['address_from']) ? $_POST['address_from'] :'';
+					$address_to=isset($_POST['address_to']) ? $_POST['address_to'] :'';
+					$type_pub=isset($_POST['type_pub']) ? $_POST['type_pub'] : '1';
+					$start_pos_lat=isset($_POST['start_pos_lat']) ? $_POST['start_pos_lat'] :'';
+					$start_pos_lgt=isset($_POST['start_pos_lgt']) ? $_POST['start_pos_lgt'] :'';
+					$end_pos_lat=isset($_POST['end_pos_lat']) ? $_POST['end_pos_lat'] :'';
+					$end_pos_lgt=isset($_POST['end_pos_lgt']) ? $_POST['end_pos_lgt'] :'';*/
 
-	            //Encode and set entity
+	            nameValuePair.add(new BasicNameValuePair("user_id", params[1]));
+	            nameValuePair.add(new BasicNameValuePair("date_go_min", params[2]));
+	            nameValuePair.add(new BasicNameValuePair("date_go_max",params[3]));
+	            nameValuePair.add(new BasicNameValuePair("date_arrival_min",params[4]));
+	            nameValuePair.add(new BasicNameValuePair("date_arrival_max",params[5]));
+	            nameValuePair.add(new BasicNameValuePair("text",params[6]));
+				nameValuePair.add(new BasicNameValuePair("address_from",params[7]));
+				nameValuePair.add(new BasicNameValuePair("address_to",params[8]));
+				nameValuePair.add(new BasicNameValuePair("start_pos_lat",params[9]));
+				nameValuePair.add(new BasicNameValuePair("start_pos_lgt",params[10]));
+				nameValuePair.add(new BasicNameValuePair("end_pos_lat",params[11]));
+				nameValuePair.add(new BasicNameValuePair("end_pos_lgt",params[12]));
+				nameValuePair.add(new BasicNameValuePair("date_go",params[13]));
+				nameValuePair.add(new BasicNameValuePair("date_arrival",params[14]));
+				nameValuePair.add(new BasicNameValuePair("type_pub",params[15]));
+				nameValuePair.add(new BasicNameValuePair("means",params[16]));
+				nameValuePair.add(new BasicNameValuePair("typegood",params[17]));
+				//Encode and set entity
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePair, HTTP.UTF_8));
 	            HttpResponse response = client.execute(post);
 				responseBody = EntityUtils.toString(response.getEntity());
@@ -92,7 +115,6 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-		progdialog.setMessage("changement en cours");
 		progdialog.show();
 
 	}
@@ -107,7 +129,7 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 			if(json.getString("error").equals("0"))
 			{
 				Toast.makeText(context,"Insertion Done",Toast.LENGTH_LONG).show();
-				Intent intent = new Intent(parentactivity,MainClient.class);
+				Intent intent = new Intent(parentactivity,Home_affreteur_activity.class);
 				parentactivity.startActivity(intent);
 				parentactivity.finish();
 			}

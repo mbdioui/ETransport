@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto">
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <!--<ImageButton-->
         <!--android:layout_width="wrap_content"-->
@@ -15,11 +16,15 @@
         <!--android:layout_alignParentLeft="true"-->
         <!--android:layout_alignParentTop="true" />-->
 
-        <ImageButton
+        <com.rey.material.widget.ImageButton
+            app:rd_delayClick="afterRelease"
+            app:rd_cornerRadius="35dp"
+            app:rd_enable="true"
+            app:rd_backgroundColor="@color/light_blue_transparent"
             android:id="@+id/profile_button"
             android:layout_width="180dp"
-            android:src="@drawable/ic_portrait_black_24dp"
-            android:background="@drawable/tileshape"
+            android:src="@drawable/ic_account_circle_white_36dp"
+            android:background="@drawable/buttonshape"
             android:layout_height="160dp"
             android:layout_marginRight="2dp"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -28,12 +33,16 @@
             android:layout_centerVertical="true"
             />
 
-        <ImageButton
+        <com.rey.material.widget.ImageButton
+            app:rd_delayClick="afterRelease"
+            app:rd_cornerRadius="35dp"
+            app:rd_enable="true"
+            app:rd_backgroundColor="@color/light_blue_transparent"
             android:id="@+id/History_BTN"
             android:layout_width="wrap_content"
             android:layout_height="98dp"
-            android:src="@drawable/ic_history_black_24dp"
-            android:background="@drawable/tileshape"
+            android:src="@drawable/ic_settings_backup_restore_white_36dp"
+            android:background="@drawable/buttonshape"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="2dp"
             android:layout_toRightOf="@+id/profile_button"
@@ -42,11 +51,15 @@
             android:foregroundGravity="center_horizontal"
             android:layout_toEndOf="@+id/profile_button"/>
 
-        <ImageButton
+        <com.rey.material.widget.ImageButton
+            app:rd_enable="true"
             android:id="@+id/Image3"
+            app:rd_cornerRadius="35dp"
+            app:rd_delayClick="afterRelease"
+            app:rd_backgroundColor="@color/light_blue_transparent"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
-            android:background="@drawable/tileshape"
+            android:background="@drawable/buttonshape"
             android:layout_height="58dp"
             android:foregroundGravity="center_horizontal"
             android:layout_alignBottom="@id/profile_button"
@@ -73,7 +86,7 @@
             fab:menu_colorPressed="@color/blue">
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fab1"
+                android:id="@+id/fabAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/MenuButtonsStyle"
@@ -82,7 +95,7 @@
                 fab:fab_label="Ajouter Une Demande"/>
 
             <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fab2"
+                android:id="@+id/fabResearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/MenuButtonsStyle"

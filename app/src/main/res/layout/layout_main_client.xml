@@ -20,7 +20,7 @@
                     android:layout_gravity="start"
                     android:background="@color/blue_gray"
                     app:itemTextColor="@color/White"
-                    app:menu="@menu/drawer_view" />
+                    app:menu="@menu/drawer_view_connected" />
     </android.support.v4.widget.DrawerLayout>
         <com.roughike.bottombar.BottomBar
             android:id="@+id/Bottbar"

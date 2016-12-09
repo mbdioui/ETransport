@@ -43,11 +43,11 @@ public class MainClient extends Activity  {
             public void onTabSelected(@IdRes int tabId) {
                 switch(tabId){
                 case R.id.tab_action_settings :
-                    Form_Settings_Client newFragment = new Form_Settings_Client();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.framefragment, newFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
+//                    Form_Time_Client newFragment = new Form_Time_Client();
+//                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                    transaction.replace(R.id.framefragment, newFragment);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
                         break;
                 case R.id.tab_home_client:
                     Form_Home_Client f = new Form_Home_Client();
@@ -58,12 +58,12 @@ public class MainClient extends Activity  {
                     FT.commit();
                     break;
                 case R.id.tab_Paths :
-                    Form_Paths_Client fp = new Form_Paths_Client();
-                    FragmentTransaction FT2 = getFragmentManager().beginTransaction();
-                    FT2.replace(R.id.framefragment, fp);
-                    FT2.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                    FT2.addToBackStack(null);
-                    FT2.commit();
+//                    Form_Paths_Client fp = new Form_Paths_Client();
+//                    FragmentTransaction FT2 = getFragmentManager().beginTransaction();
+//                    FT2.replace(R.id.framefragment, fp);
+//                    FT2.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+//                    FT2.addToBackStack(null);
+//                    FT2.commit();
                     break;
                 }
             }
@@ -73,16 +73,16 @@ public class MainClient extends Activity  {
             public boolean onNavigationItemSelected(MenuItem item) {
 
                 switch (item.getItemId()) {
-                    case  R.id.nav_connexion:
-                    Intent intent = new Intent(MainClient.this,LoginActivity.class);
-                    startActivity(intent);
-                    MainClient.this.finish();
-                        break;
-                    case  R.id.nav_user_inscription:
-                    Intent intent2 = new Intent(MainClient.this,InsertUserActivity.class);
-                    startActivity(intent2);
-                    MainClient.this.finish();
-                    break;
+//                    case  R.id.nav_connexion:
+//                    Intent intent = new Intent(MainClient.this,LoginActivity.class);
+//                    startActivity(intent);
+//                    MainClient.this.finish();
+//                        break;
+//                    case  R.id.nav_user_inscription:
+//                    Intent intent2 = new Intent(MainClient.this,InsertUserActivity.class);
+//                    startActivity(intent2);
+//                    MainClient.this.finish();
+//                    break;
                     case R.id.nav_disconnect :
                     UserInfos.setConnecteduser(null);
                     UserInfos.IsConnected=false;

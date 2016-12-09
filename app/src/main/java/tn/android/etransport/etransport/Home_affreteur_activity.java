@@ -1,6 +1,6 @@
 package tn.android.etransport.etransport;
 
-import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +18,9 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.alertdialogpro.AlertDialogPro;
+import com.github.clans.fab.FloatingActionButton;
+
 import utils.UserInfos;
 
 /**
@@ -32,9 +35,10 @@ public class Home_affreteur_activity extends AppCompatActivity implements View.O
     private ImageButton btn_naviguation_view;
     private TextView header_nav_mail;
     private TextView header_nav_username;
-    private ImageButton profileBTN;
+    private FloatingActionButton addBTN;
     private View action_bar_layout;
     private ActionBar actionbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +59,18 @@ public class Home_affreteur_activity extends AppCompatActivity implements View.O
         header_nav_username=(TextView) header.findViewById(R.id.User_name_head);
         setupheader_nav_view();
 
-        Home_affreteur_fragment f = new Home_affreteur_fragment();
-        FragmentTransaction FT = getFragmentManager().beginTransaction();
-        FT.replace(R.id.fragment_affreteur, f);
-        FT.setTransition(FragmentTransaction.TRANSIT_NONE);
-        FT.addToBackStack(null);
-        FT.commit();
+        if (this.getClass()==Home_affreteur_activity.class)
+        {
+            Home_affreteur_fragment f = new Home_affreteur_fragment();
+            FragmentTransaction FT = getFragmentManager().beginTransaction();
+            FT.replace(R.id.fragment_affreteur, f);
+            FT.setTransition(FragmentTransaction.TRANSIT_NONE);
+            FT.addToBackStack(null);
+            FT.commit();
+        }
+
         utils.ActionBar.changetextview(action_bar_layout,"Acceuil");
+
     }
 
     private View setup_tab() {
@@ -87,7 +96,6 @@ public class Home_affreteur_activity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        int K=v.getId();
         if (v.getId()==R.id.btn_naviguation_view)
         {
             drawer.openDrawer(navigationView);
@@ -113,27 +121,27 @@ public class Home_affreteur_activity extends AppCompatActivity implements View.O
                     break;
                 case R.id.nav_disconnect:
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home_affreteur_activity.this,R.style.dialog_theme);
-                alertDialog.setTitle("Déconnexion ...");// Le titre
-                alertDialog.setMessage(getResources().getString(R.string.deconnexion));// Le message
-                alertDialog.setIcon(R.drawable.deconnexion);// L'icone
-
-                alertDialog.setPositiveButton("OUI",
+                AlertDialogPro.Builder alertDialog = new AlertDialogPro.Builder(Home_affreteur_activity.this);
+                alertDialog.setTitle("Déconnexion ...")
+                        .setMessage(getResources().getString(R.string.deconnexion))
+                        .setIcon(R.drawable.deconnexion)
+                        .setPositiveButton("OUI",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent connexIntent = new Intent(Home_affreteur_activity.this
                                         ,LoginActivity.class);
                                 startActivity(connexIntent);
+                                UserInfos.setConnecteduser(null);
                                 exit();
                             }
-                        });
-                alertDialog.setNegativeButton("NON",
+                        })
+                        .setNegativeButton("NON",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
                             }
-                        });
-                alertDialog.show();
+                        })
+                        .show();
                     break;
                 }
             return true;
@@ -141,9 +149,14 @@ public class Home_affreteur_activity extends AppCompatActivity implements View.O
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent=getIntent();
-        startActivity(intent);
+        Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_affreteur);
+        if(currentFragment instanceof Home_affreteur_fragment)
+        Home_affreteur_activity.this.finish();
+        else
+        {  Intent intent =getIntent();
+           startActivity(intent);
+           this.finish();
+        }
     }
 
 }

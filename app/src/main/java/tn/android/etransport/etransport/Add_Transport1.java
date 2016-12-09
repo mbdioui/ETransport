@@ -474,7 +474,7 @@ public class Add_Transport1 extends Activity implements OnMapReadyCallback, Acti
     }
 
     private void zoomOutFit() {
-        if (startmarker != null) {
+        if (startmarker != null && destinationmarker!=null) {
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             LatLng Latlng1 = new LatLng(startmarker.getPosition().latitude, startmarker.getPosition().longitude);
             LatLng Latlng2 = new LatLng(destinationmarker.getPosition().latitude, destinationmarker.getPosition().longitude);

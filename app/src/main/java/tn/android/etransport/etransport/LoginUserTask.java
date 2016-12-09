@@ -1,7 +1,7 @@
 package tn.android.etransport.etransport;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,6 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import Beans.User;
+import dmax.dialog.SpotsDialog;
 import utils.UserInfos;
 
 public class LoginUserTask extends AsyncTask<String, String, String> {
@@ -33,7 +34,7 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 	private String  UserString;
 
 
-	private ProgressDialog progdialog;
+	private AlertDialog progdialog;
 	private JSONArray UserJsonArray;
 	private JSONObject UserJsonObject;
 	private Activity activityparent;
@@ -48,7 +49,7 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 
 	public LoginUserTask(Activity act) {
 		super();
-		progdialog = new ProgressDialog(act,R.style.NewDialog);
+		progdialog = new SpotsDialog(act,R.style.CustomSpotDialog);
 		activityparent=act;
 	}
 
@@ -79,7 +80,6 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPreExecute() {
 	super.onPreExecute();
-	progdialog.setMessage("Authentification en cours");
 	progdialog.show();
 
 	}
@@ -89,30 +89,31 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 		super.onPostExecute(result);
 		progdialog.dismiss();
 		JSONObject json = null;
-		try {
-			json = new JSONObject(result);
-			if(json.getString("error").equals("0")) {
-				UserString = json.getString("user").toString();
-				UserJsonArray = json.getJSONArray("user");
-				UserJsonObject = UserJsonArray.getJSONObject(0);
-				user = new User(UserJsonObject);
-				//TODO GETTING ROLE OF USER
-				UserInfos.setConnecteduser(user);
-				UserInfos.IsConnected=true;
-				Toast.makeText(cntx,"Welcome :"+user.getF_name().toString().toUpperCase(),Toast.LENGTH_LONG).show();
-				Intent intent= new Intent(activityparent,Home_affreteur_activity.class);
-				activityparent.startActivity(intent);
-				activityparent.finish();
-			}
-				else
-			if(json.getString("error").equals("1"))
-				Toast.makeText(cntx,"Wrong password",Toast.LENGTH_LONG).show();
-			else
-			if(json.getString("error").equals("2"))
-				Toast.makeText(cntx,"cannot fin any account with this mail",Toast.LENGTH_LONG).show();
+		if(result!=null) {
+			try {
+				json = new JSONObject(result);
+				if (json.getString("error").equals("0")) {
+					UserString = json.getString("user").toString();
+					UserJsonArray = json.getJSONArray("user");
+					UserJsonObject = UserJsonArray.getJSONObject(0);
+					user = new User(UserJsonObject);
+					//TODO GETTING ROLE OF USER
+					UserInfos.setConnecteduser(user);
+					UserInfos.IsConnected = true;
+					Toast.makeText(cntx, "Welcome :" + user.getF_name().toString().toUpperCase(), Toast.LENGTH_LONG).show();
+					Intent intent = new Intent(activityparent, Home_affreteur_activity.class);
+					activityparent.startActivity(intent);
+					activityparent.finish();
+				} else if (json.getString("error").equals("1"))
+					Toast.makeText(cntx, "Wrong password", Toast.LENGTH_LONG).show();
+				else if (json.getString("error").equals("2"))
+					Toast.makeText(cntx, "cannot fin any account with this mail", Toast.LENGTH_LONG).show();
+			} catch (JSONException e) {}
 		}
-		catch (JSONException e)        {}
-
+		else
+		{
+			Toast.makeText(cntx, "echec de connexion,veuillez ressayer", Toast.LENGTH_LONG).show();
+		}
 	}
 
 

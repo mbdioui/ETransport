@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <item name="light_purple" type="color">#9575CD</item>
+    <item name="light_purple" type="color">#9575CD</item>
     <item name="purple" type="color">#4A148C</item>
+    <item name="blue_purple" type="color">#7F88B5</item>
     <item name="pink_purple" type="color">#880E4F</item>
     <item name="light_blue" type="color">#64B5F6</item>
+    <item name="light_blue_transparent" type="color">#7f64b5f6</item>
     <item name="blue" type="color">#0D47A1</item>
     <item name="black" type="color">#000000</item>
     <item name="orange" type="color">#F57C00</item>
+    <item name="back_dark" type ="color">#232828</item>
     <item name="yellow" type="color">#FFFF00</item>
     <item name="Gray" type="color">#BDBDBD</item>
     <item name="White" type="color">#FAFAFA</item>
     <item name="blue_gray" type="color">#B0BEC5</item>
+    <item name="darkgray" type="color">#616161</item>
+    <item name="red" type="color">#F44336</item>
+    <item name="Green" type="color">#4CAF50</item>
 </resources>

@@ -23,9 +23,9 @@
         completions."
     </string>
     <string name="already_member"> <u>D&#233;ja membre</u>  </string>
-    <string name="forget_password"> <u> Mot de passe oublie</u> </string>
+    <string name="forget_password"><u>Mot de passe oublie</u></string>
     <string name="title_activity_forgetpass_activity">r&#233;initialiser le mot de passe</string>
-    <string name="BTN_Reset"> R&#233;initialiser le mot de passe </string>
+    <string name="BTN_Reset"><u>R&#233;initialiser le mot de passe</u>  </string>
     <string name="Welcome_text">Bienvenue</string>
     <string name="Application_version">V 1.0</string>
     <string name="title_activity_maps">Map</string>
@@ -45,8 +45,8 @@
     <string name="destination_label">Veuillez saisir votre adresse de destination :</string>
     <string name="long_text">Bonjour, tout le monde bla bla ablalbalblalbjakjs^ùjasjfhmasfnouzmlkqmksfhoQSNVnvôi§LNMlkakjfakazlflazllklaflnlkx!lkcnùlaflknazzknl,!lmqkcalsl,s</string>
     <string name="suspended_connection">Connection suspendu</string>
-    <string name="lavel_date_go">veuillez choisir la date de départ</string>
-    <string name="label_date_arrival">veuillez choisir la date d\'arrivé estimée</string>
+    <string name="lavel_date_go">la date de départ</string>
+    <string name="label_date_arrival">la date d\'arrivé estimée</string>
     <string name="geting_position_error">Erreur durant la récupération de l\'emplacement</string>
     <string name="action_save">save</string>
 
