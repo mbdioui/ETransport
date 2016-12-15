@@ -7,12 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.rey.material.widget.Switch;
 import com.rey.material.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -24,9 +24,8 @@ import java.util.Locale;
 public class Form_Time_Client extends Fragment implements View.OnClickListener {
     private TextView Datefixe;
     private TextView Dateflexible;
-    private static Switch switchdate;
+    private static android.widget.Switch switchdate;
     private SimpleDateFormat dateFormatter;
-
 
     private EditText Datego;
     private EditText Datearrive;
@@ -60,25 +59,19 @@ public class Form_Time_Client extends Fragment implements View.OnClickListener {
     }
     private void editview(View v)
     {
-        switchdate =(Switch) v.findViewById(R.id.switch_date);
-        Datefixe= (TextView) v.findViewById(R.id.textview_fixe);
-        Dateflexible= (TextView) v.findViewById(R.id.textview_flexible);
+        switchdate =(android.widget.Switch) v.findViewById(R.id.switch_date);
         final RelativeLayout flexiblelayout= (RelativeLayout) v.findViewById(R.id.flexible_Date_layout);
         final RelativeLayout fixlayout= (RelativeLayout) v.findViewById(R.id.fix_Date_layout);
-        switchdate.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+        switchdate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(Switch view, boolean checked) {
-                if (checked)
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
                 {
-                    Datefixe.setTextColor(getResources().getColor(R.color.blue_gray));
-                    Dateflexible.setTextColor(getResources().getColor(R.color.Green));
                     flexiblelayout.setVisibility(View.VISIBLE);
                     fixlayout.setVisibility(View.INVISIBLE);
                 }
                 else
                 {
-                    Datefixe.setTextColor(getResources().getColor(R.color.Green));
-                    Dateflexible.setTextColor(getResources().getColor(R.color.blue_gray));
                     flexiblelayout.setVisibility(View.INVISIBLE);
                     fixlayout.setVisibility(View.VISIBLE);
                 }

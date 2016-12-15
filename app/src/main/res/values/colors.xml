@@ -17,4 +17,6 @@
     <item name="darkgray" type="color">#616161</item>
     <item name="red" type="color">#F44336</item>
     <item name="Green" type="color">#4CAF50</item>
+    <item name="hint_foreground_material_light" type="color">#c1bdbe</item>
+    <item name="hint_foreground_material_dark" type="color">@color/darkgray</item>
 </resources>

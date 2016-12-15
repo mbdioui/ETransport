@@ -8,10 +8,6 @@
     android:id="@+id/affreteur_coordinator"
     xmlns:fab="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v4.widget.DrawerLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/drawer_layout_affreteur">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -25,21 +21,9 @@
                 app:popupTheme="@style/MyActionBar"/>
                 <FrameLayout
                     android:id="@+id/fragment_affreteur"
-                    android:layout_below="@+id/my_toolbar"
                     android:layout_width="match_parent"
+                    android:layout_below="@+id/my_toolbar"
                     android:layout_height="match_parent">
                 </FrameLayout>
         </RelativeLayout>
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navig_View"
-        app:headerLayout="@layout/nav_header"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/White"
-        android:alpha="256"
-        app:itemTextAppearance="@style/MyTextnaviguation"
-        app:menu="@menu/drawer_view_connected" />
-
-  </android.support.v4.widget.DrawerLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -10,8 +10,8 @@
       android:id="@+id/MapHere_affreteur"
       android:name="com.google.android.gms.maps.MapFragment"
       android:layout_width="match_parent"
-      android:layout_height="270sp"
-      android:layout_alignParentLeft="true"/>
+      android:layout_alignParentLeft="true"
+      android:layout_height="450sp" />
 
   <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
@@ -20,9 +20,7 @@
     android:layout_below="@id/MapHere_affreteur"  >
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin">
+        android:layout_height="match_parent">
       <com.rey.material.widget.ImageButton
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -30,81 +28,90 @@
           android:layout_gravity="center"
           android:layout_marginTop="@dimen/small_dimen_between_fields"
           android:layout_marginBottom="@dimen/small_dimen_between_fields"
-          android:layout_centerHorizontal="true"
+          android:layout_alignParentLeft="true"
+          android:layout_marginLeft="180dp"
           android:background="@android:color/transparent"
           android:src="@android:drawable/ic_menu_mapmode"
           app:rd_enable="true"/>
       <AutoCompleteTextView
           android:id="@+id/start_place_autocomplete"
           android:layout_below="@id/BTN_resizemap"
-          android:layout_width="fill_parent"
+          android:layout_width="200dp"
           android:textSize="@dimen/text_size"
           android:layout_height="wrap_content"
           android:layout_marginBottom="@dimen/small_dimen_between_fields"
+          android:layout_alignParentLeft="true"
+          android:layout_marginLeft="70dp"
           android:gravity="center"
           android:background="@drawable/buttonshape"
           android:hint="adresse de départ"/>
       <AutoCompleteTextView
           android:id="@+id/dest_place_autocomplete"
-          android:layout_width="fill_parent"
+          android:layout_width="200dp"
           android:textSize="@dimen/text_size"
           android:layout_height="wrap_content"
           android:layout_below="@id/start_place_autocomplete"
           android:layout_marginBottom="@dimen/small_dimen_between_fields"
+          android:layout_alignParentLeft="true"
+          android:layout_marginLeft="70dp"
           android:gravity="center"
           android:background="@drawable/buttonshape"
           android:hint="adresse d'arrivé"/>
-      <com.rey.material.widget.Switch
-          app:sw_trackColor="@color/White"
-          app:sw_thumbColor="@color/light_blue"
-          android:gravity="center"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_toRightOf="@+id/bootstrap_start_pos"
-          android:layout_alignTop="@+id/bootstrap_start_pos"
+      <Switch
+          android:track="@android:color/transparent"
+          android:thumb="@android:color/transparent"
+          android:layout_height="30dp"
+          android:layout_toEndOf="@id/start_place_autocomplete"
+          android:layout_toRightOf="@id/start_place_autocomplete"
+          android:layout_alignBottom="@id/start_place_autocomplete"
           android:id="@+id/toggle_marker_start"
-          android:textOn="activé"
-          android:textOff="déactivé"
-          android:checked="false"/>
-      <com.rey.material.widget.Switch
-          app:sw_trackColor="@color/White"
-          app:sw_thumbColor="@color/light_blue"
-          android:gravity="center"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textOn="activé"
-          android:textOff="déactivé"
-          android:layout_toRightOf="@+id/bootstrap_end_pos"
-          android:layout_alignTop="@+id/bootstrap_end_pos"
+          android:background="@drawable/background_switch_on_off"
+          android:textOn=""
+          android:textOff=""
+          android:checked="false"
+          android:layout_marginLeft="25dp"
+          android:layout_width="55dp" />
+      <Switch
+          android:track="@android:color/transparent"
+          android:thumb="@android:color/transparent"
+          android:layout_height="30dp"
+          android:textOn=""
+          android:textOff=""
+          android:background="@drawable/background_switch_on_off"
+          android:layout_alignBottom="@id/dest_place_autocomplete"
+          android:layout_toEndOf="@id/dest_place_autocomplete"
+          android:layout_toRightOf="@id/dest_place_autocomplete"
           android:id="@+id/toggle_marker_end"
-          android:checked="false"/>
+          android:checked="false"
+          android:layout_marginLeft="25dp"
+          android:layout_width="55dp" />
 
-       <com.beardedhen.androidbootstrap.BootstrapButton
-          android:layout_width="120dp"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-          app:badgeText="start position"
-          android:layout_below="@id/dest_place_autocomplete"
-          app:bootstrapBrand="primary"
-          android:layout_marginRight="6dp"
-          app:buttonMode="checkbox"
-          app:bootstrapSize="md"
-          android:id="@+id/bootstrap_start_pos"
-          app:fontAwesomeIcon="fa_map_marker"
-          />
-      <com.beardedhen.androidbootstrap.BootstrapButton
-          android:layout_width="120dp"
-          android:layout_height="wrap_content"
-          android:layout_centerHorizontal="true"
-          app:badgeText="end position"
-          android:layout_below="@id/bootstrap_start_pos"
-          android:layout_marginRight="6dp"
-          app:bootstrapBrand="success"
-          app:bootstrapSize="md"
-          app:buttonMode="checkbox"
-          android:id="@+id/bootstrap_end_pos"
-          app:fontAwesomeIcon="fa_map_marker"
-          />
+       <!--<com.beardedhen.androidbootstrap.BootstrapButton-->
+          <!--android:layout_width="120dp"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_centerHorizontal="true"-->
+          <!--app:badgeText="start position"-->
+          <!--android:layout_below="@id/dest_place_autocomplete"-->
+          <!--app:bootstrapBrand="primary"-->
+          <!--android:layout_marginRight="6dp"-->
+          <!--app:buttonMode="checkbox"-->
+          <!--app:bootstrapSize="md"-->
+          <!--android:id="@+id/bootstrap_start_pos"-->
+          <!--app:fontAwesomeIcon="fa_map_marker"-->
+          <!--/>-->
+      <!--<com.beardedhen.androidbootstrap.BootstrapButton-->
+          <!--android:layout_width="120dp"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_centerHorizontal="true"-->
+          <!--app:badgeText="end position"-->
+          <!--android:layout_below="@id/bootstrap_start_pos"-->
+          <!--android:layout_marginRight="6dp"-->
+          <!--app:bootstrapBrand="success"-->
+          <!--app:bootstrapSize="md"-->
+          <!--app:buttonMode="checkbox"-->
+          <!--android:id="@+id/bootstrap_end_pos"-->
+          <!--app:fontAwesomeIcon="fa_map_marker"-->
+          <!--/>-->
 
 
     </RelativeLayout>

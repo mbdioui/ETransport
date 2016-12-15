@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+<ScrollView
     android:background="@color/back_dark"
     android:layout_width="match_parent"
     android:focusableInTouchMode="true"
@@ -8,40 +7,37 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <RelativeLayout android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <com.rey.material.widget.TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date Exacte"
-            android:textColor="@color/Green"
-            android:layout_alignBottom="@+id/switch_date"
-            android:layout_toLeftOf="@id/switch_date"
-            android:layout_alignParentLeft="true"
-            android:textSize="@dimen/title_text_size"
-            android:id="@+id/textview_fixe"
-            />
-        <com.rey.material.widget.TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignBottom="@+id/switch_date"
-            android:layout_toRightOf="@id/switch_date"
-            android:text="Date Flexible"
-            android:textSize="@dimen/title_text_size"
+            android:text="Date"
             android:textColor="@color/blue_gray"
-            android:gravity="center"
-            android:id="@+id/textview_flexible"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/title_text_size"
+            android:id="@+id/textview_date"
             />
-        <com.rey.material.widget.Switch
+        <Switch
             android:layout_marginTop="@dimen/small_dimen_between_fields"
-            app:sw_trackColor="@color/White"
-            app:sw_thumbColor="@color/light_blue"
+            android:track="@android:color/transparent"
+            android:thumb="@android:color/transparent"
             android:gravity="center"
+            android:textOn=""
+            android:textOff=""
+            android:background="@drawable/background_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textview_date"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true"
             android:id="@+id/switch_date" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -124,63 +120,63 @@
                 android:focusableInTouchMode="false"
                 android:id="@+id/date_arrive_max" />
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/switch_date"
+            android:id="@+id/fix_Date_layout">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/switch_date"
-        android:id="@+id/fix_Date_layout">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Départ :"
+                android:background="@drawable/buttonshape"
+                android:textSize="@dimen/title_text_size"
+                android:id="@+id/textview_depart_fix"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="160dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Départ :"
-            android:background="@drawable/buttonshape"
-            android:textSize="@dimen/title_text_size"
-            android:id="@+id/textview_depart_fix"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="160dp" />
-
-        <EditText
-            android:textColorHint="@color/blue_gray"
-            android:textColor="@color/White"
-            android:hint="date minimum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:inputType="none"
-            android:layout_alignBottom="@+id/textview_depart_fix"
-            android:focusableInTouchMode="false"
-            android:id="@+id/date_depart"
-            android:drawableLeft="@android:drawable/ic_menu_today"
-            android:layout_alignParentRight="true" />
+            <EditText
+                android:textColorHint="@color/blue_gray"
+                android:textColor="@color/White"
+                android:hint="date minimum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="none"
+                android:layout_alignBottom="@+id/textview_depart_fix"
+                android:focusableInTouchMode="false"
+                android:id="@+id/date_depart"
+                android:drawableLeft="@android:drawable/ic_menu_today"
+                android:layout_alignParentRight="true" />
 
 
-        <com.rey.material.widget.TextView
-            android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/between_fields_vertical_margin"
-            android:layout_height="wrap_content"
-            android:text="Arrivée :"
-            android:background="@drawable/buttonshape"
-            android:layout_alignParentLeft="true"
-            android:textSize="@dimen/title_text_size"
-            android:layout_below="@id/date_depart"
-            android:id="@+id/textview_arrive_fix"
-            />
-        <EditText
-            android:textColorHint="@color/blue_gray"
-            android:textColor="@color/White"
-            android:hint="date minimum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:inputType="none"
-            android:layout_alignBottom="@+id/textview_arrive_fix"
-            android:focusableInTouchMode="false"
-            android:id="@+id/date_arrive"
-            android:drawableLeft="@android:drawable/ic_menu_today"
-            android:layout_alignParentRight="true" />
+            <com.rey.material.widget.TextView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/between_fields_vertical_margin"
+                android:layout_height="wrap_content"
+                android:text="Arrivée :"
+                android:background="@drawable/buttonshape"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/title_text_size"
+                android:layout_below="@id/date_depart"
+                android:id="@+id/textview_arrive_fix"
+                />
+            <EditText
+                android:textColorHint="@color/blue_gray"
+                android:textColor="@color/White"
+                android:hint="date minimum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="none"
+                android:layout_alignBottom="@+id/textview_arrive_fix"
+                android:focusableInTouchMode="false"
+                android:id="@+id/date_arrive"
+                android:drawableLeft="@android:drawable/ic_menu_today"
+                android:layout_alignParentRight="true" />
 
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+</ScrollView>

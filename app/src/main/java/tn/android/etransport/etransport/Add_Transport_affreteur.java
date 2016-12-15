@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.Spinner;
-import com.rey.material.widget.Switch;
 
 import utils.Links;
 import utils.Pager;
@@ -82,7 +81,6 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
 
         //Creating our pager adapter
         adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount());
-
         //Adding adapter to pager
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(4);
@@ -147,7 +145,7 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
         MaterialEditText descriEditText= (MaterialEditText) findViewById(R.id.description_transport_affreteur);
         String string = descriEditText.getText().toString();
 
-        if(((Switch) findViewById(R.id.switch_date)).isChecked())
+        if(((android.widget.Switch) findViewById(R.id.switch_date)).isChecked())
         {
             date_depart_min= ((EditText) findViewById(R.id.date_depart_min)).getText().toString();
             date_depart_max= ((EditText) findViewById(R.id.date_depart_max)).getText().toString();
@@ -173,7 +171,7 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
         String means = meansSpinner.getSelectedItem().toString();
         Spinner typegoodsSpinner = (Spinner)findViewById(R.id.spinner_goods);
         String typegood = typegoodsSpinner.getSelectedItem().toString();
-        if (((Switch) findViewById(R.id.switch_date)).isChecked()==false)
+        if (((android.widget.Switch) findViewById(R.id.switch_date)).isChecked()==false)
         {
             if (date_depart.equals("") || date_arrive.equals(""))
             {
@@ -193,7 +191,7 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
                 fieldsok = true;
             }
         }
-        else if(((Switch) findViewById(R.id.switch_date)).isChecked()) {
+        else if(((android.widget.Switch) findViewById(R.id.switch_date)).isChecked()) {
             if ((date_depart_min.equals("") || date_depart_max.equals("") || date_arrive_min.equals("") || date_arrive_max.equals(""))) {
                 viewPager.setCurrentItem(0);
                 Toast.makeText(this, "Veuillez choisir les dates", Toast.LENGTH_LONG).show();

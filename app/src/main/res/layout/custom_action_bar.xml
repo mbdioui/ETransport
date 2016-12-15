@@ -4,25 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="50dp">
 
-    <com.rey.material.widget.ImageButton
-    app:rd_enable="true"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/btn_naviguation_view"
-    android:layout_centerVertical="true"
-    android:src="@drawable/ic"
-    android:background="@null"
-    android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/title_text_action_bar"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textAllCaps="true"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/black"
+        android:textColor="@color/White"
         android:textStyle="bold" />
 
 </RelativeLayout>

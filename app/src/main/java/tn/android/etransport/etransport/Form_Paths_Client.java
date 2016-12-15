@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
@@ -36,7 +37,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.rey.material.widget.ImageButton;
-import com.rey.material.widget.Switch;
 
 import java.io.IOException;
 import java.util.List;
@@ -54,7 +54,7 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
 
     private BootstrapButton startmarkerBTN;
     private BootstrapButton endmarkerBTN;
-    private Switch toggle_start;
+    private android.widget.Switch toggle_start;
     private ImageButton resizemap;
     private AutoCompleteTextView startposition_autocomplete;
     private AutoCompleteTextView destposition_autocomplete;
@@ -101,7 +101,7 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
             new LatLng(25.57152, -4.50047), new LatLng(51.56979, 7.27688));
     private Marker startmarker;
     private Marker destinationmarker;
-    private Switch toggle_end;
+    private android.widget.Switch toggle_end;
     private String startposition;
     private String Start_Country;
     private String destposition="";
@@ -115,10 +115,8 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
     }
 
     private void settup(View view) {
-        startmarkerBTN = (BootstrapButton) view.findViewById(R.id.bootstrap_start_pos);
-        endmarkerBTN = (BootstrapButton) view.findViewById(R.id.bootstrap_end_pos);
-        toggle_start = (Switch) view.findViewById(R.id.toggle_marker_start);
-        toggle_end = (Switch) view.findViewById(R.id.toggle_marker_end);
+        toggle_start = (android.widget.Switch) view.findViewById(R.id.toggle_marker_start);
+        toggle_end = (android.widget.Switch) view.findViewById(R.id.toggle_marker_end);
         resizemap = (ImageButton) view.findViewById(R.id.BTN_resizemap);
         startposition_autocomplete = (AutoCompleteTextView) view.findViewById(R.id.start_place_autocomplete);
         destposition_autocomplete = (AutoCompleteTextView) view.findViewById(R.id.dest_place_autocomplete);
@@ -130,23 +128,21 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
 
 
         //select Start position Marker
-        toggle_start.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+        toggle_start.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(Switch view, boolean checked) {
-                if (checked)
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
                     if (toggle_end.isChecked())
-                    toggle_end.setChecked(false);
-
+                        toggle_end.setChecked(false);
             }
         });
         //select End position Marker
-        toggle_end.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+        toggle_end.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(Switch view, boolean checked) {
-                if (checked)
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked)
                     if (toggle_start.isChecked())
                         toggle_start.setChecked(false);
-
             }
         });
         resizemap.setOnClickListener(new View.OnClickListener() {
@@ -240,8 +236,11 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
                             if (!adr.getAddressLine(i).equals("Unnamed Road"))
                                 destposition= destposition.concat(", "+adr.getAddressLine(i));
                         }
-                        destposition=destposition.substring(1);
-                        destposition_autocomplete.setText(destposition);
+                        if (!destposition.equals(""))
+                        {
+                            destposition=destposition.substring(1);
+                            destposition_autocomplete.setText(destposition);
+                        }
                         destposition_autocomplete.dismissDropDown();
                     } else {
 
@@ -312,8 +311,11 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
                             if (!adr.getAddressLine(i).equals("Unnamed Road"))
                                 startposition= startposition.concat(", "+adr.getAddressLine(i));
                         }
-                        startposition=startposition.substring(1);
-                        startposition_autocomplete.setText(startposition);
+                        if (!startposition.equals(""))
+                        {
+                            startposition=startposition.substring(1);
+                            startposition_autocomplete.setText(startposition);
+                        }
                         startposition_autocomplete.dismissDropDown();
                     } else {
 

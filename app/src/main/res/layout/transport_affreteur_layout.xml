@@ -26,6 +26,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         app:fab_backgroundColor="@color/light_blue"
+        android:layout_marginBottom="10dp"
         app:fab_iconSrc="@android:drawable/stat_sys_upload_done" />
 
 </RelativeLayout>
