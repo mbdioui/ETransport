@@ -93,6 +93,8 @@
         </activity>
         <activity
             android:name=".Add_Transport_affreteur"
+            android:configChanges="keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -100,7 +102,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".CardView_activity">
+        <activity android:name=".Listing_CardView_activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />

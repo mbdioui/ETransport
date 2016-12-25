@@ -12,31 +12,18 @@
     <!-- Strings related to login -->
     <string name="prompt_email">E-mail</string>
     <string name="prompt_password">Mot de passe</string>
-    <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">S\'authentifier</string>
     <string name="action_sign_in_forget"><u>S\'authentifier</u></string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="already_member"> <u>D&#233;ja membre</u>  </string>
     <string name="forget_password"><u>Mot de passe oublie</u></string>
     <string name="title_activity_forgetpass_activity">r&#233;initialiser le mot de passe</string>
     <string name="BTN_Reset"><u>R&#233;initialiser le mot de passe</u>  </string>
     <string name="Welcome_text">Bienvenue</string>
     <string name="Application_version">V 1.0</string>
-    <string name="title_activity_maps">Map</string>
     <string name="google_maps_key">AIzaSyAekHtGgMH5mqveWlRpYAocsg55CK3aW5I</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="location_permission_denied">This application requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
     <string name="permission_required_toast">Location permission is required for this app.</string>
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
-    <string name="BTN_AddPath_label">Add Path</string>
     <string name="no_places_found">la destination cherché n\'est pas trouvé ou dans un pays au déla de la zone de couverture, essayez encore</string>
     <string name="done">valider</string>
     <string name="transport_description">veuillez décrire votre trajet</string>
@@ -48,6 +35,5 @@
     <string name="lavel_date_go">la date de départ</string>
     <string name="label_date_arrival">la date d\'arrivé estimée</string>
     <string name="geting_position_error">Erreur durant la récupération de l\'emplacement</string>
-    <string name="action_save">save</string>
 
 </resources>

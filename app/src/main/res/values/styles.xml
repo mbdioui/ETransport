@@ -29,10 +29,6 @@
     </style>
 
 
-    <style name="YourRippleDrawableStyle">
-        <item name="android:background">@drawable/buttonshape</item>
-    </style>
-
     <style name="CustomSpotDialog" parent="android:Theme.DeviceDefault.Dialog">
         <item name="DialogTitleAppearance">@android:style/TextAppearance.Medium</item>
         <item name="DialogTitleText">Chargement…</item>
@@ -144,6 +140,13 @@
 
     <style name="MyCustomTextTheme" parent="android:Theme.Light.NoTitleBar">
         <item name="android:textColor">@color/White</item>
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:typeface">serif</item>
+    </style>
+
+    <style name="Text_CardView" >
+        <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:textStyle">italic</item>
         <item name="android:typeface">serif</item>

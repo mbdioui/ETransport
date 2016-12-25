@@ -13,9 +13,7 @@
     <item
         android:title="Transport">
         <menu>
-            <item
-                android:id="@+id/publish_transport"
-                android:title="Publier un trajet" />
+            <item android:title="Publier un trajet" />
         </menu>
     </item>
 </menu>

@@ -119,7 +119,11 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
         toggle_end = (android.widget.Switch) view.findViewById(R.id.toggle_marker_end);
         resizemap = (ImageButton) view.findViewById(R.id.BTN_resizemap);
         startposition_autocomplete = (AutoCompleteTextView) view.findViewById(R.id.start_place_autocomplete);
+        startposition_autocomplete.setDropDownWidth(getResources().getDisplayMetrics().widthPixels);
+
         destposition_autocomplete = (AutoCompleteTextView) view.findViewById(R.id.dest_place_autocomplete);
+        destposition_autocomplete.setDropDownWidth(getResources().getDisplayMetrics().widthPixels);
+
         MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.MapHere_affreteur);
         if (Connectivity.Checkinternet(getActivity()))
             mapFragment.getMapAsync(this);
@@ -343,8 +347,12 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
         if (PermissionUtils.isMarshMellow()) {
             if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION
-                        , Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_location);
+                {
+//                      ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION
+//                        , Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_location);
+                    requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION
+                            , Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_location);
+            }
             } else {
                 setupmap();
                 googleMap.setMyLocationEnabled(true);
@@ -496,17 +504,20 @@ public class Form_Paths_Client extends android.support.v4.app.Fragment implement
     //Check internet connexion and GPS if it's ok go ahead else finish the activity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==REQUEST_location)
         if (Connectivity.Checkinternet(getActivity())) {
-            if (!PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_FINE_LOCATION) &&
-                    !PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_COARSE_LOCATION))
-                setupmap();
-                else
-                {
+            if (requestCode == 100) {
+                if (!PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_FINE_LOCATION) &&
+                        !PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.ACCESS_COARSE_LOCATION))
+                    setupmap();
+                else {
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                            ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-                    {  setupmap();
-                        MapForm.setMyLocationEnabled(true);}
+                            ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        setupmap();
+                        MapForm.setMyLocationEnabled(true);
+                    }
                 }
+            }
         }
     }
 

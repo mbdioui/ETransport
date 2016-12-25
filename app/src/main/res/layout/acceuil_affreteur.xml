@@ -53,7 +53,6 @@
 
         <com.rey.material.widget.ImageButton
             app:rd_enable="true"
-            android:id="@+id/Image3"
             app:rd_cornerRadius="35dp"
             app:rd_delayClick="afterRelease"
             app:rd_backgroundColor="@color/light_blue_transparent"
@@ -69,7 +68,6 @@
 
 
         <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/menu1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"

@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Locale;
 
 import Beans.Transport;
 import tn.android.etransport.etransport.R;
@@ -18,17 +20,17 @@ import tn.android.etransport.etransport.R;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
-    ArrayList<Transport> items;
+    private ArrayList<Transport> items;
+    private HashMap<Integer,String> mapgoods= new HashMap<>();
 
-    public CardAdapter(List<Transport> list){
+
+    public CardAdapter(ArrayList<Transport> list, HashMap map){
         super();
-        items = new ArrayList<Transport>();
+        items = new ArrayList<>();
         for(int i =0; i<list.size(); i++){
-            Transport item = new Transport();
-            item.setTransport_id(list.get(i).getTransport_id());
-            item.setText(list.get(i).getText());
-            items.add(item);
+            items.add(list.get(i));
         }
+        mapgoods=map;
     }
 
     @Override
@@ -42,8 +44,28 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Transport item =  items.get(position);
-        holder.TextIdView.setText(String.valueOf(item.getTransport_id()));
-        holder.TextViewDescription.setText(item.getText());
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
+
+        if (item.getDate_go()!=null)
+            holder.dateTextView.setText(String.valueOf(dateFormatter.format(item.getDate_go())));
+        else if (item.getDate_go_min()!=null)
+            holder.dateTextView.setText(String.valueOf(dateFormatter.format(item.getDate_go_min())));
+        if (!item.getAddress_from().equals("null"))
+            holder.AddressgoTextView.setText(item.getAddress_from());
+        else
+            holder.AddressgoTextView.setText("inconnue");
+        if (!item.getAddress_to().equals("null"))
+            holder.AddressArriveTextView.setText(item.getAddress_to());
+        else
+            holder.AddressArriveTextView.setText("inconnue");
+
+        //goods
+        if (item.getType_goods()>0 && item.getType_goods()<7)
+        {
+            holder.TypegoodsTextView.setText(mapgoods.get(item.getType_goods()));
+        }
+        else
+            holder.TypegoodsTextView.setText("non spécifiée");
     }
 
     @Override
@@ -52,15 +74,17 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView TextIdView;
-        public TextView TextViewDescription;
+        public TextView dateTextView;
+        public TextView AddressgoTextView;
+        public TextView AddressArriveTextView;
+        public TextView TypegoodsTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            TextIdView = (TextView) itemView.findViewById(R.id.firstLine);
-            TextViewDescription = (TextView) itemView.findViewById(R.id.secondLine);
-
+            dateTextView = (TextView) itemView.findViewById(R.id.date_departtextview);
+            AddressgoTextView =(TextView) itemView.findViewById(R.id.address_departtextview);
+            AddressArriveTextView =(TextView) itemView.findViewById(R.id.address_arrivettextview);
+            TypegoodsTextView = (TextView) itemView.findViewById(R.id.typegoods_textview);
         }
     }
 }

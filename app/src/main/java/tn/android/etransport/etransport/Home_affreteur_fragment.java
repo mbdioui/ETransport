@@ -71,7 +71,7 @@ public class Home_affreteur_fragment extends Fragment implements View.OnClickLis
         else if (v.getId()==R.id.fabResearch)
         {
             getActivity().finish();
-            Intent researchintent= new Intent(getActivity(),CardView_activity.class);
+            Intent researchintent= new Intent(getActivity(),Listing_CardView_activity.class);
             startActivity(researchintent);
 
         }

@@ -132,7 +132,6 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent intent= new Intent(this,Home_affreteur_activity.class);
         startActivity(intent);
         Add_Transport_affreteur.this.finish();
@@ -195,6 +194,8 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
             if ((date_depart_min.equals("") || date_depart_max.equals("") || date_arrive_min.equals("") || date_arrive_max.equals(""))) {
                 viewPager.setCurrentItem(0);
                 Toast.makeText(this, "Veuillez choisir les dates", Toast.LENGTH_LONG).show();
+                date_depart="";
+                date_arrive="";
             } else if (startpositiontext.equals("") || destpositiontext.equals("")) {
                 viewPager.setCurrentItem(1);
                 Toast.makeText(this, "Veuillez choisir les adresses de départ et de destination", Toast.LENGTH_LONG).show();

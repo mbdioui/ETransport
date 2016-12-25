@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <RelativeLayout android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:focusableInTouchMode="true"
         android:focusable="true"
@@ -140,7 +139,7 @@
             <EditText
                 android:textColorHint="@color/blue_gray"
                 android:textColor="@color/White"
-                android:hint="date minimum"
+                android:hint="date exacte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -166,7 +165,7 @@
             <EditText
                 android:textColorHint="@color/blue_gray"
                 android:textColor="@color/White"
-                android:hint="date minimum"
+                android:hint="date exacte"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"

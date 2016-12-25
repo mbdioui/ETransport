@@ -6,7 +6,6 @@
         barColorWhenSelected="@color/blue_gray"/>
     <tab
         id="@+id/tab_Paths"
-        icon="@drawable/star"
         title="@string/action_fav"
         barColorWhenSelected="@color/orange"/>
     <tab

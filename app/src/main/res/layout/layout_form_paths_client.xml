@@ -16,8 +16,7 @@
   <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/scroll_1"
-    android:layout_below="@id/MapHere_affreteur"  >
+      android:layout_below="@id/MapHere_affreteur"  >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
