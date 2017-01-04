@@ -1,9 +1,12 @@
 package Beans;
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,16 +19,16 @@ import java.util.Locale;
 public class Transport {
     private int user_id;
     private int transport_id;
-    private Date date_go;
-    private Date date_arrival;
-    private Date date_go_min;
-    private Date date_go_max;
-    private Date date_arrival_min;
-    private Date date_arrival_max;
-    private String text;
-    private Date date_add;
-    private int status;
-    private int type_goods;
+    private Date transport_date_go;
+    private Date transport_date_arrival;
+    private Date transport_date_go_min;
+    private Date transport_date_go_max;
+    private Date transport_date_arrival_min;
+    private Date transport_date_arrival_max;
+    private String transport_text;
+    private Date transport_date_add;
+    private int transport_status;
+    private int id_type_goods;
     private String address_from;
     private String address_to;
     private float start_pos_lgt;
@@ -51,84 +54,84 @@ public class Transport {
         this.transport_id = transport_id;
     }
 
-    public Date getDate_go() {
-        return date_go;
+    public Date getTransport_date_go() {
+        return transport_date_go;
     }
 
-    public void setDate_go(Date date_go) {
-        this.date_go = date_go;
+    public void setTransport_date_go(Date transport_date_go) {
+        this.transport_date_go = transport_date_go;
     }
 
-    public Date getDate_arrival() {
-        return date_arrival;
+    public Date getTransport_date_arrival() {
+        return transport_date_arrival;
     }
 
-    public void setDate_arrival(Date date_arrival) {
-        this.date_arrival = date_arrival;
+    public void setTransport_date_arrival(Date transport_date_arrival) {
+        this.transport_date_arrival = transport_date_arrival;
     }
 
-    public Date getDate_go_min() {
-        return date_go_min;
+    public Date getTransport_date_go_min() {
+        return transport_date_go_min;
     }
 
-    public void setDate_go_min(Date date_go_min) {
-        this.date_go_min = date_go_min;
+    public void setTransport_date_go_min(Date transport_date_go_min) {
+        this.transport_date_go_min = transport_date_go_min;
     }
 
-    public Date getDate_go_max() {
-        return date_go_max;
+    public Date getTransport_date_go_max() {
+        return transport_date_go_max;
     }
 
-    public void setDate_go_max(Date date_go_max) {
-        this.date_go_max = date_go_max;
+    public void setTransport_date_go_max(Date transport_date_go_max) {
+        this.transport_date_go_max = transport_date_go_max;
     }
 
-    public Date getDate_arrival_min() {
-        return date_arrival_min;
+    public Date getTransport_date_arrival_min() {
+        return transport_date_arrival_min;
     }
 
-    public void setDate_arrival_min(Date date_arrival_min) {
-        this.date_arrival_min = date_arrival_min;
+    public void setTransport_date_arrival_min(Date transport_date_arrival_min) {
+        this.transport_date_arrival_min = transport_date_arrival_min;
     }
 
-    public Date getDate_arrival_max() {
-        return date_arrival_max;
+    public Date getTransport_date_arrival_max() {
+        return transport_date_arrival_max;
     }
 
-    public void setDate_arrival_max(Date date_arrival_max) {
-        this.date_arrival_max = date_arrival_max;
+    public void setTransport_date_arrival_max(Date transport_date_arrival_max) {
+        this.transport_date_arrival_max = transport_date_arrival_max;
     }
 
-    public String getText() {
-        return text;
+    public String getTransport_text() {
+        return transport_text;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTransport_text(String transport_text) {
+        this.transport_text = transport_text;
     }
 
-    public Date getDate_add() {
-        return date_add;
+    public Date getTransport_date_add() {
+        return transport_date_add;
     }
 
-    public void setDate_add(Date date_add) {
-        this.date_add = date_add;
+    public void setTransport_date_add(Date transport_date_add) {
+        this.transport_date_add = transport_date_add;
     }
 
-    public int getStatus() {
-        return status;
+    public int getTransport_status() {
+        return transport_status;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setTransport_status(int transport_status) {
+        this.transport_status = transport_status;
     }
 
-    public int getType_goods() {
-        return type_goods;
+    public int getId_type_goods() {
+        return id_type_goods;
     }
 
-    public void setType_goods(int type_goods) {
-        this.type_goods = type_goods;
+    public void setId_type_goods(int id_type_goods) {
+        this.id_type_goods = id_type_goods;
     }
 
     public String getAddress_from() {
@@ -197,19 +200,19 @@ public class Transport {
 
     public Transport(){};
 
-    public Transport(int user_id, int transport_id, Date date_go, Date date_arrival, Date date_go_min, Date date_go_max, Date date_arrival_min, Date date_arrival_max, String text, Date date_add, int status, int type_goods, String address_from, String address_to, float start_pos_lgt, float start_pos_lat, float end_pos_lgt, float end_pos_lat, int type_pub, int means_id) {
+    public Transport(int user_id, int transport_id, Date date_go, Date transport_date_arrival, Date transport_date_go_min, Date transport_date_go_max, Date transport_date_arrival_min, Date transport_date_arrival_max, String transport_text, Date transport_date_add, int transport_status, int id_type_goods, String address_from, String address_to, float start_pos_lgt, float start_pos_lat, float end_pos_lgt, float end_pos_lat, int type_pub, int means_id) {
         this.user_id = user_id;
         this.transport_id = transport_id;
-        this.date_go = date_go;
-        this.date_arrival = date_arrival;
-        this.date_go_min = date_go_min;
-        this.date_go_max = date_go_max;
-        this.date_arrival_min = date_arrival_min;
-        this.date_arrival_max = date_arrival_max;
-        this.text = text;
-        this.date_add = date_add;
-        this.status = status;
-        this.type_goods = type_goods;
+        this.transport_date_go = date_go;
+        this.transport_date_arrival = transport_date_arrival;
+        this.transport_date_go_min = transport_date_go_min;
+        this.transport_date_go_max = transport_date_go_max;
+        this.transport_date_arrival_min = transport_date_arrival_min;
+        this.transport_date_arrival_max = transport_date_arrival_max;
+        this.transport_text = transport_text;
+        this.transport_date_add = transport_date_add;
+        this.transport_status = transport_status;
+        this.id_type_goods = id_type_goods;
         this.address_from = address_from;
         this.address_to = address_to;
         this.start_pos_lgt = start_pos_lgt;
@@ -220,50 +223,72 @@ public class Transport {
         this.means_id = means_id;
     }
 
-    public Transport (JSONObject Json)
+    public Transport (JSONObject Json,int intformat)
     {
         try {
             this.user_id = (Json.getInt("user_id"));
             this.transport_id = (Json.getInt("transport_id"));
-            DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
+            DateFormat format;
+            if(intformat==1)
+                format = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
+            else
+                format = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss aa",Locale.ENGLISH);
+//            "transport_date_arrival" -> "Oct 27, 2016 12:00:00 AM"
             try {
-                String date_go = (Json.getString("transport_date_go"));
-                if(!date_go.equals("0000-00-00")&& !date_go.equals("null"))
-                    this.date_go = format.parse(date_go);
-                String date_arrival = (Json.getString("transport_date_arrival"));
-                if(!date_arrival.equals("0000-00-00")&& !date_arrival.equals("null"))
-                    this.date_arrival = format.parse(date_arrival);
-                String date_go_min = (Json.getString("transport_date_go_min"));
-                if(!date_go_min.equals("0000-00-00")&& !date_go_min.equals("null"))
-                    this.date_go_min = format.parse(date_go_min);
-                String date_go_max = (Json.getString("transport_date_go_max"));
-                if(!date_go_max.equals("0000-00-00")&& !date_go_max.equals("null"))
-                    this.date_go_max = format.parse(date_go_max);
-                String date_arrival_min = (Json.getString("transport_date_arrival_min"));
-                if(!date_arrival_min.equals("0000-00-00")&& !date_arrival_min.equals("null"))
-                    this.date_arrival_min = format.parse(date_arrival_min);
-                String date_arrival_max = (Json.getString("transport_date_arrival_max"));
-                if(!date_arrival_max.equals("0000-00-00")&& !date_arrival_max.equals("null"))
-                    this.date_arrival_max = format.parse(date_arrival_max);
-                String date_add = (Json.getString("transport_date_add"));
-                if(!date_add.equals("0000-00-00")&& !date_add.equals("null"))
-                    this.date_add = format.parse(date_add);
+                if(Json.has("transport_date_go"))
+                {
+                    String date_go = (Json.getString("transport_date_go"));
+                    if (!date_go.equals("0000-00-00") && !date_go.equals("null"))
+                        this.transport_date_go = format.parse(date_go);
+                }
+                if(Json.has("transport_date_arrival")) {
+                    String date_arrival = (Json.getString("transport_date_arrival"));
+                    if (!date_arrival.equals("0000-00-00") && !date_arrival.equals("null"))
+                        this.transport_date_arrival = format.parse(date_arrival);
+                }
+                if(Json.has("transport_date_go_min")) {
+                    String date_go_min = (Json.getString("transport_date_go_min"));
+                    if (!date_go_min.equals("0000-00-00") && !date_go_min.equals("null"))
+                        this.transport_date_go_min = format.parse(date_go_min);
+                }
+                if(Json.has("transport_date_go_max")) {
+                    String date_go_max = (Json.getString("transport_date_go_max"));
+                    if (!date_go_max.equals("0000-00-00") && !date_go_max.equals("null"))
+                        this.transport_date_go_max = format.parse(date_go_max);
+                }
+                if(Json.has("transport_date_arrival_min")) {
+                    String date_arrival_min = (Json.getString("transport_date_arrival_min"));
+                    if (!date_arrival_min.equals("0000-00-00") && !date_arrival_min.equals("null"))
+                        this.transport_date_arrival_min = format.parse(date_arrival_min);
+                }
+                if(Json.has("transport_date_arrival_max")) {
+                    String date_arrival_max = (Json.getString("transport_date_arrival_max"));
+                    if (!date_arrival_max.equals("0000-00-00") && !date_arrival_max.equals("null"))
+                        this.transport_date_arrival_max = format.parse(date_arrival_max);
+                }
+                if(Json.has("transport_date_add")) {
+                    String date_add = (Json.getString("transport_date_add"));
+                    if (!date_add.equals("0000-00-00") && !date_add.equals("null"))
+                        this.transport_date_add = format.parse(date_add);
+                }
 
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-            this.text = (Json.getString("transport_text"));
+            this.transport_text = (Json.getString("transport_text"));
             if (!Json.getString("transport_status").equals(""))
-                this.status = (Json.getInt("transport_status"));
+                this.transport_status = (Json.getInt("transport_status"));
             if (!Json.getString("id_type_goods").equals("null"))
-                this.type_goods = (Json.getInt("id_type_goods"));
+                this.id_type_goods = (Json.getInt("id_type_goods"));
             this.address_from =(Json.getString("address_from"));
             this.address_to = (Json.getString("address_to"));
-            this.start_pos_lgt = (Json.getLong("start_pos_lgt"));;
-            this.start_pos_lat = (Json.getLong("start_pos_lat"));;
-            this.end_pos_lgt = (Json.getLong("end_pos_lgt"));;
-            this.end_pos_lat = (Json.getLong("end_pos_lat"));;
+
+            DecimalFormat form = new DecimalFormat("00.0000");
+            this.start_pos_lgt =Float.parseFloat(Json.getString("start_pos_lgt"));
+            this.start_pos_lat = Float.parseFloat(Json.getString("start_pos_lat"));
+            this.end_pos_lgt = Float.parseFloat(Json.getString("end_pos_lgt"));
+            this.end_pos_lat = Float.parseFloat(Json.getString("end_pos_lat"));
             this.type_pub = (Json.getInt("type_pub"));
             if (!Json.getString("means_id").equals("null"))
                 this.means_id = (Json.getInt("means_id"));
@@ -273,5 +298,10 @@ public class Transport {
         e.printStackTrace();
     }
 
+    }
+    public String getTransport()
+    {
+        Gson gson= new Gson();
+        return gson.toJson(this);
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="tn.android.etransport.etransport">
 
     <uses-sdk
@@ -94,7 +95,16 @@
         <activity
             android:name=".Add_Transport_affreteur"
             android:configChanges="keyboardHidden|screenSize"
-            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="nosensor"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Listing_CardView_activity"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -102,10 +112,20 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Listing_CardView_activity">
+        <activity android:name=".Detail_transport_item"></activity>
+
+        <activity android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
+            tools:replace="android:theme"
+            android:theme="@style/OverrideMultipleImageSelectTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.darsh.multipleimageselect.activities.ImageSelectActivity"
+            tools:replace="android:theme"
+            android:theme="@style/OverrideMultipleImageSelectTheme">
+            <intent-filter>
+                <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

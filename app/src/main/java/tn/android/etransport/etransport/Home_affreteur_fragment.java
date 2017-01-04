@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 import com.github.clans.fab.FloatingActionButton;
 
 import dmax.dialog.SpotsDialog;
+import utils.AlertDialogCustom;
+import utils.Connectivity;
 
 public class Home_affreteur_fragment extends Fragment implements View.OnClickListener {
     private ImageButton profile_btn;
@@ -62,17 +64,26 @@ public class Home_affreteur_fragment extends Fragment implements View.OnClickLis
 //            FT.addToBackStack(null);
 //            FT.commit();
 //            utils.ActionBar.changetextview(action_bar_layout,"Ajout d'un trajet");
+            if (Connectivity.Checkinternet(getActivity()))
+            {
+                AddTransportAffreteurTask task = new AddTransportAffreteurTask(this.getActivity());
+                task.execute();
+            }
+            else
+                     AlertDialogCustom.show(getActivity(),"vous devez être lié à internet");
 
-            AddTransportAffreteurTask task= new AddTransportAffreteurTask(this.getActivity());
-//            task.setCntx(getContext());
-            task.execute();
 
         }
-        else if (v.getId()==R.id.fabResearch)
-        {
-            getActivity().finish();
-            Intent researchintent= new Intent(getActivity(),Listing_CardView_activity.class);
-            startActivity(researchintent);
+        else if (v.getId()==R.id.fabResearch) {
+            if (Connectivity.Checkinternet(getActivity()))
+            {
+                getActivity().finish();
+                Intent researchintent = new Intent(getActivity(), Listing_CardView_activity.class);
+                startActivity(researchintent);
+            }
+            else
+                AlertDialogCustom.show(getActivity(),"vous devez être lié à internet");
+
 
         }
     }

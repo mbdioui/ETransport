@@ -124,10 +124,10 @@ public class GetTransportTask extends AsyncTask<String, String, String> {
 				for(int n = 0; n < transportJsonArray.length(); n++)
 				{
 					JSONObject object = transportJsonArray.getJSONObject(n);
-					transport = new Transport(object);
+					transport = new Transport(object,1);
 					listtransport.add(transport);
 				}
-			Toast.makeText(context, transport.getText(),Toast.LENGTH_LONG).show();
+			Toast.makeText(context, transport.getTransport_text(),Toast.LENGTH_LONG).show();
 
 			}
 			else

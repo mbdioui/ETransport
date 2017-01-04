@@ -1,10 +1,18 @@
 package adapters;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.beardedhen.androidbootstrap.AwesomeTextView;
+import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +20,7 @@ import java.util.HashMap;
 import java.util.Locale;
 
 import Beans.Transport;
+import tn.android.etransport.etransport.Detail_transport_item;
 import tn.android.etransport.etransport.R;
 
 /**
@@ -20,17 +29,23 @@ import tn.android.etransport.etransport.R;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
 
+    private final PullToRefreshRecyclerView mRecycleview;
     private ArrayList<Transport> items;
     private HashMap<Integer,String> mapgoods= new HashMap<>();
+    private int mExpandedPosition =-1;
+    private Context context;
+    private Activity activity;
 
-
-    public CardAdapter(ArrayList<Transport> list, HashMap map){
+    public CardAdapter(ArrayList<Transport> list, HashMap map, PullToRefreshRecyclerView recycleview
+            , Context context, Activity activity){
         super();
+        this.context=context;
         items = new ArrayList<>();
         for(int i =0; i<list.size(); i++){
             items.add(list.get(i));
         }
         mapgoods=map;
+        mRecycleview=recycleview;
     }
 
     @Override
@@ -42,14 +57,15 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Transport item =  items.get(position);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        final Transport item =  items.get(position);
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
 
-        if (item.getDate_go()!=null)
-            holder.dateTextView.setText(String.valueOf(dateFormatter.format(item.getDate_go())));
-        else if (item.getDate_go_min()!=null)
-            holder.dateTextView.setText(String.valueOf(dateFormatter.format(item.getDate_go_min())));
+        if (item.getTransport_date_go()!=null)
+            holder.dateTextView.setText(String.valueOf(dateFormatter.format(item.getTransport_date_go())));
+        else if (item.getTransport_date_go_min()!=null)
+            holder.dateTextView.setText(String.valueOf(dateFormatter.format(item.getTransport_date_go_min())));
         if (!item.getAddress_from().equals("null"))
             holder.AddressgoTextView.setText(item.getAddress_from());
         else
@@ -60,12 +76,56 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             holder.AddressArriveTextView.setText("inconnue");
 
         //goods
-        if (item.getType_goods()>0 && item.getType_goods()<7)
+        if (item.getId_type_goods()>0 && item.getId_type_goods()<7)
         {
-            holder.TypegoodsTextView.setText(mapgoods.get(item.getType_goods()));
+            holder.TypegoodsTextView.setText(mapgoods.get(item.getId_type_goods()));
         }
         else
             holder.TypegoodsTextView.setText("non spécifiée");
+
+//            details adapter
+//        if(!item.getTransport_date_add().equals("null"))
+//            holder.carddetail_datepublish.setTransport_text(String.valueOf(dateFormatter.format(item.getTransport_date_add())));
+//        if (item.getTransport_date_go()!=null)
+//        {
+//            holder.carddetail_dategomin.setTransport_text(String.valueOf(dateFormatter.format(item.getTransport_date_go())));
+//            holder.carddetail_dategomax.setTransport_text(String.valueOf(dateFormatter.format(item.getTransport_date_go())));
+//        }
+//        else
+//        {
+//            holder.carddetail_dategomin.setTransport_text(String.valueOf(dateFormatter.format(item.getTransport_date_go_min())));
+//            holder.carddetail_dategomax.setTransport_text(String.valueOf(dateFormatter.format(item.getTransport_date_go_max())));
+//        }
+//        if(item.getTransport_date_arrival_max()!=null)
+//            holder.carddetail_datearrivemax.setTransport_text(String.valueOf(dateFormatter.format(item.getTransport_date_arrival_max())));
+//        else
+//            holder.carddetail_datearrivemax.setTransport_text(String.valueOf(dateFormatter.format(item.getTransport_date_arrival())));
+//
+//
+//        final boolean isExpanded = position==mExpandedPosition;
+//        holder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+//        holder.card.setActivated(isExpanded);
+//        holder.card.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mExpandedPosition = isExpanded ? -1:position;
+//                com.transitionseverywhere.TransitionManager.beginDelayedTransition(mRecycleview);
+//                notifyDataSetChanged();
+//            }
+//        });
+
+                holder.card.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent i = new Intent(context, Detail_transport_item.class);
+                        String transportstring= item.getTransport();
+                        i.putExtra("item", transportstring);
+                        context.startActivity(i);
+                        Activity activity = (Activity) context;
+                        activity.overridePendingTransition(R.anim.zoom_in, R.anim.out_animation);
+                    }
+                });
+
     }
 
     @Override
@@ -78,13 +138,28 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         public TextView AddressgoTextView;
         public TextView AddressArriveTextView;
         public TextView TypegoodsTextView;
+        public CardView card;
+        public RelativeLayout details;
+
+        public AwesomeTextView carddetail_datepublish;
+        public AwesomeTextView carddetail_dategomin;
+        public AwesomeTextView carddetail_dategomax;
+        public AwesomeTextView carddetail_datearrivemax;
 
         public ViewHolder(View itemView) {
             super(itemView);
             dateTextView = (TextView) itemView.findViewById(R.id.date_departtextview);
             AddressgoTextView =(TextView) itemView.findViewById(R.id.address_departtextview);
-            AddressArriveTextView =(TextView) itemView.findViewById(R.id.address_arrivettextview);
+            AddressArriveTextView =(TextView) itemView.findViewById(R.id.address_arrivetextview);
             TypegoodsTextView = (TextView) itemView.findViewById(R.id.typegoods_textview);
+            card =(CardView) itemView.findViewById(R.id.maincontent);
+//            details = (RelativeLayout) itemView.findViewById(R.id.details);
+//            //details items
+//            carddetail_datepublish= (AwesomeTextView) itemView.findViewById(R.id.detail_datepublish);
+//            carddetail_dategomin= (AwesomeTextView) itemView.findViewById(R.id.detail_dategomin);
+//            carddetail_dategomax= (AwesomeTextView) itemView.findViewById(R.id.detail_dategomax);
+//            carddetail_datearrivemax= (AwesomeTextView) itemView.findViewById(R.id.detail_datearrivemax);
+
         }
     }
 }

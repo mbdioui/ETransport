@@ -11,6 +11,8 @@ import android.widget.EditText;
 
 import com.rey.material.widget.Button;
 
+import utils.AlertDialogCustom;
+import utils.Connectivity;
 import utils.KeyboardUtil;
 import utils.Links;
 import utils.UserInfos;
@@ -67,12 +69,17 @@ public class profile_update_fragment extends Fragment implements View.OnClickLis
     {
         if(v.getId()==R.id.update_profile_BTN)
         {
+            if (Connectivity.Checkinternet(getActivitycontext()))
+            {
             UpdateUserTask updatetask = new UpdateUserTask(getActivity(),getActivitycontext());
             updatetask.execute(Links.getRootFolder()+"update_user.php"
             ,String.valueOf(UserInfos.getConnecteduser().getId()),edit_f_name.getText().toString()
                     ,edit_l_name.getText().toString(),edit_phone.getText().toString()
                     ,edit_address.getText().toString());
             KeyboardUtil.hideKeyboard(getActivity());
+            }
+            else
+                AlertDialogCustom.show(getActivity(),"vous devez être lié à internet");
         }
     }
 

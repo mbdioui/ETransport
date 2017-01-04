@@ -48,24 +48,6 @@
             android:id="@+id/Reset_confirmation_password"
             android:hint="Confirmation Du Mot De Passe" />
 
-        <Button
-            android:text="@string/BTN_Reset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Reset_confirmation_password"
-            android:background="@android:color/transparent"
-            android:id="@+id/Reset_button" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:id="@+id/BTN_forgetpassword_connect"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="0dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/Reset_button"
-            android:background="@android:color/transparent"
-            android:text="@string/action_sign_in_forget" />
 
         <com.rey.material.widget.Button
             android:background="@drawable/buttonshapebackgroundcolored"
@@ -81,5 +63,21 @@
             android:id="@+id/cancel_reset_password_BTN"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"/>
+
+        <com.rey.material.widget.Button
+            android:background="@drawable/buttonshapebackgroundcolored"
+            app:rd_cornerRadius="35dp"
+            app:rd_enable="true"
+            android:layout_gravity="center"
+            app:rd_backgroundColor="@color/White"
+            android:textColor="@color/White"
+            app:rd_delayClick="afterRelease"
+            android:text="Réinitialiser"
+            android:layout_marginTop="41dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Reset_button"
+            android:layout_below="@+id/Reset_confirmation_password"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </RelativeLayout>

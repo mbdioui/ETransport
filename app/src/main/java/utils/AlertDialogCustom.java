@@ -1,7 +1,8 @@
 package utils;
 
-import android.app.AlertDialog;
 import android.content.Context;
+
+import com.alertdialogpro.AlertDialogPro;
 
 import tn.android.etransport.etransport.R;
 
@@ -12,7 +13,7 @@ import tn.android.etransport.etransport.R;
 public class AlertDialogCustom {
     public static void show(Context context,String string)
     {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context,R.style.dialog_theme);
+        AlertDialogPro.Builder alertDialogBuilder = new AlertDialogPro.Builder(context);
         alertDialogBuilder.setMessage(string);
         alertDialogBuilder.setTitle("informations");
         alertDialogBuilder.setIcon(R.drawable.ic_info_black_24dp);

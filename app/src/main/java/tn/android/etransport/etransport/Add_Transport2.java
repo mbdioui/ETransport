@@ -80,7 +80,7 @@ public class Add_Transport2 extends Activity {
 //                Toast.makeText(getApplicationContext(),Time_arrival_String, Toast.LENGTH_LONG).show();
                 InsertTransportTask user_transport_task = new InsertTransportTask(Add_Transport2.this,getApplicationContext());
 //                user_transport_task.execute(Links.getRootFolder()+"inserttransport.php", String.valueOf(UserInfos.getConnecteduser().getId()),
-//                        Time_go_String,Time_arrival_String,Transport_text.getText().toString(),
+//                        Time_go_String,Time_arrival_String,Transport_text.getTransport_text().toString(),
 //                        startVille,destVille,startCountry,destCountry,startposition,destposition);
                 user_transport_task.setParentactivity(Add_Transport2.this);
                 user_transport_task.execute(Links.getRootFolder()+"inserttransport.php", "7",

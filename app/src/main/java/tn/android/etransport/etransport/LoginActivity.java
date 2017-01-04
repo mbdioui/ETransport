@@ -60,11 +60,11 @@ public class LoginActivity extends Activity implements OnClickListener {
     {
         if(Connectivity.Checkinternet(this)) {
             if (!user_mail.getText().toString().equals("") && !user_password.getText().toString().equals("")) {
+                KeyboardUtil.hideKeyboard(this);
                 LoginUserTask log_User = new LoginUserTask(LoginActivity.this);
                 log_User.setCntx(LoginActivity.this);
                 log_User.execute(Links.getRootFolder() + "userconnexion.php", user_mail.getText().toString()
                         , user_password.getText().toString());
-                KeyboardUtil.hideKeyboard(this);
 //            while (log_User.Auth==null)
 //            {}
 //            if (log_User.Auth.equals("ok"))

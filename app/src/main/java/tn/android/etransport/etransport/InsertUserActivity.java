@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ToggleButton;
 
+import com.alertdialogpro.AlertDialogPro;
+
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -48,7 +50,7 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		if (!Connectivity.Checkinternet(getApplicationContext()))
 		{
-			AlertDialog.Builder alertbuilder= new AlertDialog.Builder(this,R.style.dialog_theme);
+			AlertDialogPro.Builder alertbuilder= new AlertDialogPro.Builder(this);
 			alertbuilder.setMessage("Vérifier votre connection");
 			alertbuilder.setIcon(R.drawable.ic_info_black_24dp);
 			alertbuilder.setPositiveButton("Ok",null);

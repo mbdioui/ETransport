@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.alertdialogpro.AlertDialogPro;
+
 import java.util.logging.Logger;
 
 import utils.KeyboardUtil;
@@ -23,7 +25,6 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
     private EditText mail;
     private EditText Mdp;
     private EditText Confirm_Mdp;
-    private Button authentification_BTN;
     private com.rey.material.widget.Button cancel_BTN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +33,10 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
         mail = (EditText) findViewById(R.id.Reset_mail);
         Mdp = (EditText) findViewById(R.id.Reset_password);
         Confirm_Mdp = (EditText) findViewById(R.id.Reset_confirmation_password);
-        Button reset_button = (Button) findViewById(R.id.Reset_button);
+        Button reset_button = (com.rey.material.widget.Button) findViewById(R.id.Reset_button);
         reset_button.setOnClickListener(this);
 
         cancel_BTN =(com.rey.material.widget.Button) findViewById(R.id.cancel_reset_password_BTN);
-        authentification_BTN= (Button) findViewById(R.id.BTN_forgetpassword_connect);
-        authentification_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent Authen_intent = new Intent(Forgetpass_activity.this,LoginActivity.class);
-                startActivity(Authen_intent);
-                Forgetpass_activity.this.finish();
-            }
-        });
         cancel_BTN.setOnClickListener(this);
      }
 
@@ -52,7 +44,7 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
     public void onClick(View v) {
         if (v.getId() == R.id.Reset_button)
         {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            AlertDialogPro.Builder alertDialogBuilder = new AlertDialogPro.Builder(this);
             alertDialogBuilder.setMessage("veuillez remplir tous les champs");
             alertDialogBuilder.setPositiveButton("Continuez", null);
 //            alertDialogBuilder.setNegativeButton("Retour", new DialogInterface.OnClickListener() {

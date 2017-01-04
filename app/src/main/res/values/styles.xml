@@ -152,5 +152,17 @@
         <item name="android:typeface">serif</item>
     </style>
     <!-- Application theme. -->
-
+    //theme galerie select
+        <style name="OverrideMultipleImageSelectTheme" parent="Theme.AppCompat.NoActionBar">
+            <item name="colorPrimary">@color/light_blue</item>
+            <item name="colorPrimaryDark">@color/light_blue_transparent</item>
+            <item name="colorAccent">@color/blue_gray</item>
+            <item name="actionModeStyle">@style/OverrideCustomActionModeStyle</item>
+            <item name="windowActionModeOverlay">true</item>
+        </style>
+        <style name="OverrideCustomActionModeStyle" parent="Base.Widget.AppCompat.ActionMode">
+            <item name="background">@color/light_blue</item>
+        </style>
+        <style name="OverrideCustomToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
+        </style>
 </resources>

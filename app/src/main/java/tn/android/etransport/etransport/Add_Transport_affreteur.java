@@ -220,4 +220,8 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
                     String.valueOf(endmarker.getPosition().longitude), date_depart, date_arrive, "1",means,typegood);
         }
     }
+
+
+
+
 }

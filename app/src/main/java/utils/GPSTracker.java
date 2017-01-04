@@ -16,6 +16,8 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.alertdialogpro.AlertDialogPro;
+
 public class GPSTracker extends Service implements LocationListener {
 	  
 		private final Context mContext;
@@ -224,7 +226,7 @@ public class GPSTracker extends Service implements LocationListener {
 	}
 	
 	public void showSettingsAlert(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        AlertDialogPro.Builder alertDialog = new AlertDialogPro.Builder(mContext);
 
         // Setting Dialog Title
         alertDialog.setTitle("GPS is settings");

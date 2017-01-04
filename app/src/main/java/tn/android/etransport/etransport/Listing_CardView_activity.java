@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -52,10 +51,12 @@ public class Listing_CardView_activity extends Activity  {
     }
 
     private void ConfigureRecycleView() {
-                mLayoutManager = new LinearLayoutManager(this);
-                mRecyclerView.setLayoutManager(mLayoutManager);
+                mLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         // set true to open swipe(pull to refresh, default is true)
-                mRecyclerView.setSwipeEnable(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mRecyclerView.setSwipeEnable(true);
+        mRecyclerView.setNestedScrollingEnabled(true);
 //                mRecyclerView.removeHeader();
         //setpaginablelistener
         mRecyclerView.setPagingableListener(new PullToRefreshRecyclerView.PagingableListener() {
@@ -72,9 +73,6 @@ public class Listing_CardView_activity extends Activity  {
                         getData(Listing_CardView_activity.this);
                     }
                 });
-        // add item divider to recyclerView
-                mRecyclerView.getRecyclerView().addItemDecoration(new DividerItemDecoration(this,
-                        DividerItemDecoration.HORIZONTAL));
 
         // set loadmore String
                 mRecyclerView.setLoadmoreString("loading");
@@ -129,7 +127,7 @@ public class Listing_CardView_activity extends Activity  {
     }
 
     public void showData(){
-        mAdapter = new CardAdapter(listtransport,mapgoods);
+        mAdapter = new CardAdapter(listtransport,mapgoods,mRecyclerView,this,Listing_CardView_activity.this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setOnRefreshComplete();
     }
@@ -149,7 +147,7 @@ public class Listing_CardView_activity extends Activity  {
             Transport transport;
             for(int i=0; i<array.length(); i++){
                 JSONObject j = array.getJSONObject(i);
-                transport=new Transport(j);
+                transport=new Transport(j,1);
                 resultlist.add(transport);
             }
             listtransport=resultlist;

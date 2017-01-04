@@ -17,7 +17,7 @@
     <string name="already_member"> <u>D&#233;ja membre</u>  </string>
     <string name="forget_password"><u>Mot de passe oublie</u></string>
     <string name="title_activity_forgetpass_activity">r&#233;initialiser le mot de passe</string>
-    <string name="BTN_Reset"><u>R&#233;initialiser le mot de passe</u>  </string>
+    <string name="BTN_Reset"><u>R&#233;initialiser</u>  </string>
     <string name="Welcome_text">Bienvenue</string>
     <string name="Application_version">V 1.0</string>
     <string name="google_maps_key">AIzaSyAekHtGgMH5mqveWlRpYAocsg55CK3aW5I</string>
