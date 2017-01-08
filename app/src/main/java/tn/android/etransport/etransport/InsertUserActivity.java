@@ -147,5 +147,9 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 		User_phone.setText("");
 		User_phone.clearFocus();
 	}
-
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		this.finishAffinity();
+	}
 }

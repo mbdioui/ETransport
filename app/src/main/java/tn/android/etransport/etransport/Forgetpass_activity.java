@@ -95,5 +95,15 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
         Confirm_Mdp.setText("");
     }
 
-
+    @Override
+    public void onBackPressed() {
+        if(UserInfos.getConnecteduser()!=null)
+        {Intent intentparent = new Intent(this,Home_affreteur_activity.class);
+            startActivity(intentparent);
+            this.finish();}
+        else if(UserInfos.getConnecteduser()==null)
+        {Intent cnxintent=new Intent(this,LoginActivity.class);
+            startActivity(cnxintent);
+            this.finish();}
+    }
 }

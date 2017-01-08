@@ -232,7 +232,7 @@ public class Transport {
             if(intformat==1)
                 format = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
             else
-                format = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss aa",Locale.ENGLISH);
+                format = new SimpleDateFormat("MMM dd, yyyy hh:mm:ss",Locale.ENGLISH);
 //            "transport_date_arrival" -> "Oct 27, 2016 12:00:00 AM"
             try {
                 if(Json.has("transport_date_go"))

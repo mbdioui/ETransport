@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
@@ -13,6 +14,7 @@ import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -21,15 +23,15 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
 
 
     private BootstrapButton galeriebtn;
-    private final int numberOfImagesToSelect = 5;
+    private final int numberOfImagesToSelect = 3;
     private final int Galeriepermission= 5656;
-
+    private HashMap<String,String> savedImages;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Galeriepermission && resultCode == RESULT_OK && data != null)
+         if (requestCode == Galeriepermission && resultCode == RESULT_OK && data != null)
         {
             ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
-
+            Toast.makeText(getContext(),images.get(0).path,Toast.LENGTH_SHORT).show();
         }
     }
 

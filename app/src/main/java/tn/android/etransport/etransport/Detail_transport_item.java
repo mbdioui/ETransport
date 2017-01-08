@@ -70,7 +70,7 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE);
 
-        if(!transport.getTransport_date_add().equals(""))
+        if(transport.getTransport_date_add()!=null)
             datepublishView.setText(String.valueOf(dateFormatter.format(transport.getTransport_date_add())));
         if (transport.getTransport_date_go()!=null)
         {
