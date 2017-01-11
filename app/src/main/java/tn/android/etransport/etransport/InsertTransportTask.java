@@ -97,7 +97,10 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 				nameValuePair.add(new BasicNameValuePair("type_pub",params[15]));
 				nameValuePair.add(new BasicNameValuePair("means",params[16]));
 				nameValuePair.add(new BasicNameValuePair("typegood",params[17]));
-				//Encode and set entity
+				nameValuePair.add(new BasicNameValuePair("picture1",params[18]));
+				nameValuePair.add(new BasicNameValuePair("picture2",params[19]));
+				nameValuePair.add(new BasicNameValuePair("picture3",params[20]));
+			//Encode and set entity
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePair, HTTP.UTF_8));
 	            HttpResponse response = client.execute(post);
 				responseBody = EntityUtils.toString(response.getEntity());

@@ -1,21 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/back_dark"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-    <com.beardedhen.androidbootstrap.BootstrapButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sélectionner via Galerie"
-        android:id="@+id/button_galerie"
-        app:bootstrapBrand="success"
-        app:bootstrapSize="lg"
-        app:buttonMode="regular"
-        app:showOutline="false"
-        app:roundedCorners="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        />
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:background="@color/back_dark"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sélectionner via Galerie"
+            android:id="@+id/button_galerie"
+            app:bootstrapBrand="success"
+            app:bootstrapSize="lg"
+            app:buttonMode="regular"
+            app:showOutline="false"
+            app:roundedCorners="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/button_galerie"
+            android:id="@+id/list_uploaded_images">
+        </ListView>
+        <com.rey.material.widget.ImageView
+            android:layout_width="match_parent"
+            android:adjustViewBounds="true"
+            android:layout_height="match_parent"
+            android:id="@+id/imageview"
+            android:layout_marginTop="3dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/list_uploaded_images"/>
 
-</RelativeLayout>
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageview"
+            android:text="Send picture"
+            android:id="@+id/button_send"
+            app:bootstrapBrand="success"
+            app:bootstrapSize="lg"
+            app:buttonMode="regular"
+            app:showOutline="false"
+            app:roundedCorners="true"
+            android:layout_marginTop="2dp"
+            android:layout_centerHorizontal="true"
+            />
+        <com.rey.material.widget.ProgressView
+            android:id="@+id/progress_view_picture"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:pv_autostart="true"
+            app:pv_circular="true"
+            android:layout_centerInParent="true"
+            app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
+            app:pv_progressMode="indeterminate"/>
+
+    </RelativeLayout>
+</ScrollView>

@@ -17,6 +17,9 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.widget.FloatingActionButton;
 import com.rey.material.widget.Spinner;
 
+import java.util.HashMap;
+import java.util.Set;
+
 import utils.Links;
 import utils.Pager;
 import utils.UserInfos;
@@ -211,13 +214,27 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
         }
         if(fieldsok)
         {
+            //pictures loop
+            String transport_picture[] = new String[3];
+            Form_Pict_Client picturefragment =(Form_Pict_Client) myadapter.getFragment(3);
+            HashMap<String,Boolean> picturesmap = picturefragment.getSavedImages();
+            Set<String> set =picturesmap.keySet();
+            int i=0;
+            for (String s : set) {
+                if (!s.equals(""))
+                    transport_picture[i] = s;
+                else
+                    transport_picture[i] = "";
+                i++;
+            }
             InsertTransportTask task = new InsertTransportTask(Add_Transport_affreteur.this, getApplicationContext());
             task.setParentactivity(Add_Transport_affreteur.this);
             task.execute(Links.getRootFolder() + "inserttransport.php", String.valueOf(UserInfos.getConnecteduser().getId())
                     , date_depart_min, date_depart_max, date_arrive_min, date_arrive_max, string, startpositiontext,
                     destposition.getText().toString(), String.valueOf(startmarker.getPosition().latitude)
                     , String.valueOf(startmarker.getPosition().longitude), String.valueOf(endmarker.getPosition().latitude),
-                    String.valueOf(endmarker.getPosition().longitude), date_depart, date_arrive, "1",means,typegood);
+                    String.valueOf(endmarker.getPosition().longitude), date_depart, date_arrive, "1",means,typegood
+                    ,transport_picture[0],transport_picture[1],transport_picture[2]);
         }
     }
 

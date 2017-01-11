@@ -54,5 +54,8 @@ dependencies {
     compile "com.andkulikov:transitionseverywhere:1.7.0"
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.github.darsh2:MultipleImageSelect:3474549'
+    //upload image
+    compile 'com.loopj.android:android-async-http:1.4.9'
+    //instant capture
     testCompile 'junit:junit:4.12'
 }
