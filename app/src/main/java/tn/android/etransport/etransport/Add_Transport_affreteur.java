@@ -20,6 +20,7 @@ import com.rey.material.widget.Spinner;
 import java.util.HashMap;
 import java.util.Set;
 
+import tasks.Deletepictures;
 import utils.Links;
 import utils.Pager;
 import utils.UserInfos;
@@ -51,6 +52,7 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
     private int pageSelected;
     private String startpositiontext;
     private String destpositiontext;
+    private Set<String> listimages;
 
     public Context getActivitycontext() {
         return activitycontext;
@@ -138,6 +140,16 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
         Intent intent= new Intent(this,Home_affreteur_activity.class);
         startActivity(intent);
         Add_Transport_affreteur.this.finish();
+        //delete updated pictures
+        Pager myadapter= ((Pager)viewPager.getAdapter());
+        Form_Pict_Client picturefragment =(Form_Pict_Client) myadapter.getFragment(3);
+        HashMap<String,Boolean> picturesmap = picturefragment.getSavedImages();
+        String[] Stringlist=new String[3];int i=0;
+        for (String st : picturesmap.keySet())
+        {Stringlist[i]=st;
+            i++;}
+        Deletepictures deletepictures= new Deletepictures(this);
+        deletepictures.execute(Links.getRootFolder()+"/deletepictures.php",Stringlist[0],Stringlist[1],Stringlist[2]);
     }
 
     @Override

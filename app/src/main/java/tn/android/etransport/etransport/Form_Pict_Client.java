@@ -1,18 +1,24 @@
 package tn.android.etransport.etransport;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.alertdialogpro.AlertDialogPro;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
@@ -23,14 +29,20 @@ import com.loopj.android.http.RequestParams;
 import com.rey.material.widget.ImageView;
 import com.rey.material.widget.ProgressView;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Set;
 
 import adapters.ImagesListAdapter;
 import cz.msebera.android.httpclient.Header;
+import utils.Connectivity;
 import utils.Links;
+import utils.PermissionUtils;
+import utils.UserInfos;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -41,6 +53,8 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
     private BootstrapButton galeriebtn;
     private final int numberOfImagesToSelect = 1;
     private final int Galeriepermission= 5656;
+    private final int TakeaPhoto = 9999;
+    private LoadToast lt;
 
     public HashMap<String, Boolean> getSavedImages() {
         return savedImages;
@@ -54,10 +68,10 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
     private BootstrapButton sendbtn;
     private ImageView imgView;
     private android.widget.ListView list_images;
-    ArrayAdapter<String> listadapter;
+    private Bitmap photo;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-         if (requestCode == Galeriepermission && resultCode == RESULT_OK && data != null)
+        if (requestCode == Galeriepermission && resultCode == RESULT_OK && data != null)
         {
             ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
             Toast.makeText(getContext(),images.get(0).path,Toast.LENGTH_SHORT).show();
@@ -76,6 +90,19 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
             imgView.setImageBitmap(resizedBitmap);
 
         }
+        else if (requestCode == TakeaPhoto && resultCode == RESULT_OK && data != null)
+         {
+             Calendar c = Calendar.getInstance();
+             int seconds = c.get(Calendar.SECOND);
+             photo = (Bitmap) data.getExtras().get("data");
+             Bitmap resizedBitmap = Bitmap.createScaledBitmap(
+                     photo, 900,900, true);
+             imgView.setImageBitmap(resizedBitmap);
+             imgView.setVisibility(View.VISIBLE);
+             sendbtn.setVisibility(View.VISIBLE);
+             fileName = "instant_capture_ID="+UserInfos.getConnecteduser().getId()+seconds+c.get(Calendar.MINUTE)+".jpeg";
+             params.put("filename", fileName);
+         }
     }
 
     @Override
@@ -104,24 +131,63 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
     public void onClick(View v) {
         if (v.getId()== R.id.button_galerie)
         {
-            if(savedImages.size()<3) {
-                Intent intent = new Intent(getActivity(), AlbumSelectActivity.class);
-                //set limit on number of images that can be selected, default is 10
-                intent.putExtra(Constants.INTENT_EXTRA_LIMIT, numberOfImagesToSelect);
-                startActivityForResult(intent, Galeriepermission);
-            }
-            else
-                Toast.makeText(getContext(),"Nombre d'images maximum est atteint",Toast.LENGTH_SHORT).show();
+            final CharSequence[] items = {"Galerie", "Capture Instantanée"};
+
+            AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getContext());
+            builder.setTitle("Séléctionnez un choix");
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    if(items[item].equals("Galerie"))
+                    {
+                        if(nbsuccessupload()<3) {
+                            if(Build.VERSION.SDK_INT< Build.VERSION_CODES.M)
+                            { accessgalerie();}
+                            else
+                            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}
+                                        , Galeriepermission);
+                            else
+                                accessgalerie();
+                        }
+                        else
+                            Toast.makeText(getContext(),"Nombre d'images maximum est atteint",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+
+                            takephoto();
+                    }
+                }
+            });
+            AlertDialogPro alert = builder.create();
+            alert.show();
         }
         else if (v.getId()==R.id.button_send)
         {
-            if(savedImages.size()<3)
-                encodeImagetoString();
-            else
-                Toast.makeText(getContext(),"Nombre d'images maximum est atteint",Toast.LENGTH_SHORT).show();
+            if (Connectivity.Checkinternet(getActivity())) {
+                if (nbsuccessupload() < 3)
+                    encodeImagetoString();
+                else
+                    Toast.makeText(getContext(), "Nombre d'images maximum est atteint", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
+    private void accessgalerie() {
+        Intent intent = new Intent(getActivity(), AlbumSelectActivity.class);
+        //set limit on number of images that can be selected, default is 10
+        intent.putExtra(Constants.INTENT_EXTRA_LIMIT, numberOfImagesToSelect);
+        startActivityForResult(intent, Galeriepermission);
+    }
+
+    private int nbsuccessupload()
+    {
+        int i=0;
+        for (String key : savedImages.keySet())
+            if (savedImages.get(key)==true)
+                i++;
+        return i;
+    }
 
 
     // AsyncTask - To convert Image to String
@@ -132,6 +198,9 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
             progressview.start();
             progressview.setVisibility(View.VISIBLE);
             sendbtn.setEnabled(false);
+                lt= new LoadToast(getContext());
+                lt.setText("Enregistrement en cours...");
+                lt.show();
             };
 
             @Override
@@ -139,8 +208,14 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
                 BitmapFactory.Options options = null;
                 options = new BitmapFactory.Options();
                 options.inSampleSize = 3;
-                bitmap = BitmapFactory.decodeFile(imgPath,
+                if (imgPath!=null )
+                    if (!imgPath.equals(""))
+                        bitmap = BitmapFactory.decodeFile(imgPath,
                         options);
+                    else
+                        bitmap=photo;
+                else
+                    bitmap=photo;
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 // Must compress the Image to reduce image size to make upload easy
                 bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
@@ -174,13 +249,13 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         hideprogressview();
                         hideimageview();
+                        lt.success();
                         sendbtn.setEnabled(true);
-                        Toast.makeText(getContext(), "success",
-                                Toast.LENGTH_LONG).show();
                         savedImages.put(fileName,true);
                         params.remove("image");
                         fileName="";
-                        imgPath="";
+                        if (imgPath!=null)
+                            imgPath="";
                         Set<String> keys = savedImages.keySet();
                         String[] keyArray = keys.toArray(new String[keys.size()]);
                         ImagesListAdapter adapter= new ImagesListAdapter(getContext(),keyArray,savedImages);
@@ -192,6 +267,7 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         hideprogressview();
+                        hideimageview();
                         sendbtn.setEnabled(true);
                         savedImages.put(fileName,false);
                         params.remove("image");
@@ -232,4 +308,19 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
         sendbtn.setVisibility(View.INVISIBLE);
         imgView.setVisibility(View.INVISIBLE);
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M ) {
+            if (PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    && requestCode == Galeriepermission) {
+                accessgalerie();
+            }
+        }
+    }
+
+    private void takephoto() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, TakeaPhoto);
+    }
+
 }

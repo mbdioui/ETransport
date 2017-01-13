@@ -10,7 +10,7 @@
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sélectionner via Galerie"
+            android:text="Ajouter des images"
             android:id="@+id/button_galerie"
             app:bootstrapBrand="success"
             app:bootstrapSize="lg"

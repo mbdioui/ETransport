@@ -17,8 +17,27 @@
         <item name="windowActionBar">false</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
-        <item name="alertDialogProTheme">@style/Theme.AlertDialogPro.Material</item>
+        <item name="alertDialogProTheme">@style/AppTheme.FlavoredMaterialLight</item>
+
     </style>
+
+    <style name="AppTheme.FlavoredMaterialLight" parent="Theme.AlertDialogPro.Material.Light">
+        <item name="colorPrimary">#3F51B5</item>
+        <item name="colorPrimaryDark">#303F9F</item>
+        <item name="colorAccent">#FF4081</item>
+        <item name="android:windowTitleStyle">@style/AdpTitleStyle</item>
+        <item name="adpButtonBarNegativeButtonStyle">@style/AdpNormalButtonStyle</item>
+        <item name="adpButtonBarNeutralButtonStyle">@style/AdpNormalButtonStyle</item>
+    </style>
+
+    <style name="AdpTitleStyle" parent="DialogWindowTitle.AlertDialogPro.Material.Light">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="AdpNormalButtonStyle" parent="Widget.AlertDialogPro.Material.Light.Button">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
 
     <style name="MyMenuTextAppearance" parent="android:TextAppearance.Holo.Widget.ActionBar.Menu">
         <item name="android:textAllCaps">false</item>
@@ -124,6 +143,7 @@
         <item name="fab_colorPressed">@color/blue</item>
         <item name="fab_colorRipple">@color/purple</item>
     </style>
+
 
     <style name="NewDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>

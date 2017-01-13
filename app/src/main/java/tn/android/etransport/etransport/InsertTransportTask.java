@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -33,6 +35,7 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 	private String responseBody;
 	private AlertDialog progdialog;
 	private Activity parentactivity;
+	private LoadToast lt;
 
 	public Activity getParentactivity() {
 		return parentactivity;
@@ -119,6 +122,9 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 	protected void onPreExecute() {
 		super.onPreExecute();
 		progdialog.show();
+		lt= new LoadToast(context);
+		lt.setText("Enregistrement en cours...");
+		lt.show();
 
 	}
 
@@ -131,7 +137,8 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 			json = new JSONObject(result);
 			if(json.getString("error").equals("0"))
 			{
-				Toast.makeText(context,"Insertion Done",Toast.LENGTH_LONG).show();
+//				Toast.makeText(context,"Insertion Done",Toast.LENGTH_LONG).show();
+				lt.success();
 				Intent intent = new Intent(parentactivity,Home_affreteur_activity.class);
 				parentactivity.startActivity(intent);
 				parentactivity.finish();

@@ -56,6 +56,6 @@ dependencies {
     compile 'com.github.darsh2:MultipleImageSelect:3474549'
     //upload image
     compile 'com.loopj.android:android-async-http:1.4.9'
-    //instant capture
+    compile 'net.steamcrafted:load-toast:1.0.10'
     testCompile 'junit:junit:4.12'
 }
