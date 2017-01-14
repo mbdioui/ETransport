@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.rey.material.widget.Button;
 
+import tasks.UpdateUserTask;
 import utils.AlertDialogCustom;
 import utils.Connectivity;
 import utils.KeyboardUtil;

@@ -25,7 +25,6 @@ import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -55,18 +54,20 @@ public class Home_affreteur_activity extends AppCompatActivity
         //if you want to update the items at a later time it is recommended to keep it in a variable
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Réinitialiser le mot de passe")
                 .withIcon(R.drawable.ic_autorenew_white_24dp).withSelectable(false);
-        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2)
+        PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2)
                 .withName("Se déconnecter").withIcon(R.drawable.deconnexion).withSelectable(false);
-
+        //profile
         final IProfile profile = new ProfileDrawerItem()
                 .withName(UserInfos.getConnecteduser().getF_name()+" "+UserInfos.getConnecteduser().getL_name())
-                .withEmail(UserInfos.getConnecteduser().getMail()).withIcon(R.drawable.ic_account_circle_white_36dp)
+                .withEmail(UserInfos.getConnecteduser().getMail())
+                .withIcon(R.drawable.ic_account_circle_white_36dp)
                 .withIdentifier(UserInfos.getConnecteduser().getId());
         //create the drawer and remember the `Drawer` result object
         action_bar_layout=setup_tab();
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
+                .withSelectionListEnabled(false)
                 .withHeaderBackground(R.drawable.bg3)
                 .addProfiles(
                         profile

@@ -1,4 +1,4 @@
-package tn.android.etransport.etransport;
+package tasks;
 /**
  * Created by mohamed salah
  */
@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import tn.android.etransport.etransport.LoginActivity;
+import tn.android.etransport.etransport.R;
 import utils.AlertDialogCustom;
 import utils.Connectivity;
 import utils.KeyboardUtil;

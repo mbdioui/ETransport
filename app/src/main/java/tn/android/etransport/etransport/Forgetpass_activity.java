@@ -15,6 +15,7 @@ import com.alertdialogpro.AlertDialogPro;
 
 import java.util.logging.Logger;
 
+import tasks.ResetPasswordUserTask;
 import utils.KeyboardUtil;
 import utils.Links;
 import utils.UserInfos;

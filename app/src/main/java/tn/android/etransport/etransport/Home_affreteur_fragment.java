@@ -77,9 +77,9 @@ public class Home_affreteur_fragment extends Fragment implements View.OnClickLis
         else if (v.getId()==R.id.fabResearch) {
             if (Connectivity.Checkinternet(getActivity()))
             {
-                getActivity().finish();
-                Intent researchintent = new Intent(getActivity(), Listing_CardView_activity.class);
-                startActivity(researchintent);
+//                getActivity().finish();
+//                Intent researchintent = new Intent(getActivity(), Listing_CardView_activity.class);
+//                startActivity(researchintent);
             }
             else
                 AlertDialogCustom.show(getActivity(),"vous devez être lié à internet");

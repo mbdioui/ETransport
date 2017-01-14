@@ -1,4 +1,4 @@
-package tn.android.etransport.etransport;
+package tasks;
 /**
  * Created by mohamed salah
  */
@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 import Beans.User;
 import dmax.dialog.SpotsDialog;
+import tn.android.etransport.etransport.R;
 
 public class GetUserTask extends AsyncTask<String, String, String> {
 
@@ -63,7 +64,7 @@ public class GetUserTask extends AsyncTask<String, String, String> {
 	public GetUserTask(Activity activity, Context context)
 	{
 		setParentactivity(activity);
-		progdialog = new SpotsDialog(activity,R.style.CustomSpotDialog);
+		progdialog = new SpotsDialog(activity, R.style.CustomSpotDialog);
 		this.context=context;
 	}
 

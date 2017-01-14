@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import tasks.Deletepictures;
+import tasks.InsertTransportTask;
 import utils.Links;
 import utils.Pager;
 import utils.UserInfos;

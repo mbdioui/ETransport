@@ -15,6 +15,8 @@ import android.widget.EditText;
 
 import java.util.logging.Logger;
 
+import tasks.InsertUserActivity;
+import tasks.LoginUserTask;
 import utils.AlertDialogCustom;
 import utils.Connectivity;
 import utils.KeyboardUtil;
@@ -48,7 +50,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         subscribe.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent InsertUser = new Intent(LoginActivity.this,InsertUserActivity.class);
+                Intent InsertUser = new Intent(LoginActivity.this, InsertUserActivity.class);
                 startActivity(InsertUser);
                 LoginActivity.this.finish();
             }

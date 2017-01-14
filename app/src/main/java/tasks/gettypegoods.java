@@ -1,4 +1,4 @@
-package tn.android.etransport.etransport;
+package tasks;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,6 +15,8 @@ import java.net.URL;
 import java.util.HashMap;
 
 import dmax.dialog.SpotsDialog;
+import tn.android.etransport.etransport.Listing_CardView_activity;
+import tn.android.etransport.etransport.R;
 import utils.Links;
 
 /**
@@ -32,7 +34,7 @@ public class gettypegoods extends AsyncTask<String,String,String> {
     public gettypegoods(Context context, Listing_CardView_activity mainActivity){
         this.context = context;
         this.mainActivity = mainActivity;
-        progdialog = new SpotsDialog(context,R.style.CustomSpotDialog);
+        progdialog = new SpotsDialog(context, R.style.CustomSpotDialog);
 
     }
 

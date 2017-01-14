@@ -1,4 +1,4 @@
-package tn.android.etransport.etransport;
+package tasks;
 /**
  * Created by mohamed salah
  */
@@ -28,6 +28,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import tn.android.etransport.etransport.Home_affreteur_activity;
+import tn.android.etransport.etransport.R;
 
 public class InsertTransportTask extends AsyncTask<String, String, String> {
 
@@ -55,7 +57,7 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 
 	public InsertTransportTask(Activity activity,Context context)
 	{
-		progdialog = new SpotsDialog(activity,R.style.CustomSpotDialog);
+		progdialog = new SpotsDialog(activity, R.style.CustomSpotDialog);
 		this.context=context;
 	}
 

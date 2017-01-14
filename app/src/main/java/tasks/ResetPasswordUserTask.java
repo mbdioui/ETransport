@@ -1,4 +1,4 @@
-package tn.android.etransport.etransport;
+package tasks;
 
 /**
  * Created by mohamed salah
@@ -25,6 +25,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
+import tn.android.etransport.etransport.R;
 
 public class ResetPasswordUserTask extends AsyncTask<String, String, String> {
 
@@ -40,7 +41,7 @@ public class ResetPasswordUserTask extends AsyncTask<String, String, String> {
 	}
 	public ResetPasswordUserTask(Activity act)
 	{
-		progdialog = new SpotsDialog(act,R.style.CustomSpotDialog);
+		progdialog = new SpotsDialog(act, R.style.CustomSpotDialog);
 	}
 	@Override
 	protected String doInBackground(String... params) {

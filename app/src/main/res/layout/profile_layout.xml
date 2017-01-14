@@ -25,6 +25,7 @@
         android:layout_below="@+id/label_user_name"
         android:background="@drawable/buttonshape"
         android:id="@+id/edit_user_f_name"
+        android:inputType="textNoSuggestions"
         android:layout_marginBottom="@dimen/between_fields_vertical_margin"/>
     <EditText
         android:layout_width="wrap_content"
@@ -36,6 +37,7 @@
         android:layout_toEndOf="@+id/edit_user_f_name"
         android:id="@+id/edit_user_l_name"
         android:gravity="center"
+        android:inputType="textNoSuggestions"
         android:layout_marginBottom="@dimen/between_fields_vertical_margin"/>
     <TextView
         android:layout_width="match_parent"
@@ -73,6 +75,7 @@
         android:textSize="@dimen/text_size"
         android:background="@drawable/buttonshape"
         android:layout_alignParentLeft="true"
+        android:inputType="textNoSuggestions"
         android:layout_below="@id/label_address"
         android:id="@+id/edit_address"
         android:layout_marginBottom="@dimen/between_fields_vertical_margin"/>

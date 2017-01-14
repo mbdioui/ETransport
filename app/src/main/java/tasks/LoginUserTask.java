@@ -1,4 +1,4 @@
-package tn.android.etransport.etransport;
+package tasks;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 import Beans.User;
 import dmax.dialog.SpotsDialog;
+import tn.android.etransport.etransport.Home_affreteur_activity;
+import tn.android.etransport.etransport.R;
 import utils.UserInfos;
 
 public class LoginUserTask extends AsyncTask<String, String, String> {
@@ -49,7 +51,7 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 
 	public LoginUserTask(Activity act) {
 		super();
-		progdialog = new SpotsDialog(act,R.style.CustomSpotDialog);
+		progdialog = new SpotsDialog(act, R.style.CustomSpotDialog);
 		activityparent=act;
 	}
 

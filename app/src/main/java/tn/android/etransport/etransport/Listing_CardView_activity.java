@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 import Beans.Transport;
 import adapters.CardAdapter;
+import tasks.gettypegoods;
 import utils.Connectivity;
 import utils.Links;
 
