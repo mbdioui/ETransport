@@ -132,15 +132,15 @@ public class PlaceArrayAdapter
     }
  
     class PlaceAutocomplete {
- 
+
         public CharSequence placeId;
         public CharSequence description;
- 
+
         PlaceAutocomplete(CharSequence placeId, CharSequence description) {
             this.placeId = placeId;
             this.description = description;
         }
- 
+
         @Override
         public String toString() {
             return description.toString();

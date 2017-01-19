@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 
 import com.beardedhen.androidbootstrap.AwesomeTextView;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -21,9 +23,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import Beans.Transport;
+import utils.Links;
 
 public class Detail_transport_item extends Activity implements OnMapReadyCallback {
 
@@ -38,10 +43,13 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
     private AwesomeTextView dategomax;
     private AwesomeTextView datearrivemax;
 
+    private SliderLayout sliderShow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transport_item_details);
+        sliderShow = (SliderLayout) findViewById(R.id.slider);
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.itemheaderdetail);
         mapFragment.getMapAsync(this);
         Bundle b=getIntent().getExtras();
@@ -53,7 +61,39 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
             e.printStackTrace();
         }
         transport=new Transport(obj,2);
+        sliderconfig();
         configlayout();
+    }
+
+    private void sliderconfig()  {
+        DefaultSliderView SliderView = new DefaultSliderView(this);
+
+        if(transport.getTransport_picture_1()==null&&transport.getTransport_picture_2()==null &&transport.getTransport_picture_3()==null)
+        {
+            SliderView.image("http://cloud.leportail.ci/default.png");
+            sliderShow.addSlider(SliderView);
+        }
+        else
+        {
+            List<String> pictures= new ArrayList<>();
+            if (transport.getTransport_picture_1()!=null)
+                pictures.add(transport.getTransport_picture_1());
+            if (transport.getTransport_picture_2()!=null)
+                pictures.add(transport.getTransport_picture_2());
+            if (transport.getTransport_picture_3()!=null)
+                pictures.add(transport.getTransport_picture_3());
+            for(int i=0;i<pictures.size();i++)
+            {
+                if (!pictures.get(i).equals(""))
+                {
+                    SliderView = new DefaultSliderView(this);
+                    SliderView.image(Links.getPicFolder()+pictures.get(i));
+                    sliderShow.addSlider(SliderView);
+                }
+            }
+        }
+
+        sliderShow.stopAutoCycle();
     }
 
     private void configlayout()
@@ -139,6 +179,11 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
         builder.include(Latlng1);
         builder.include(Latlng2);
         LatLngBounds bounds = builder.build();
-        MapForm.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds,80));
+        MapForm.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds,70));
+    }
+    @Override
+    protected void onStop() {
+        sliderShow.stopAutoCycle();
+        super.onStop();
     }
 }

@@ -35,5 +35,6 @@
     <string name="lavel_date_go">la date de départ</string>
     <string name="label_date_arrival">la date d\'arrivé estimée</string>
     <string name="geting_position_error">Erreur durant la récupération de l\'emplacement</string>
-
+    <string name="passed_transport_title">Trajets passés</string>
+    <string name="current_transport_title">Trajets en cours</string>
 </resources>

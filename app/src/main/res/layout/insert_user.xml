@@ -1,11 +1,11 @@
-<FrameLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:kswTextOff="http://schemas.android.com/tools"
 	android:focusableInTouchMode="true"
 	android:background="@drawable/bg3"
 	android:focusable="true"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
 	<android.support.v4.widget.NestedScrollView
 		android:layout_width="match_parent"
@@ -21,7 +21,7 @@
 			  android:id="@+id/User_l_name"
 			  android:layout_width="95dp"
 			  android:gravity="center"
-			  android:textSize="@dimen/text_size"
+			  android:textSize="@dimen/bigtext_size"
 			  android:layout_alignParentTop="true"
 			  android:layout_alignParentLeft="true"
 			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
@@ -35,7 +35,7 @@
 		  <AutoCompleteTextView
 			  android:id="@+id/User_f_name"
 			  android:layout_width="0dp"
-			  android:textSize="@dimen/text_size"
+			  android:textSize="@dimen/bigtext_size"
 			  android:gravity="center"
 			  android:layout_alignParentRight="true"
 			  android:layout_toRightOf="@id/User_l_name"
@@ -49,7 +49,7 @@
               android:id="@+id/User_mail"
 			  android:layout_width="fill_parent"
 			  android:gravity="center"
-			  android:textSize="@dimen/text_size"
+			  android:textSize="@dimen/bigtext_size"
 			  android:layout_below="@id/User_l_name"
 			  android:layout_alignParentLeft="true"
               android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
           <AutoCompleteTextView
               android:id="@+id/User_password"
 			  android:gravity="center"
-			  android:textSize="@dimen/text_size"
+			  android:textSize="@dimen/bigtext_size"
 			  android:background="@drawable/buttonshape"
 			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
 			  android:layout_width="fill_parent"
@@ -74,7 +74,7 @@
           <AutoCompleteTextView
               android:id="@+id/User_password_confirm"
 			  android:gravity="center"
-			  android:textSize="@dimen/text_size"
+			  android:textSize="@dimen/bigtext_size"
 			  android:background="@drawable/buttonshape"
 			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
 			  android:layout_width="fill_parent"
@@ -88,7 +88,7 @@
           <AutoCompleteTextView
               android:id="@+id/User_phone"
 			  android:layout_width="fill_parent"
-			  android:textSize="@dimen/text_size"
+			  android:textSize="@dimen/bigtext_size"
               android:layout_height="wrap_content"
 			  android:background="@drawable/buttonshape"
 			  android:layout_marginBottom="@dimen/between_fields_vertical_margin"
@@ -98,15 +98,20 @@
               android:hint="Numéro de téléphone"
               android:inputType="number" />
 
-              <ToggleButton
+				<com.kyleduo.switchbutton.SwitchButton
+				  style="@style/SwitchButtonStyle"
                   android:id="@+id/User_status"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:layout_centerHorizontal="true"
 				  android:layout_below="@id/User_phone"
-				  android:layout_marginTop="30dp"
-                  android:textOff="Chauffeur"
-                  android:textOn="Affréteur" />
+				  android:textColor="@color/light_blue"
+				  app:kswThumbColor="@color/light_blue"
+				  app:kswFadeBack="@color/darkgray"
+				  app:kswTintColor="@color/Gray"
+				  app:kswTextOff="Chauffeur"
+				  app:kswAutoAdjustTextPosition="true"
+				  app:kswTextOn="Affréteur"/>
 
 		<com.rey.material.widget.Button
 			android:background="@drawable/buttonshapebackgroundcolored"

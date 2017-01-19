@@ -1,4 +1,4 @@
-package tasks;
+package tn.android.etransport.etransport;
 /**
  * Created by mohamed salah
  */
@@ -15,13 +15,13 @@ import android.widget.EditText;
 import android.widget.ToggleButton;
 
 import com.alertdialogpro.AlertDialogPro;
+import com.kyleduo.switchbutton.SwitchButton;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import tn.android.etransport.etransport.LoginActivity;
-import tn.android.etransport.etransport.R;
+import tasks.InsertUserTask;
 import utils.AlertDialogCustom;
 import utils.Connectivity;
 import utils.KeyboardUtil;
@@ -68,7 +68,7 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 			EditText User_mail_tv =  (EditText)findViewById(R.id.User_mail);
 			EditText User_pass =  (EditText)findViewById(R.id.User_password);
 			EditText User_pass_confirm = (EditText)findViewById(R.id.User_password_confirm);
-			ToggleButton User_status =  (ToggleButton)findViewById(R.id.User_status);
+			SwitchButton User_status =  (SwitchButton) findViewById(R.id.User_status);
 			EditText User_phone = (EditText)findViewById(R.id.User_phone);
 			//check status of user
 			if(User_status.isChecked())

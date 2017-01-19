@@ -6,19 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.alertdialogpro.AlertDialogPro;
-import com.github.clans.fab.FloatingActionButton;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -37,15 +32,15 @@ import utils.UserInfos;
 public class Home_affreteur_activity extends AppCompatActivity
 {
 
-    private DrawerLayout drawer;
-    private NavigationView navigationView;
-    private ImageButton btn_naviguation_view;
-    private TextView header_nav_mail;
-    private TextView header_nav_username;
-    private FloatingActionButton addBTN;
     private View action_bar_layout;
     private AccountHeader headerResult = null;
     private ActionBar actionbar;
+
+    public String getType() {
+        return type;
+    }
+
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,12 +143,14 @@ public class Home_affreteur_activity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         Fragment currentFragment = getFragmentManager().findFragmentById(R.id.fragment_affreteur);
-        if(currentFragment instanceof Home_affreteur_fragment)
-        Home_affreteur_activity.this.finish();
-        else
+        if(currentFragment instanceof profile_update_fragment)
         {  Intent intent =getIntent();
            startActivity(intent);
            this.finish();
+        }
+        else
+        {
+            moveTaskToBack(true);
         }
     }
     private View setup_tab() {

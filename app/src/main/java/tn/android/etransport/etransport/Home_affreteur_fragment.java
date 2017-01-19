@@ -15,10 +15,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 import dmax.dialog.SpotsDialog;
 import utils.AlertDialogCustom;
 import utils.Connectivity;
+import utils.UserInfos;
 
 public class Home_affreteur_fragment extends Fragment implements View.OnClickListener {
     private ImageButton profile_btn;
@@ -26,6 +28,7 @@ public class Home_affreteur_fragment extends Fragment implements View.OnClickLis
     private ActionBar actionbar;
     private FloatingActionButton addButton;
     private FloatingActionButton researchButton;
+    private FloatingActionMenu floatingactionmenu;
 
 
     @Override
@@ -35,6 +38,11 @@ public class Home_affreteur_fragment extends Fragment implements View.OnClickLis
         profile_btn.setOnClickListener(this);
         addButton = (FloatingActionButton) v.findViewById(R.id.fabAdd);
         researchButton = (FloatingActionButton) v.findViewById(R.id.fabResearch);
+        floatingactionmenu =(FloatingActionMenu) v.findViewById(R.id.floating_action_menu);
+        if (UserInfos.getConnecteduser().getStatus()==1)
+            floatingactionmenu.removeMenuButton(researchButton);
+        else
+            floatingactionmenu.removeMenuButton(addButton);
         addButton.setOnClickListener(this);
         researchButton.setOnClickListener(this);
         action_bar_layout = (View) getActivity().findViewById(R.id.my_toolbar);
@@ -77,9 +85,9 @@ public class Home_affreteur_fragment extends Fragment implements View.OnClickLis
         else if (v.getId()==R.id.fabResearch) {
             if (Connectivity.Checkinternet(getActivity()))
             {
-//                getActivity().finish();
-//                Intent researchintent = new Intent(getActivity(), Listing_CardView_activity.class);
-//                startActivity(researchintent);
+                getActivity().finish();
+                Intent researchintent = new Intent(getActivity(), Listing_CardView_activity.class);
+                startActivity(researchintent);
             }
             else
                 AlertDialogCustom.show(getActivity(),"vous devez être lié à internet");

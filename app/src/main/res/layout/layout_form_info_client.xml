@@ -67,6 +67,7 @@
         android:layout_below="@+id/spinner_goods"
         android:id="@+id/description_transport_affreteur"
         android:layout_height="150dp"
+        android:inputType="textNoSuggestions"
         android:hint="@string/transport_description"
         android:textSize="@dimen/text_size"
         app:et_labelTextSize="@dimen/title_text_size"

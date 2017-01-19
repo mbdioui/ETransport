@@ -237,10 +237,10 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
                 if (!s.equals(""))
                     transport_picture[i] = s;
                 else
-                    transport_picture[i] = "";
+                    transport_picture[i] = "NULL";
                 i++;
             }
-            InsertTransportTask task = new InsertTransportTask(Add_Transport_affreteur.this, getApplicationContext());
+            InsertTransportTask task = new InsertTransportTask(Add_Transport_affreteur.this, this);
             task.setParentactivity(Add_Transport_affreteur.this);
             task.execute(Links.getRootFolder() + "inserttransport.php", String.valueOf(UserInfos.getConnecteduser().getId())
                     , date_depart_min, date_depart_max, date_arrive_min, date_arrive_max, string, startpositiontext,

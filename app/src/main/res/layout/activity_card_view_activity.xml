@@ -8,10 +8,18 @@
     android:background="@color/back_dark"
     tools:context="tn.android.etransport.etransport.Listing_CardView_activity">
 
+        <com.rey.material.widget.CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/check_onlycurrent"
+            android:layout_alignParentRight="true"
+            android:text="Trajets courants"/>
+
         <com.lhh.ptrrv.library.PullToRefreshRecyclerView
             android:id="@+id/my_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/check_onlycurrent"
             card_view:cardUseCompatPadding="false"
             card_view:cardPreventCornerOverlap="false"
             android:focusableInTouchMode="true"

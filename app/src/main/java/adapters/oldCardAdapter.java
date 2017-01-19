@@ -8,14 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.beardedhen.androidbootstrap.AwesomeTextView;
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -27,7 +26,7 @@ import tn.android.etransport.etransport.R;
  * Created by mohamed salah on 14/12/2016.
  */
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
+public class OldCardAdapter extends RecyclerView.Adapter<OldCardAdapter.ViewHolder> {
 
     private final PullToRefreshRecyclerView mRecycleview;
     private ArrayList<Transport> items;
@@ -36,14 +35,23 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private Context context;
     private Activity activity;
 
-    public CardAdapter(ArrayList<Transport> list, HashMap map, PullToRefreshRecyclerView recycleview
+    public OldCardAdapter(ArrayList<Transport> list, HashMap map, PullToRefreshRecyclerView recycleview
             , Context context, Activity activity){
         super();
         this.context=context;
+        Date currentdate = new Date(System.currentTimeMillis());
         items = new ArrayList<>();
-        for(int i =0; i<list.size(); i++){
-            items.add(list.get(i));
-        }
+        if (list!=null)
+            for(int i =0; i<list.size(); i++){
+               if (list.get(i).getTransport_date_arrival()!=null)
+                {
+                 if (list.get(i).getTransport_date_arrival().compareTo(currentdate)<0)
+                    items.add(list.get(i));
+                }
+               else
+                   if (list.get(i).getTransport_date_arrival_max().compareTo(currentdate)<0)
+                    items.add(list.get(i));
+            }
         mapgoods=map;
         mRecycleview=recycleview;
     }
@@ -139,12 +147,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         public TextView AddressArriveTextView;
         public TextView TypegoodsTextView;
         public CardView card;
-        public RelativeLayout details;
-
-        public AwesomeTextView carddetail_datepublish;
-        public AwesomeTextView carddetail_dategomin;
-        public AwesomeTextView carddetail_dategomax;
-        public AwesomeTextView carddetail_datearrivemax;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -153,13 +155,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
             AddressArriveTextView =(TextView) itemView.findViewById(R.id.address_arrivetextview);
             TypegoodsTextView = (TextView) itemView.findViewById(R.id.typegoods_textview);
             card =(CardView) itemView.findViewById(R.id.maincontent);
-//            details = (RelativeLayout) itemView.findViewById(R.id.details);
-//            //details items
-//            carddetail_datepublish= (AwesomeTextView) itemView.findViewById(R.id.detail_datepublish);
-//            carddetail_dategomin= (AwesomeTextView) itemView.findViewById(R.id.detail_dategomin);
-//            carddetail_dategomax= (AwesomeTextView) itemView.findViewById(R.id.detail_dategomax);
-//            carddetail_datearrivemax= (AwesomeTextView) itemView.findViewById(R.id.detail_datearrivemax);
-
         }
     }
 }

@@ -43,4 +43,8 @@ public class Splash_screen extends Activity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

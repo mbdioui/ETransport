@@ -17,6 +17,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    signingConfigs {
+        debug {
+            storeFile file('C:/Users/med salah/Desktop/ETransport/keystore.jks')
+            keyAlias 'keystore'
+            keyPassword 'azerty'
+            storePassword 'azerty'
+        }
+        myConfig {
+            storeFile file('C:/Users/med salah/Desktop/ETransport/keystore.jks')
+            keyAlias 'keystore'
+            keyPassword 'azerty'
+            storePassword 'azerty'
+        }
+    }
+
     useLibrary 'org.apache.http.legacy'
 }
 
@@ -56,6 +72,17 @@ dependencies {
     compile 'com.github.darsh2:MultipleImageSelect:3474549'
     //upload image
     compile 'com.loopj.android:android-async-http:1.4.9'
+    //customized toast
     compile 'net.steamcrafted:load-toast:1.0.10'
+    //customized switchbutton
+    compile 'com.kyleduo.switchbutton:library:1.4.4'
+    //joiner
+    compile 'su.j2e:rv-joiner:1.0.9'
+    //image scroller
+    compile "com.android.support:support-v4:+"
+    compile 'com.squareup.picasso:picasso:2.3.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+
     testCompile 'junit:junit:4.12'
 }

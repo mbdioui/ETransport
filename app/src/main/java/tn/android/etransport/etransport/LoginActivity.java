@@ -15,7 +15,6 @@ import android.widget.EditText;
 
 import java.util.logging.Logger;
 
-import tasks.InsertUserActivity;
 import tasks.LoginUserTask;
 import utils.AlertDialogCustom;
 import utils.Connectivity;

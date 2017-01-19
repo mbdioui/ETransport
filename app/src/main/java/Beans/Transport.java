@@ -37,6 +37,33 @@ public class Transport {
     private float end_pos_lat;
     private int type_pub;
     private int means_id;
+    private String transport_picture_1;
+    private String transport_picture_2;
+    private String transport_picture_3;
+
+    public String getTransport_picture_1() {
+        return transport_picture_1;
+    }
+
+    public void setTransport_picture_1(String transport_picture_1) {
+        this.transport_picture_1 = transport_picture_1;
+    }
+
+    public String getTransport_picture_2() {
+        return transport_picture_2;
+    }
+
+    public void setTransport_picture_2(String transport_picture_2) {
+        this.transport_picture_2 = transport_picture_2;
+    }
+
+    public String getTransport_picture_3() {
+        return transport_picture_3;
+    }
+
+    public void setTransport_picture_3(String transport_picture_3) {
+        this.transport_picture_3 = transport_picture_3;
+    }
 
     public int getUser_id() {
         return user_id;
@@ -223,7 +250,33 @@ public class Transport {
         this.means_id = means_id;
     }
 
-    public Transport (JSONObject Json,int intformat)
+    public Transport(int user_id, int transport_id, Date transport_date_go, Date transport_date_arrival, Date transport_date_go_min, Date transport_date_go_max, Date transport_date_arrival_min, Date transport_date_arrival_max, String transport_text, Date transport_date_add, int transport_status, int id_type_goods, String address_from, String address_to, float start_pos_lgt, float start_pos_lat, float end_pos_lgt, float end_pos_lat, int type_pub, int means_id, String picture1, String picture2, String picture3) {
+        this.user_id = user_id;
+        this.transport_id = transport_id;
+        this.transport_date_go = transport_date_go;
+        this.transport_date_arrival = transport_date_arrival;
+        this.transport_date_go_min = transport_date_go_min;
+        this.transport_date_go_max = transport_date_go_max;
+        this.transport_date_arrival_min = transport_date_arrival_min;
+        this.transport_date_arrival_max = transport_date_arrival_max;
+        this.transport_text = transport_text;
+        this.transport_date_add = transport_date_add;
+        this.transport_status = transport_status;
+        this.id_type_goods = id_type_goods;
+        this.address_from = address_from;
+        this.address_to = address_to;
+        this.start_pos_lgt = start_pos_lgt;
+        this.start_pos_lat = start_pos_lat;
+        this.end_pos_lgt = end_pos_lgt;
+        this.end_pos_lat = end_pos_lat;
+        this.type_pub = type_pub;
+        this.means_id = means_id;
+        this.transport_picture_1 = picture1;
+        this.transport_picture_2 = picture2;
+        this.transport_picture_3 = picture3;
+    }
+
+    public Transport (JSONObject Json, int intformat)
     {
         try {
             this.user_id = (Json.getInt("user_id"));
@@ -292,6 +345,23 @@ public class Transport {
             this.type_pub = (Json.getInt("type_pub"));
             if (!Json.getString("means_id").equals("null"))
                 this.means_id = (Json.getInt("means_id"));
+
+            //pictures
+            if(Json.has("transport_picture_1")) {
+                String picture = (Json.getString("transport_picture_1"));
+                if (!picture.equals("null"))
+                    this.transport_picture_1 = picture;
+            }
+            if(Json.has("transport_picture_2")) {
+                String picture = (Json.getString("transport_picture_2"));
+                if (!picture.equals("null"))
+                    this.transport_picture_2 = picture;
+            }
+            if(Json.has("transport_picture_3")) {
+                String picture = (Json.getString("transport_picture_3"));
+                if (!picture.equals("null"))
+                    this.transport_picture_3 = picture;
+            }
 
     }
     catch (JSONException e) {

@@ -39,6 +39,7 @@ import java.util.Set;
 
 import adapters.ImagesListAdapter;
 import cz.msebera.android.httpclient.Header;
+import utils.AlertDialogCustom;
 import utils.Connectivity;
 import utils.Links;
 import utils.PermissionUtils;
@@ -74,8 +75,6 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
         if (requestCode == Galeriepermission && resultCode == RESULT_OK && data != null)
         {
             ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
-            Toast.makeText(getContext(),images.get(0).path,Toast.LENGTH_SHORT).show();
-
             Image img=  images.get(0);
             fileName = img.name;
             imgPath = img.path;
@@ -154,8 +153,18 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
                     }
                     else
                     {
-
-                            takephoto();
+                        if(nbsuccessupload()<3) {
+                            if(Build.VERSION.SDK_INT< Build.VERSION_CODES.M)
+                            { takephoto();}
+                            else
+                            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+                                requestPermissions(new String[]{Manifest.permission.CAMERA}
+                                        , TakeaPhoto);
+                            else
+                                takephoto();
+                        }
+                        else
+                            Toast.makeText(getContext(),"Nombre d'images maximum est atteint",Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -169,6 +178,11 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
                     encodeImagetoString();
                 else
                     Toast.makeText(getContext(), "Nombre d'images maximum est atteint", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                AlertDialogCustom.show(getContext(),"vous devez etre lié à internet");
+
             }
         }
     }
@@ -268,6 +282,7 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         hideprogressview();
                         hideimageview();
+                        lt.error();
                         sendbtn.setEnabled(true);
                         savedImages.put(fileName,false);
                         params.remove("image");
@@ -315,6 +330,9 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
                     && requestCode == Galeriepermission) {
                 accessgalerie();
             }
+            else if(PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.CAMERA)
+                    && requestCode == TakeaPhoto)
+                takephoto();
         }
     }
 

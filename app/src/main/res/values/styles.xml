@@ -15,6 +15,7 @@
         <item name="android:dialogTheme">@style/dialog_theme</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="colorAccent">@color/blue</item>
         <item name="android:actionMenuTextAppearance">@style/MyMenuTextAppearance</item>
         <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
         <item name="alertDialogProTheme">@style/AppTheme.FlavoredMaterialLight</item>
@@ -41,8 +42,9 @@
         <item name="colorPrimaryDark">#303F9F</item>
         <item name="colorAccent">#FF4081</item>
         <item name="android:windowTitleStyle">@style/AdpTitleStyle</item>
-        <item name="adpButtonBarNegativeButtonStyle">@style/AdpNormalButtonStyle</item>
-        <item name="adpButtonBarNeutralButtonStyle">@style/AdpNormalButtonStyle</item>
+        <item name="adpButtonBarButtonStyle">@style/AdpNormalButtonStyle</item>
+        <item name="adpButtonBarNegativeButtonStyle">@style/AdpPosnegButtonStyle</item>
+        <item name="adpButtonBarNeutralButtonStyle">@style/AdpPosnegButtonStyle</item>
     </style>
 
     <style name="AdpTitleStyle" parent="DialogWindowTitle.AlertDialogPro.Material.Light">
@@ -50,7 +52,10 @@
     </style>
 
     <style name="AdpNormalButtonStyle" parent="Widget.AlertDialogPro.Material.Light.Button">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+    <style name="AdpPosnegButtonStyle" parent="Widget.AlertDialogPro.Material.Light.Button">
+        <item name="android:textColor">#FF4081</item>
     </style>
 
 
@@ -200,5 +205,12 @@
         <style name="OverrideCustomToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
         </style>
 
+    //switchbutton style
+    <style name="SwitchButtonStyle">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
 
 </resources>
