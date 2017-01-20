@@ -30,6 +30,8 @@ import java.util.Locale;
 import Beans.Transport;
 import utils.Links;
 
+import static tn.android.etransport.etransport.R.id.slider;
+
 public class Detail_transport_item extends Activity implements OnMapReadyCallback {
 
     private GoogleMap MapForm;
@@ -49,7 +51,7 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transport_item_details);
-        sliderShow = (SliderLayout) findViewById(R.id.slider);
+        sliderShow = (SliderLayout) findViewById(slider);
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.itemheaderdetail);
         mapFragment.getMapAsync(this);
         Bundle b=getIntent().getExtras();
@@ -92,8 +94,7 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
                 }
             }
         }
-
-        sliderShow.stopAutoCycle();
+        sliderShow.startAutoCycle();
     }
 
     private void configlayout()
@@ -130,7 +131,7 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//        super.onBackPressed();
         overridePendingTransition(R.anim.zoom_in, R.anim.out_animation);
         this.finish();
     }

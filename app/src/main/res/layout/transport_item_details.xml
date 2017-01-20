@@ -8,7 +8,7 @@
     android:id="@+id/details">
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="220dp"
+        android:layout_height="320dp"
         android:name="com.google.android.gms.maps.MapFragment"
         android:id="@+id/itemheaderdetail"
         android:layout_alignParentTop="true">
@@ -25,38 +25,41 @@
         android:clickable="false"
         android:layout_marginBottom="-4dp"
         card_view:cardElevation="0dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent">
+
         //buttons
-        <com.beardedhen.androidbootstrap.BootstrapButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:paddingTop="13dp"
-            app:bootstrapBrand="danger"
-            app:bootstrapSize="lg"
-            android:id="@+id/button_like"
-            app:fontAwesomeIcon="fa_thumbs_up"
-            app:buttonMode="checkbox"
-            app:showOutline="true"
-            app:roundedCorners="true"
-            />
-        <com.beardedhen.androidbootstrap.BootstrapButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/button_like"
-            android:paddingTop="13dp"
-            android:layout_marginRight="5dp"
-            app:bootstrapBrand="success"
-            app:bootstrapSize="lg"
-            app:fontAwesomeIcon="fa_phone"
-            android:id="@+id/button_call"
-            app:buttonMode="regular"
-            app:showOutline="true"
-            app:roundedCorners="true"
-            />
+        <!--<com.beardedhen.androidbootstrap.BootstrapButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:paddingTop="13dp"-->
+            <!--app:bootstrapBrand="danger"-->
+            <!--app:bootstrapSize="lg"-->
+            <!--android:id="@+id/button_like"-->
+            <!--app:fontAwesomeIcon="fa_thumbs_up"-->
+            <!--app:buttonMode="checkbox"-->
+            <!--app:showOutline="true"-->
+            <!--app:roundedCorners="true"-->
+            <!--/>-->
+        <!--<com.beardedhen.androidbootstrap.BootstrapButton-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toLeftOf="@id/button_like"-->
+            <!--android:paddingTop="13dp"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--app:bootstrapBrand="success"-->
+            <!--app:bootstrapSize="lg"-->
+            <!--app:fontAwesomeIcon="fa_phone"-->
+            <!--android:id="@+id/button_call"-->
+            <!--app:buttonMode="regular"-->
+            <!--app:showOutline="true"-->
+            <!--app:roundedCorners="true" />-->
         //labels
         <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="wrap_content"
@@ -64,7 +67,7 @@
             app:bootstrapBrand="secondary"
             app:bootstrapHeading="h6"
             app:roundedCorners="true"
-            android:layout_below="@id/button_like"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="3dp"
             android:text="date de publication"
             android:id="@+id/label_datepublish"
@@ -144,12 +147,15 @@
         //image scroll
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/slider"
+            android:layout_below="@id/label_datearrivemax"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="15dp"
-            android:layout_width="150dp"
+            android:layout_marginTop="25dp"
+            android:layout_width="230dp"
             android:layout_centerHorizontal="true"
-            android:layout_height="200dp"
+            android:layout_height="230dp"
             />
+
     </RelativeLayout>
+    </ScrollView>
     </android.support.v7.widget.CardView>
 </RelativeLayout>
