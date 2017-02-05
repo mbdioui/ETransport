@@ -35,12 +35,8 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Set;
 
-import adapters.ImagesListAdapter;
 import cz.msebera.android.httpclient.Header;
-import utils.AlertDialogCustom;
-import utils.Connectivity;
 import utils.Links;
 import utils.PermissionUtils;
 import utils.UserInfos;
@@ -66,10 +62,11 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
     private String imgPath, fileName,encodedString;
     private RequestParams params = new RequestParams();
     private ProgressView progressview;
-    private BootstrapButton sendbtn;
-    private ImageView imgView;
-    private android.widget.ListView list_images;
     private Bitmap photo;
+    private ImageView image1,image2,image3;
+    private int selectedimage=0;
+
+    //after capturing image from(camera or galery)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == Galeriepermission && resultCode == RESULT_OK && data != null)
@@ -80,13 +77,12 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
             imgPath = img.path;
             // Put file name in Async Http Post Param which will used in Php web app
             params.put("filename", fileName);
-            imgView.setVisibility(View.VISIBLE);
-            sendbtn.setVisibility(View.VISIBLE);
             // Set the Image in ImageView
             Bitmap bitmap= Bitmap.createBitmap(BitmapFactory.decodeFile(imgPath));
             Bitmap resizedBitmap = Bitmap.createScaledBitmap(
-                    bitmap, 900,900, true);
-            imgView.setImageBitmap(resizedBitmap);
+                    bitmap, 400,220, true);
+            ImageView view= (ImageView) getView().findViewById(selectedimage);
+            view.setImageBitmap(resizedBitmap);
 
         }
         else if (requestCode == TakeaPhoto && resultCode == RESULT_OK && data != null)
@@ -95,13 +91,14 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
              int seconds = c.get(Calendar.SECOND);
              photo = (Bitmap) data.getExtras().get("data");
              Bitmap resizedBitmap = Bitmap.createScaledBitmap(
-                     photo, 900,900, true);
-             imgView.setImageBitmap(resizedBitmap);
-             imgView.setVisibility(View.VISIBLE);
-             sendbtn.setVisibility(View.VISIBLE);
+                     photo, 400,220, true);
              fileName = "instant_capture_ID="+UserInfos.getConnecteduser().getId()+seconds+c.get(Calendar.MINUTE)+".jpeg";
              params.put("filename", fileName);
+             ImageView view= (ImageView) getView().findViewById(selectedimage);
+             view.setImageBitmap(resizedBitmap);
          }
+        if (data!= null && resultCode==RESULT_OK)
+            encodeImagetoString();
     }
 
     @Override
@@ -113,25 +110,27 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
 
     private void confilay(View v) {
         savedImages = new HashMap<>();
-        list_images = (android.widget.ListView) v.findViewById(R.id.list_uploaded_images);
-        galeriebtn =(BootstrapButton) v.findViewById(R.id.button_galerie);
-        galeriebtn.setOnClickListener(this);
-        sendbtn =(BootstrapButton) v.findViewById(R.id.button_send);
-        sendbtn.setOnClickListener(this);
-        sendbtn.setVisibility(View.INVISIBLE);
-        imgView = (ImageView) v.findViewById(R.id.imageview);
-        imgView.setVisibility(View.INVISIBLE);
         progressview =(ProgressView) v.findViewById(R.id.progress_view_picture);
         progressview.setVisibility(View.GONE);
+        image1 = (ImageView) v.findViewById(R.id.Image1);
+        image2 = (ImageView) v.findViewById(R.id.Image2);
+        image3 = (ImageView) v.findViewById(R.id.Image3);
+        image1.setOnClickListener(this);
+        image2.setOnClickListener(this);
+        image3.setOnClickListener(this);
+
+        image1.setImageResource(R.drawable.upload_photo);
+        image2.setImageResource(R.drawable.upload_photo);
+        image3.setImageResource(R.drawable.upload_photo);
+
         progressview.stop();
     }
 
+    //clicking on the Imageview
     @Override
     public void onClick(View v) {
-        if (v.getId()== R.id.button_galerie)
-        {
+            selectedimage =v.getId();
             final CharSequence[] items = {"Galerie", "Capture Instantanée"};
-
             AlertDialogPro.Builder builder = new AlertDialogPro.Builder(getContext());
             builder.setTitle("Séléctionnez un choix");
             builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -170,26 +169,11 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
             });
             AlertDialogPro alert = builder.create();
             alert.show();
-        }
-        else if (v.getId()==R.id.button_send)
-        {
-            if (Connectivity.Checkinternet(getActivity())) {
-                if (nbsuccessupload() < 3)
-                    encodeImagetoString();
-                else
-                    Toast.makeText(getContext(), "Nombre d'images maximum est atteint", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                AlertDialogCustom.show(getContext(),"vous devez etre lié à internet");
 
-            }
-        }
     }
 
     private void accessgalerie() {
         Intent intent = new Intent(getActivity(), AlbumSelectActivity.class);
-        //set limit on number of images that can be selected, default is 10
         intent.putExtra(Constants.INTENT_EXTRA_LIMIT, numberOfImagesToSelect);
         startActivityForResult(intent, Galeriepermission);
     }
@@ -211,7 +195,6 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
             protected void onPreExecute() {
             progressview.start();
             progressview.setVisibility(View.VISIBLE);
-            sendbtn.setEnabled(false);
                 lt= new LoadToast(getContext());
                 lt.setText("Enregistrement en cours...");
                 lt.show();
@@ -256,34 +239,27 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
     // Make Http call to upload Image to Php server
     public void makeHTTPCall() {
         AsyncHttpClient client = new AsyncHttpClient();
-        // Don't forget to change the IP address to your LAN address. Port no as well.
+        client.setConnectTimeout(5000);
         client.post(Links.getRootFolder()+"uploadimage.php",
                 params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         hideprogressview();
-                        hideimageview();
                         lt.success();
-                        sendbtn.setEnabled(true);
                         savedImages.put(fileName,true);
                         params.remove("image");
                         fileName="";
                         if (imgPath!=null)
                             imgPath="";
-                        Set<String> keys = savedImages.keySet();
-                        String[] keyArray = keys.toArray(new String[keys.size()]);
-                        ImagesListAdapter adapter= new ImagesListAdapter(getContext(),keyArray,savedImages);
-                        list_images.setAdapter(adapter);
-
                     }
 
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         hideprogressview();
-                        hideimageview();
+                        ImageView view= (ImageView) getView().findViewById(selectedimage);
+                        view.setImageResource(R.drawable.camera_icon);
                         lt.error();
-                        sendbtn.setEnabled(true);
                         savedImages.put(fileName,false);
                         params.remove("image");
                         fileName="";
@@ -317,11 +293,6 @@ public class Form_Pict_Client extends android.support.v4.app.Fragment implements
     {
         progressview.stop();
         progressview.setVisibility(View.INVISIBLE);
-    }
-    private void hideimageview()
-    {
-        sendbtn.setVisibility(View.INVISIBLE);
-        imgView.setVisibility(View.INVISIBLE);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

@@ -27,6 +27,15 @@ public class User {
     private String confirmation_code;
     private Role user_role;
 
+    public String getUser_picture() {
+        return user_picture;
+    }
+
+    public void setUser_picture(String user_picture) {
+        this.user_picture = user_picture;
+    }
+
+    private String user_picture;
     public String getAddress() {
         return address;
     }
@@ -123,6 +132,23 @@ public class User {
         this.user_role = user_role;
     }
     public User(){}
+
+    public User(Date date_inscrip, int status, int id, String f_name, String l_name, String mail, String password, String phone, String address, int active, String confirmation_code, Role user_role, String user_picture) {
+        this.date_inscrip = date_inscrip;
+        this.status = status;
+        this.id = id;
+        this.f_name = f_name;
+        this.l_name = l_name;
+        this.mail = mail;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
+        this.active = active;
+        this.confirmation_code = confirmation_code;
+        this.user_role = user_role;
+        this.user_picture = user_picture;
+    }
+
     public User(int id, String f_name, String l_name, String mail, String password, String phone, int active, String confirmation_code, Role user_role) {
         this.id = id;
         this.f_name = f_name;
@@ -156,6 +182,7 @@ public class User {
             this.active=Json.getInt("user_active");
             this.user_role = new Role();
             this.user_role.setId(Json.getInt("role_id"));
+            this.user_picture =Json.getString("user_picture");
 
         }
         catch (JSONException e) {

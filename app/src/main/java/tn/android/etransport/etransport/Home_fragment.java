@@ -22,7 +22,7 @@ import utils.AlertDialogCustom;
 import utils.Connectivity;
 import utils.UserInfos;
 
-public class Home_affreteur_fragment extends Fragment implements View.OnClickListener {
+public class Home_fragment extends Fragment implements View.OnClickListener {
     private ImageButton profile_btn;
     private View action_bar_layout;
     private ActionBar actionbar;

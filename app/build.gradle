@@ -76,8 +76,6 @@ dependencies {
     compile 'net.steamcrafted:load-toast:1.0.10'
     //customized switchbutton
     compile 'com.kyleduo.switchbutton:library:1.4.4'
-    //joiner
-    compile 'su.j2e:rv-joiner:1.0.9'
     //image scroller
     compile "com.android.support:support-v4:+"
     compile 'com.squareup.picasso:picasso:2.3.2'

@@ -5,6 +5,8 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,24 +14,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.alertdialogpro.AlertDialogPro;
+import com.bumptech.glide.Glide;
+import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
+import com.mikepenz.materialdrawer.util.DrawerImageLoader;
+import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 
+import utils.Links;
 import utils.UserInfos;
 
 /**
  * Created by mohamed salah on 01/11/2016.
  */
 
-public class Home_affreteur_activity extends AppCompatActivity
+public class Home_activity extends AppCompatActivity
 {
 
     private View action_bar_layout;
@@ -51,13 +61,50 @@ public class Home_affreteur_activity extends AppCompatActivity
                 .withIcon(R.drawable.ic_autorenew_white_24dp).withSelectable(false);
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2)
                 .withName("Se déconnecter").withIcon(R.drawable.deconnexion).withSelectable(false);
+        //
+        PrimaryDrawerItem item3= new PrimaryDrawerItem().withIdentifier(3).withName("Trajets en cours"
+        ).withIcon(android.R.drawable.ic_dialog_info).withSelectable(false);
         //profile
-        final IProfile profile = new ProfileDrawerItem()
+        IProfile profile = new ProfileDrawerItem()
                 .withName(UserInfos.getConnecteduser().getF_name()+" "+UserInfos.getConnecteduser().getL_name())
                 .withEmail(UserInfos.getConnecteduser().getMail())
                 .withIcon(R.drawable.ic_account_circle_white_36dp)
                 .withIdentifier(UserInfos.getConnecteduser().getId());
-        //create the drawer and remember the `Drawer` result object
+
+        if (!UserInfos.getConnecteduser().getUser_picture().equals("null"))
+        {
+            DrawerImageLoader.init(new AbstractDrawerImageLoader() {
+                @Override
+                public void set(ImageView imageView, Uri uri, Drawable placeholder) {
+                    Glide.with(imageView.getContext()).load(uri).placeholder(placeholder).into(imageView);
+                }
+
+                @Override
+                public void cancel(ImageView imageView) {
+                    Glide.clear(imageView);
+                }
+
+                @Override
+                public Drawable placeholder(Context ctx, String tag) {
+                    //define different placeholders for different imageView targets
+                    //default tags are accessible via the DrawerImageLoader.Tags
+                    //custom ones can be checked via string. see the CustomUrlBasePrimaryDrawerItem LINE 111
+                    if (DrawerImageLoader.Tags.PROFILE.name().equals(tag)) {
+                        return DrawerUIUtils.getPlaceHolder(ctx);
+                    } else if (DrawerImageLoader.Tags.ACCOUNT_HEADER.name().equals(tag)) {
+                        return new IconicsDrawable(ctx).iconText(" ").backgroundColorRes(com.mikepenz.materialdrawer.R.color.primary).sizeDp(56);
+                    } else if ("customUrlItem".equals(tag)) {
+                        return new IconicsDrawable(ctx).iconText(" ").backgroundColorRes(R.color.md_red_500).sizeDp(56);
+                    }
+
+                    //we use the default one for
+                    //DrawerImageLoader.Tags.PROFILE_DRAWER_ITEM.name()
+
+                    return super.placeholder(ctx, tag);
+                }
+            });
+            profile.withIcon(Links.getProfilePictures()+UserInfos.getConnecteduser().getUser_picture());
+        }        //create the drawer and remember the `Drawer` result object
         action_bar_layout=setup_tab();
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         headerResult = new AccountHeaderBuilder()
@@ -79,13 +126,15 @@ public class Home_affreteur_activity extends AppCompatActivity
                 .addDrawerItems(
                         item1
                         ,item2
+                        ,new DividerDrawerItem()
+                        ,item3
                 )
                 .withOnDrawerItemClickListener(clickitem)
                 .build();
 
-        if (this.getClass()==Home_affreteur_activity.class)
+        if (this.getClass()==Home_activity.class)
         {
-            Home_affreteur_fragment f = new Home_affreteur_fragment();
+            Home_fragment f = new Home_fragment();
             FragmentTransaction FT = getFragmentManager().beginTransaction();
             FT.replace(R.id.fragment_affreteur, f);
             FT.setTransition(FragmentTransaction.TRANSIT_NONE);
@@ -111,16 +160,16 @@ public class Home_affreteur_activity extends AppCompatActivity
                 startActivity(forgetintent);
                 exit();
             }
-            else
+            else if (position == 2)
             {
-                AlertDialogPro.Builder alertDialog = new AlertDialogPro.Builder(Home_affreteur_activity.this);
+                AlertDialogPro.Builder alertDialog = new AlertDialogPro.Builder(Home_activity.this);
                 alertDialog.setTitle("Déconnexion ...")
                         .setMessage(getResources().getString(R.string.deconnexion))
                         .setIcon(R.drawable.deconnexion)
                         .setPositiveButton("OUI",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent connexIntent = new Intent(Home_affreteur_activity.this
+                                        Intent connexIntent = new Intent(Home_activity.this
                                                 ,LoginActivity.class);
                                         startActivity(connexIntent);
                                         UserInfos.setConnecteduser(null);

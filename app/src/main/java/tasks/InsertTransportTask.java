@@ -28,7 +28,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
-import tn.android.etransport.etransport.Home_affreteur_activity;
+import tn.android.etransport.etransport.Home_activity;
 import tn.android.etransport.etransport.R;
 
 public class InsertTransportTask extends AsyncTask<String, String, String> {
@@ -141,7 +141,7 @@ public class InsertTransportTask extends AsyncTask<String, String, String> {
 			{
 //				Toast.makeText(context,"Insertion Done",Toast.LENGTH_LONG).show();
 				lt.success();
-				Intent intent = new Intent(parentactivity,Home_affreteur_activity.class);
+				Intent intent = new Intent(parentactivity,Home_activity.class);
 				parentactivity.startActivity(intent);
 				parentactivity.finish();
 			}

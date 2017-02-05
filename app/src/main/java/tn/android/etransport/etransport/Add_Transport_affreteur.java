@@ -138,7 +138,7 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
 
     @Override
     public void onBackPressed() {
-        Intent intent= new Intent(this,Home_affreteur_activity.class);
+        Intent intent= new Intent(this,Home_activity.class);
         startActivity(intent);
         Add_Transport_affreteur.this.finish();
         //delete updated pictures
@@ -234,7 +234,7 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
             Set<String> set =picturesmap.keySet();
             int i=0;
             for (String s : set) {
-                if (!s.equals(""))
+                if (!s.equals("")&& picturesmap.get(s)==true)
                     transport_picture[i] = s;
                 else
                     transport_picture[i] = "NULL";

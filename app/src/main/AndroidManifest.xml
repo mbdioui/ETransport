@@ -87,7 +87,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home_affreteur_activity"
+            android:name=".Home_activity"
             android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

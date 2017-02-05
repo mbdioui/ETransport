@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import Beans.User;
 import dmax.dialog.SpotsDialog;
-import tn.android.etransport.etransport.Home_affreteur_activity;
+import tn.android.etransport.etransport.Home_activity;
 import tn.android.etransport.etransport.R;
 import utils.UserInfos;
 
@@ -102,14 +102,14 @@ public class LoginUserTask extends AsyncTask<String, String, String> {
 					//TODO GETTING ROLE OF USER
 					UserInfos.setConnecteduser(user);
 					UserInfos.IsConnected = true;
-					Toast.makeText(cntx, "Welcome :" + user.getF_name().toString().toUpperCase(), Toast.LENGTH_LONG).show();
-					Intent intent = new Intent(activityparent, Home_affreteur_activity.class);
+					Toast.makeText(cntx, "Bievenue :" + user.getF_name().toString().toUpperCase(), Toast.LENGTH_LONG).show();
+					Intent intent = new Intent(activityparent, Home_activity.class);
 					activityparent.startActivity(intent);
 					activityparent.finish();
 				} else if (json.getString("error").equals("1"))
-					Toast.makeText(cntx, "Wrong password", Toast.LENGTH_LONG).show();
+					Toast.makeText(cntx, "Mot de passe incorrecte", Toast.LENGTH_LONG).show();
 				else if (json.getString("error").equals("2"))
-					Toast.makeText(cntx, "cannot fin any account with this mail", Toast.LENGTH_LONG).show();
+					Toast.makeText(cntx, "Mail non existant", Toast.LENGTH_LONG).show();
 			} catch (JSONException e) {}
 		}
 		else

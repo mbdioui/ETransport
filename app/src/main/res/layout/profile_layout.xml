@@ -5,7 +5,15 @@
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
-
+    <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/thumbnail"
+        android:src="@android:drawable/ic_menu_camera"
+        app:bootstrapBrand="info"
+        app:hasBorder="false"
+        android:layout_centerHorizontal="true"/>
     <TextView
         android:layout_width="match_parent"
         android:gravity="left"
@@ -13,8 +21,8 @@
         android:text="Nom et Prenom :"
         android:textSize="20sp"
         android:id="@+id/label_user_name"
-        android:layout_marginTop="80dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/thumbnail"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"/>
     <EditText
         android:layout_width="160dp"

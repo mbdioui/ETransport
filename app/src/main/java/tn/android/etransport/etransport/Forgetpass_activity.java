@@ -80,7 +80,7 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
         else if(v.getId() == R.id.cancel_reset_password_BTN)
         {
             if(UserInfos.getConnecteduser()!=null)
-            {Intent intentparent = new Intent(this,Home_affreteur_activity.class);
+            {Intent intentparent = new Intent(this,Home_activity.class);
             startActivity(intentparent);
             this.finish();}
             else if(UserInfos.getConnecteduser()==null)
@@ -99,7 +99,7 @@ public class Forgetpass_activity extends Activity implements View.OnClickListene
     @Override
     public void onBackPressed() {
         if(UserInfos.getConnecteduser()!=null)
-        {Intent intentparent = new Intent(this,Home_affreteur_activity.class);
+        {Intent intentparent = new Intent(this,Home_activity.class);
             startActivity(intentparent);
             this.finish();}
         else if(UserInfos.getConnecteduser()==null)

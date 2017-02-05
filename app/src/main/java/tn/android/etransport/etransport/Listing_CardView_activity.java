@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.lhh.ptrrv.library.PullToRefreshRecyclerView;
-import com.rey.material.widget.CheckBox;
 import com.rey.material.widget.ProgressView;
 
 import org.json.JSONArray;
@@ -26,27 +25,18 @@ import java.util.HashMap;
 
 import Beans.Transport;
 import adapters.NewCardAdapter;
-import adapters.OldCardAdapter;
-import su.j2e.rvjoiner.JoinableAdapter;
-import su.j2e.rvjoiner.JoinableLayout;
-import su.j2e.rvjoiner.RvJoiner;
 import tasks.gettypegoods;
 import utils.Connectivity;
 import utils.Links;
 
-public class Listing_CardView_activity extends Activity implements View.OnClickListener {
+public class Listing_CardView_activity extends Activity  {
     private PullToRefreshRecyclerView mRecyclerView;
-    private RecyclerView.Adapter adapter_old_card;
     private RecyclerView.Adapter adapter_new_card;
     private RecyclerView.LayoutManager mLayoutManager;
     private static String LOG_TAG = "CardViewActivity";
     private ProgressView progressview;
     private HashMap<Integer,String> mapgoods= new HashMap<>();
     private ArrayList<Transport> listtransport;
-    private RvJoiner rvJoiner;
-    private CheckBox checkonlycurrent;
-    private JoinableAdapter oldjoinadapter;
-    private JoinableLayout oldjoinlayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +44,6 @@ public class Listing_CardView_activity extends Activity implements View.OnClickL
         setContentView(R.layout.activity_card_view_activity);
 
         progressview = (ProgressView) findViewById(R.id.progress_view);
-        checkonlycurrent =(CheckBox) findViewById(R.id.check_onlycurrent);
-        checkonlycurrent.setOnClickListener(this);
         mRecyclerView = (PullToRefreshRecyclerView ) findViewById(R.id.my_recycler_view);
         if (Connectivity.Checkinternet(this)) {
             getData(Listing_CardView_activity.this);
@@ -79,13 +67,13 @@ public class Listing_CardView_activity extends Activity implements View.OnClickL
             }
         });
         // set OnRefreshListener
-                mRecyclerView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mRecyclerView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
-                    @Override
-                    public void onRefresh() {
-                        getData(Listing_CardView_activity.this);
-                    }
-                });
+            @Override
+            public void onRefresh() {
+                getData(Listing_CardView_activity.this);
+            }
+        });
 
         // set loadmore String
                 mRecyclerView.setLoadmoreString("loading");
@@ -143,18 +131,9 @@ public class Listing_CardView_activity extends Activity implements View.OnClickL
     }
 
     public void showData(){
-        adapter_old_card = new OldCardAdapter(listtransport,mapgoods,mRecyclerView,this,Listing_CardView_activity.this);
         adapter_new_card = new NewCardAdapter(listtransport,mapgoods,mRecyclerView,this,Listing_CardView_activity.this);
-        rvJoiner = new RvJoiner();
-        oldjoinlayout= new JoinableLayout(R.layout.passed_transport_title);
-        oldjoinadapter = new JoinableAdapter(adapter_old_card);
-        rvJoiner.add(oldjoinlayout);
-        rvJoiner.add(oldjoinadapter);
-        rvJoiner.add(new JoinableLayout(R.layout.current_transport_title));
-        rvJoiner.add(new JoinableAdapter(adapter_new_card));
-        rvJoiner.add(new JoinableLayout(R.layout.footer_recyclerview));
-//set join adapter to your RecyclerView
-        mRecyclerView.setAdapter(rvJoiner.getAdapter());
+
+        mRecyclerView.setAdapter(adapter_new_card);
         mRecyclerView.setOnRefreshComplete();
     }
     public void setGoodtypes(HashMap map)
@@ -186,80 +165,14 @@ public class Listing_CardView_activity extends Activity implements View.OnClickL
 
     }
 
-    private int gettransportID(JSONObject j){
-        int id  =0;
-        try {
-            id = j.getInt("transport_id");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return id;
-    }
-    private int getgoodsid(JSONObject j){
-        int result=0;
-        try {
-            result = j.getInt("id_type_goods");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    private String getDescription(JSONObject j){
-        String url = null;
-        try {
-            url = j.getString("transport_text");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return url;
-    }
-    private String getUser(JSONObject j){
-        String url = null;
-        try {
-            url = j.getString("user_id");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return url;
-    }
-    private String getDateadd(JSONObject j){
-        String url = null;
-        try {
-            url = j.getString("transport_date_add");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return url;
-    }
 
     @Override
     public void onBackPressed() {
         this.finish();
-        Intent intent = new Intent(getApplication(),Home_affreteur_activity.class);
+        Intent intent = new Intent(getApplication(),Home_activity.class);
         startActivity(intent);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId()==R.id.check_onlycurrent)
-        {
-            if (checkonlycurrent.isChecked())
-            {
-                rvJoiner.remove(oldjoinlayout);
-                rvJoiner.remove(oldjoinadapter);
-            }
-            else
-            {
-                rvJoiner.add(oldjoinlayout,0);
-                rvJoiner.add(oldjoinadapter,1);
-                mRecyclerView = new PullToRefreshRecyclerView(this);
-                mRecyclerView.setAdapter(rvJoiner.getAdapter());
-                mLayoutManager.scrollToPosition(0);
-            }
-
-        }
-    }
 
 
 //    private User getUser(Activity activity, final int id){
