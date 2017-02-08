@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class Deletepictures extends AsyncTask<String, String, String> {
+public class Deleteprofilepicture extends AsyncTask<String, String, String> {
 
 	Context context;
 	String responseBody;
@@ -35,7 +35,7 @@ public class Deletepictures extends AsyncTask<String, String, String> {
 		this.context = context;
 	}
 
-	public Deletepictures(Activity activity)
+	public Deleteprofilepicture(Activity activity)
 	{
 
 	}
@@ -49,9 +49,7 @@ public class Deletepictures extends AsyncTask<String, String, String> {
 	            // set up post data
 	            ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
 	          
-	            nameValuePair.add(new BasicNameValuePair("picture1", params[1]));
-	            nameValuePair.add(new BasicNameValuePair("picture2", params[2]));
-	            nameValuePair.add(new BasicNameValuePair("picture3",params[3]));
+	            nameValuePair.add(new BasicNameValuePair("picture", params[1]));
 
 	            //Encode and set entity
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePair, HTTP.UTF_8));

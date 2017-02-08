@@ -42,6 +42,7 @@ import java.util.Calendar;
 
 import Beans.User;
 import cz.msebera.android.httpclient.Header;
+import tasks.Deleteprofilepicture;
 import tasks.UpdateUserTask;
 import utils.AlertDialogCustom;
 import utils.Connectivity;
@@ -68,6 +69,7 @@ public class profile_update_fragment extends Fragment implements View.OnClickLis
     private LoadToast lt;
     private RequestParams params = new RequestParams();
     private Bitmap photo;
+    private boolean pictureset;
 
     public Context getActivitycontext() {
         return activitycontext;
@@ -90,7 +92,10 @@ public class profile_update_fragment extends Fragment implements View.OnClickLis
         {
             Picasso.with(getActivity()).load(Links.getProfilePictures()+UserInfos.getConnecteduser().getUser_picture())
                     .into(thumbnail);
+            pictureset=true;
         }
+        else
+            pictureset=false;
         return v;
     }
 
@@ -291,6 +296,10 @@ public class profile_update_fragment extends Fragment implements View.OnClickLis
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         lt.success();
+                        User connecteduser=UserInfos.getConnecteduser();
+                        if(pictureset)
+                        {Deleteprofilepicture deleteprofilepicture= new Deleteprofilepicture(getActivity());
+                        deleteprofilepicture.execute(Links.getRootFolder()+"/deleteprofilepicture.php",connecteduser.getUser_picture());}
                         params.remove("image");
                         fileName="";
                         if (imgPath!=null)
@@ -304,12 +313,10 @@ public class profile_update_fragment extends Fragment implements View.OnClickLis
                         catch (Exception e) {
                             e.printStackTrace();
                         }
-                        User connecteduser=UserInfos.getConnecteduser();
                         connecteduser.setUser_picture(newimagename);
                         UserInfos.setConnecteduser(connecteduser);
                         Intent refresh = new Intent(getActivitycontext(), Home_activity.class);
                         startActivity(refresh);
-                        //TODO delete olduserpicture WebService & AsyncTask !!!!
                     }
 
 

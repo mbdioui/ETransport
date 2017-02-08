@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ToggleButton;
 
 import com.alertdialogpro.AlertDialogPro;
 import com.kyleduo.switchbutton.SwitchButton;
@@ -137,7 +136,7 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 		EditText User_mail_tv =  (EditText)findViewById(R.id.User_mail);
 		EditText User_pass =  (EditText)findViewById(R.id.User_password);
 		EditText User_pass_confirm = (EditText)findViewById(R.id.User_password_confirm);
-		ToggleButton User_status =  (ToggleButton)findViewById(R.id.User_status);
+		SwitchButton User_status =  (SwitchButton) findViewById(R.id.User_status);
 		EditText User_phone = (EditText)findViewById(R.id.User_phone);
 
 		User_f_name_tv.setText("");

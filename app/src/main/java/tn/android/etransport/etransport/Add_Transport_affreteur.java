@@ -20,7 +20,7 @@ import com.rey.material.widget.Spinner;
 import java.util.HashMap;
 import java.util.Set;
 
-import tasks.Deletepictures;
+import tasks.Deletepicturestransport;
 import tasks.InsertTransportTask;
 import utils.Links;
 import utils.Pager;
@@ -149,7 +149,7 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
         for (String st : picturesmap.keySet())
         {Stringlist[i]=st;
             i++;}
-        Deletepictures deletepictures= new Deletepictures(this);
+        Deletepicturestransport deletepictures= new Deletepicturestransport(this);
         deletepictures.execute(Links.getRootFolder()+"/deletepictures.php",Stringlist[0],Stringlist[1],Stringlist[2]);
     }
 

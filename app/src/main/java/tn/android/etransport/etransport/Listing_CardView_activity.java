@@ -108,7 +108,7 @@ public class Listing_CardView_activity extends Activity  {
             protected String doInBackground(Void... params) {
                 BufferedReader bufferedReader = null;
                 try {
-                    URL url = new URL(Links.getRootFolder()+"gettransport.php");
+                    URL url = new URL(Links.getRootFolder()+"gettransports.php");
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     StringBuilder sb = new StringBuilder();
 
@@ -131,10 +131,9 @@ public class Listing_CardView_activity extends Activity  {
     }
 
     public void showData(){
-        adapter_new_card = new NewCardAdapter(listtransport,mapgoods,mRecyclerView,this,Listing_CardView_activity.this);
-
-        mRecyclerView.setAdapter(adapter_new_card);
-        mRecyclerView.setOnRefreshComplete();
+            adapter_new_card = new NewCardAdapter(listtransport,mapgoods,mRecyclerView,this,Listing_CardView_activity.this);
+            mRecyclerView.setAdapter(adapter_new_card);
+            mRecyclerView.setOnRefreshComplete();
     }
     public void setGoodtypes(HashMap map)
     {

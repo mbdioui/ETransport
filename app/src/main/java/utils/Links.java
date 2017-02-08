@@ -5,9 +5,9 @@ package utils;
  */
 
 public final class Links {
-    final static String RootFolder="http://www.e-transport.eu/WebServices/";
-    final static String PicturesFolder ="http://www.e-transport.eu/uploads/Pictures/";
-    final static String ProfilePictures="http://www.e-transport.eu/uploads/ProfilesPictures/";
+    final static String RootFolder="http://www.e-transport-tunisie.eu/WebServices/";
+    final static String PicturesFolder ="http://www.e-transport-tunisie.eu/uploads/Pictures/";
+    final static String ProfilePictures="http://www.e-transport-tunisie.eu/uploads/ProfilesPictures/";
     public static String getProfilePictures() {
         return ProfilePictures;
     }
