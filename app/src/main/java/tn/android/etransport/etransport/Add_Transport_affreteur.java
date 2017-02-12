@@ -237,7 +237,7 @@ public class Add_Transport_affreteur extends AppCompatActivity implements TabLay
                 if (!s.equals("")&& picturesmap.get(s)==true)
                     transport_picture[i] = s;
                 else
-                    transport_picture[i] = "NULL";
+                    transport_picture[i] = null;
                 i++;
             }
             InsertTransportTask task = new InsertTransportTask(Add_Transport_affreteur.this, this);
