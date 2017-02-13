@@ -18,6 +18,8 @@ import android.widget.ImageView;
 
 import com.alertdialogpro.AlertDialogPro;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
@@ -45,6 +47,8 @@ public class Home_activity extends AppCompatActivity
     private View action_bar_layout;
     private AccountHeader headerResult = null;
     private ActionBar actionbar;
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+
 
     public String getType() {
         return type;
@@ -142,6 +146,11 @@ public class Home_activity extends AppCompatActivity
             FT.commit();
         }
         utils.ActionBar.changetextview(action_bar_layout,"Acceuil");
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(getApplication(), RegistrationIntentService.class);
+            startService(intent);
+        }
 
     }
 
@@ -212,5 +221,19 @@ public class Home_activity extends AppCompatActivity
         actionbar.setCustomView(action_bar_layout, new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         actionbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         return action_bar_layout;
+    }
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 }

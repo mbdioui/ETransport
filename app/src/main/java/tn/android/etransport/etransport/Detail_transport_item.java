@@ -72,7 +72,7 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
 
         if(transport.getTransport_picture_1()==null&&transport.getTransport_picture_2()==null &&transport.getTransport_picture_3()==null)
         {
-            SliderView.image("http://cloud.leportail.ci/default.png");
+            SliderView.image("https://cloud.leportail.ci/default.png");
             sliderShow.addSlider(SliderView);
         }
         else
