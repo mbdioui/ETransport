@@ -304,7 +304,8 @@ public class profile_update_fragment extends Fragment implements View.OnClickLis
                         fileName="";
                         if (imgPath!=null)
                             imgPath="";
-                        getActivity().finish();
+                        if (getActivity()!=null)
+                            getActivity().finish();
                         String newimagename=" ";
                         try {
                         JSONObject jsonObj = new JSONObject(new String(responseBody));
