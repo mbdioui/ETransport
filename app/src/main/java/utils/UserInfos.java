@@ -1,6 +1,8 @@
 package utils;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.rey.material.app.ThemeManager;
@@ -15,6 +17,12 @@ import Beans.User;
  public class UserInfos extends Application{
     private static User  connecteduser;
     public static Boolean IsConnected = false;
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
     //Bootstrap library
     @Override public void onCreate() {
         super.onCreate();
