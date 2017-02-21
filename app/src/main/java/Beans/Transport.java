@@ -349,18 +349,24 @@ public class Transport {
             //pictures
             if(Json.has("transport_picture_1")) {
                 String picture = (Json.getString("transport_picture_1"));
-                if (!picture.equals("null"))
+                if (!picture.equals("null") && !picture.equals(""))
                     this.transport_picture_1 = picture;
+                else
+                    this.transport_picture_1=null;
             }
             if(Json.has("transport_picture_2")) {
                 String picture = (Json.getString("transport_picture_2"));
-                if (!picture.equals("null"))
+                if (!picture.equals("null") && !picture.equals(""))
                     this.transport_picture_2 = picture;
+                else
+                    this.transport_picture_2=null;
             }
             if(Json.has("transport_picture_3")) {
                 String picture = (Json.getString("transport_picture_3"));
-                if (!picture.equals("null"))
+                if (!picture.equals("null") && !picture.equals(""))
                     this.transport_picture_3 = picture;
+                else
+                    this.transport_picture_3=null;
             }
 
     }

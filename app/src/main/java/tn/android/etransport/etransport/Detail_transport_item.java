@@ -1,11 +1,17 @@
 package tn.android.etransport.etransport;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 
+import com.alertdialogpro.AlertDialogPro;
 import com.beardedhen.androidbootstrap.AwesomeTextView;
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.DefaultSliderView;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,18 +34,20 @@ import java.util.List;
 import java.util.Locale;
 
 import Beans.Transport;
+import tasks.InsertOfferTask;
 import utils.Links;
+import utils.UserInfos;
 
 import static tn.android.etransport.etransport.R.id.slider;
 
-public class Detail_transport_item extends Activity implements OnMapReadyCallback {
+public class Detail_transport_item extends Activity implements OnMapReadyCallback,View.OnClickListener{
 
     private GoogleMap MapForm;
     private Transport transport;
     private Marker StartMarker;
     private Marker EndMarker;
     private MapFragment mapFragment;
-
+    private BootstrapButton PriceBTN;
     private AwesomeTextView datepublishView;
     private AwesomeTextView dategomin;
     private AwesomeTextView dategomax;
@@ -52,6 +60,8 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.transport_item_details);
         sliderShow = (SliderLayout) findViewById(slider);
+        PriceBTN = (BootstrapButton) findViewById(R.id.PriceDialog);
+        PriceBTN.setOnClickListener(this);
         mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.itemheaderdetail);
         mapFragment.getMapAsync(this);
         Bundle b=getIntent().getExtras();
@@ -186,5 +196,31 @@ public class Detail_transport_item extends Activity implements OnMapReadyCallbac
     protected void onStop() {
         sliderShow.stopAutoCycle();
         super.onStop();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId()== R.id.PriceDialog)
+        {
+            final AlertDialogPro.Builder alertDialogBuilder = new AlertDialogPro.Builder(this);
+            alertDialogBuilder.setMessage("Proposez un prix pour ce trajet");
+            final LayoutInflater inflater = this.getLayoutInflater();
+            final View inflator=inflater.inflate(R.layout.price_dialog, null);
+            alertDialogBuilder.setView(inflator);
+            final EditText edittextprice = (EditText) inflator.findViewById(R.id.price);
+            alertDialogBuilder.setPositiveButton("Confirmer", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    InsertOfferTask offer_insert_task = new InsertOfferTask(Detail_transport_item.this);
+                    //pass context in parameter
+                    offer_insert_task.setCntx(Detail_transport_item.this,transport,edittextprice.getText().toString());
+                    offer_insert_task.execute(Links.getRootFolder()+"insertoffer.php", edittextprice.getText().toString()
+                            ,String.valueOf(transport.getTransport_id()), String.valueOf(UserInfos.getConnecteduser().getId()));
+                }
+            });
+            alertDialogBuilder.setNegativeButton("Annuler",null);
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+
+        }
     }
 }

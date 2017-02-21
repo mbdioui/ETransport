@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:background="@color/back_dark"
+    tools:context="tn.android.etransport.etransport.Listing_CardView_activity">
+
+       <include android:id="@+id/title" layout="@layout/proposed_offers_title"></include>
+
+        <com.lhh.ptrrv.library.PullToRefreshRecyclerView
+            android:id="@+id/my_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title"
+            card_view:cardUseCompatPadding="true"
+            card_view:cardPreventCornerOverlap="false"
+            android:focusableInTouchMode="true"
+            android:scrollbars="vertical"/>
+        <com.rey.material.widget.ProgressView
+            android:id="@+id/progress_view"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:pv_autostart="true"
+            app:pv_circular="true"
+            android:layout_centerInParent="true"
+            app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
+            app:pv_progressMode="indeterminate"/>
+
+</RelativeLayout>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tn.android.etransport.etransport;
+package tn.android.etransport.etransport.FireBaseNotification;
 
 public class QuickstartPreferences {
 

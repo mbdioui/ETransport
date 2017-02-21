@@ -37,4 +37,5 @@
     <string name="geting_position_error">Erreur durant la récupération de l\'emplacement</string>
     <string name="passed_transport_title">Trajets passés</string>
     <string name="current_transport_title">Trajets en cours</string>
+    <string name="offers_proposed_title">offres proposées</string>
 </resources>

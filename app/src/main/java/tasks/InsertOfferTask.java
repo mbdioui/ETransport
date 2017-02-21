@@ -24,48 +24,32 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import Beans.User;
+import Beans.Transport;
 import dmax.dialog.SpotsDialog;
 import tn.android.etransport.etransport.R;
+import utils.Links;
+import utils.UserInfos;
 
-public class GetUserTask extends AsyncTask<String, String, String> {
+public class InsertOfferTask extends AsyncTask<String, String, String> {
 
-	private Context context;
-	private String responseBody;
-	private AlertDialog progdialog;
-	private Activity parentactivity;
-	private JSONObject UserJsonObject;
-	private User user=null;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Activity getParentactivity() {
-		return parentactivity;
-	}
-
-	public void setParentactivity(Activity parentactivity) {
-		this.parentactivity = parentactivity;
-	}
-
+	Context context;
+	String responseBody;
+	AlertDialog progdialog;
+	private Transport transport;
+	private String price;
 	public Context getCntx() {
 		return context;
 	}
 
-	public void setCntx(Context context) {
+	public void setCntx(Context context, Transport transport,String price) {
 		this.context = context;
+		this.transport=transport;
+		this.price=price;
 	}
 
-	public GetUserTask(Activity activity, Context context)
+	public InsertOfferTask(Activity activity)
 	{
-		setParentactivity(activity);
 		progdialog = new SpotsDialog(activity, R.style.CustomSpotDialog);
-		this.context=context;
 	}
 
 	@Override
@@ -76,8 +60,10 @@ public class GetUserTask extends AsyncTask<String, String, String> {
         try {
 	            // set up post data
 	            ArrayList<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-	            nameValuePair.add(new BasicNameValuePair("user_id", params[1]));
-
+	          
+	            nameValuePair.add(new BasicNameValuePair("price", params[1]));
+	            nameValuePair.add(new BasicNameValuePair("id_transport", params[2]));
+	            nameValuePair.add(new BasicNameValuePair("id_transporter",params[3]));
 	            //Encode and set entity
 	            post.setEntity(new UrlEncodedFormEntity(nameValuePair, HTTP.UTF_8));
 	            HttpResponse response = client.execute(post);
@@ -108,24 +94,24 @@ public class GetUserTask extends AsyncTask<String, String, String> {
 		try {
 			json = new JSONObject(result);
 			if(json.getString("error").equals("0"))
-			{
-				UserJsonObject = json.getJSONObject("user");
-				if (UserJsonObject != null) {
-					user = new User(UserJsonObject);
-				}
-				Toast.makeText(context,user.getMail(),Toast.LENGTH_LONG).show();
-			}
-			else
-			if(json.getString("error").equals("100"))
-				Toast.makeText(context,"Request Error",Toast.LENGTH_LONG).show();
+			{	Toast.makeText(context,"Votre demande est envoyée",Toast.LENGTH_LONG).show();
+			//notify the shipper
+			SendNotificationFromTransporter notification= new SendNotificationFromTransporter(context);
+			notification.execute(Links.getRootFolder()+"sendPushNotification.php","Proposition Reçu"
+					,"le transporteur "+ UserInfos.getConnecteduser().getF_name()+UserInfos.getConnecteduser().getL_name()
+							+" a proposé "+price +" pour votre trajet de "+transport.getAddress_from()+" à "+transport.getAddress_to()
+					,String.valueOf(transport.getUser_id()));}
 			else
 			if(json.getString("error").equals("2"))
-				Toast.makeText(context,"cmpte non existant",Toast.LENGTH_LONG).show();
+				Toast.makeText(context,"vous avez déja proposer votre offre pour ce trajet",Toast.LENGTH_LONG).show();
+			//  String id=json.getString("client_id").toString();
+			else
+			if(json.getString("error").equals("-1"))
+				Toast.makeText(context,"Connexion problem",Toast.LENGTH_LONG).show();
 		}
 		catch (JSONException e)        {}
 
 	}
-
 	
 	
 }

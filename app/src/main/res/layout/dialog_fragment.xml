@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_light">
+    <com.beardedhen.androidbootstrap.BootstrapCircleThumbnail
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:id="@+id/thumbnail_offer_user"
+        android:src="@android:drawable/ic_menu_camera"
+        app:bootstrapBrand="info"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        app:hasBorder="false"
+        android:layout_margin="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:id="@+id/user_flname_offer"
+        android:gravity="center"
+        android:drawableLeft="@drawable/ic_account_circle_white_36dp"
+        android:padding="10dp"
+        android:layout_toLeftOf="@id/thumbnail_offer_user"
+        android:layout_alignParentLeft="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:id="@+id/user_mail_offer"
+        android:gravity="center"
+        android:layout_below="@id/user_flname_offer"
+        android:drawableLeft="@android:drawable/sym_action_email"
+        android:padding="10dp"
+        android:layout_toLeftOf="@id/thumbnail_offer_user"
+        android:layout_alignParentLeft="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/black"
+        android:id="@+id/user_phone_offer"
+        android:gravity="center"
+        android:layout_below="@id/user_mail_offer"
+        android:drawableLeft="@android:drawable/sym_action_call"
+        android:padding="10dp"
+        android:layout_toLeftOf="@id/thumbnail_offer_user"
+        android:layout_alignParentLeft="true"/>
+</RelativeLayout>

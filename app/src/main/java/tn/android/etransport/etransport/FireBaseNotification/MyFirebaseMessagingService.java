@@ -1,4 +1,4 @@
-package tn.android.etransport.etransport;
+package tn.android.etransport.etransport.FireBaseNotification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,6 +15,10 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import tn.android.etransport.etransport.Home_activity;
+import tn.android.etransport.etransport.Listing_Offers;
+import tn.android.etransport.etransport.LoginActivity;
+import tn.android.etransport.etransport.R;
 import utils.UserInfos;
 
 /**
@@ -78,7 +82,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             //creating an intent for the notification
             Intent intent;
             if (UserInfos.IsConnected)
-                intent = new Intent(getApplicationContext(), Home_activity.class);
+                if(UserInfos.getConnecteduser().getStatus()==1)
+                    intent = new Intent(getApplicationContext(), Listing_Offers.class);
+                else
+                    intent = new Intent(getApplicationContext(), Home_activity.class);
+
             else
                 intent = new Intent(getApplicationContext(),LoginActivity.class);
 

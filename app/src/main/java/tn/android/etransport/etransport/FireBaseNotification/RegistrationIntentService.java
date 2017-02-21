@@ -1,4 +1,4 @@
-package tn.android.etransport.etransport;
+package tn.android.etransport.etransport.FireBaseNotification;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import tn.android.etransport.etransport.R;
 import utils.Links;
 import utils.UserInfos;
 

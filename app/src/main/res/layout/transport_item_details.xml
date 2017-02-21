@@ -148,11 +148,26 @@
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/slider"
             android:layout_below="@id/label_datearrivemax"
-            android:layout_alignParentBottom="true"
             android:layout_marginTop="25dp"
             android:layout_width="230dp"
             android:layout_centerHorizontal="true"
             android:layout_height="230dp"
+            />
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/PriceDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/slider"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="Proposer un prix"
+            app:bootstrapBrand="success"
+            app:bootstrapSize="lg"
+            app:buttonMode="regular"
+            app:showOutline="false"
+            app:roundedCorners="true"
             />
 
     </RelativeLayout>

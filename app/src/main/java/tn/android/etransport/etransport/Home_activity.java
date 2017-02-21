@@ -1,13 +1,17 @@
 package tn.android.etransport.etransport;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,20 +38,22 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 
+import tn.android.etransport.etransport.FireBaseNotification.RegistrationIntentService;
 import utils.Links;
+import utils.PermissionUtils;
 import utils.UserInfos;
 
 /**
  * Created by mohamed salah on 01/11/2016.
  */
 
-public class Home_activity extends AppCompatActivity
-{
+public class Home_activity extends AppCompatActivity {
 
     private View action_bar_layout;
     private AccountHeader headerResult = null;
     private ActionBar actionbar;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private final int PhoneState =111;
 
 
     public String getType() {
@@ -66,17 +72,16 @@ public class Home_activity extends AppCompatActivity
         PrimaryDrawerItem item2 = new PrimaryDrawerItem().withIdentifier(2)
                 .withName("Se déconnecter").withIcon(R.drawable.deconnexion).withSelectable(false);
         //
-        PrimaryDrawerItem item3= new PrimaryDrawerItem().withIdentifier(3).withName("Trajets en cours"
+        PrimaryDrawerItem item3 = new PrimaryDrawerItem().withIdentifier(3).withName("Trajets en cours"
         ).withIcon(android.R.drawable.ic_dialog_info).withSelectable(false);
         //profile
         IProfile profile = new ProfileDrawerItem()
-                .withName(UserInfos.getConnecteduser().getF_name()+" "+UserInfos.getConnecteduser().getL_name())
+                .withName(UserInfos.getConnecteduser().getF_name() + " " + UserInfos.getConnecteduser().getL_name())
                 .withEmail(UserInfos.getConnecteduser().getMail())
                 .withIcon(R.drawable.ic_account_circle_white_36dp)
                 .withIdentifier(UserInfos.getConnecteduser().getId());
 
-        if (!UserInfos.getConnecteduser().getUser_picture().equals("null"))
-        {
+        if (!UserInfos.getConnecteduser().getUser_picture().equals("null")) {
             DrawerImageLoader.init(new AbstractDrawerImageLoader() {
                 @Override
                 public void set(ImageView imageView, Uri uri, Drawable placeholder) {
@@ -107,9 +112,9 @@ public class Home_activity extends AppCompatActivity
                     return super.placeholder(ctx, tag);
                 }
             });
-            profile.withIcon(Links.getProfilePictures()+UserInfos.getConnecteduser().getUser_picture());
+            profile.withIcon(Links.getProfilePictures() + UserInfos.getConnecteduser().getUser_picture());
         }        //create the drawer and remember the `Drawer` result object
-        action_bar_layout=setup_tab();
+        action_bar_layout = setup_tab();
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -129,15 +134,14 @@ public class Home_activity extends AppCompatActivity
                 .withAccountHeader(headerResult)
                 .addDrawerItems(
                         item1
-                        ,item2
-                        ,new DividerDrawerItem()
-                        ,item3
+                        , item2
+                        , new DividerDrawerItem()
+                        , item3
                 )
                 .withOnDrawerItemClickListener(clickitem)
                 .build();
 
-        if (this.getClass()==Home_activity.class)
-        {
+        if (this.getClass() == Home_activity.class) {
             Home_fragment f = new Home_fragment();
             FragmentTransaction FT = getFragmentManager().beginTransaction();
             FT.replace(R.id.fragment_affreteur, f);
@@ -145,16 +149,26 @@ public class Home_activity extends AppCompatActivity
             FT.addToBackStack(null);
             FT.commit();
         }
-        utils.ActionBar.changetextview(action_bar_layout,"Acceuil");
+        utils.ActionBar.changetextview(action_bar_layout, "Acceuil");
         if (checkPlayServices()) {
-            // Start IntentService to register this application with GCM.
-            Intent intent = new Intent(getApplication(), RegistrationIntentService.class);
-            startService(intent);
+            if(Build.VERSION.SDK_INT< Build.VERSION_CODES.M)
+            { sendtoken();}
+            else
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED)
+                ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.READ_PHONE_STATE}
+                        , PhoneState);
+            else
+                sendtoken();
+
         }
 
     }
 
-
+    private void sendtoken()
+    {// Start IntentService to register this application with GCM.
+        Intent intent = new Intent(getApplication(), RegistrationIntentService.class);
+        startService(intent);
+    }
     private void exit() {
         this.finish();
     }
@@ -236,4 +250,14 @@ public class Home_activity extends AppCompatActivity
         }
         return true;
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M ) {
+            if (PermissionUtils.isPermissionGranted(permissions, grantResults, Manifest.permission.READ_PHONE_STATE)
+                    && requestCode == PhoneState)
+                sendtoken();
+
+        }
+    }
+
 }

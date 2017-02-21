@@ -24,6 +24,7 @@ import utils.UserInfos;
 
 public class Home_fragment extends Fragment implements View.OnClickListener {
     private ImageButton profile_btn;
+    private ImageButton history_btn;
     private View action_bar_layout;
     private ActionBar actionbar;
     private FloatingActionButton addButton;
@@ -35,7 +36,9 @@ public class Home_fragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.acceuil_affreteur, container, false);
         profile_btn = (ImageButton) v.findViewById(R.id.profile_button);
+        history_btn = (ImageButton) v.findViewById(R.id.History_BTN);
         profile_btn.setOnClickListener(this);
+        history_btn.setOnClickListener(this);
         addButton = (FloatingActionButton) v.findViewById(R.id.fabAdd);
         researchButton = (FloatingActionButton) v.findViewById(R.id.fabResearch);
         floatingactionmenu =(FloatingActionMenu) v.findViewById(R.id.floating_action_menu);
@@ -93,6 +96,15 @@ public class Home_fragment extends Fragment implements View.OnClickListener {
                 AlertDialogCustom.show(getActivity(),"vous devez être lié à internet");
 
 
+        }
+        else if (v.getId()==R.id.History_BTN)
+        {
+            if (UserInfos.getConnecteduser().getStatus()==1)
+            {
+            getActivity().finish();
+            Intent listingoffersintent = new Intent(getActivity(), Listing_Offers.class);
+            startActivity(listingoffersintent);
+            }
         }
     }
 
