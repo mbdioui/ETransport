@@ -91,7 +91,7 @@ public class InsertUserTask extends AsyncTask<String, String, String> {
 		try {
 			json = new JSONObject(result);
 			if(json.getString("error").equals("0"))
-				AlertDialogCustom.show(context,"@string/confirm_inscription");
+				AlertDialogCustom.show(context,context.getResources().getString(R.string.confirm_inscription));
 			else
 			if(json.getString("error").equals("2"))
 				AlertDialogCustom.show(context,"Mail déja existant");
