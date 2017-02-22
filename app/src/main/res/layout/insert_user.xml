@@ -109,7 +109,7 @@
 				  app:kswThumbColor="@color/light_blue"
 				  app:kswFadeBack="@color/darkgray"
 				  app:kswTintColor="@color/Gray"
-				  app:kswTextOff="Chauffeur"
+				  app:kswTextOff="Transporteur"
 				  app:kswAutoAdjustTextPosition="true"
 				  app:kswTextOn="Affréteur"/>
 

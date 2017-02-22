@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -26,6 +25,7 @@ import java.util.ArrayList;
 
 import dmax.dialog.SpotsDialog;
 import tn.android.etransport.etransport.R;
+import utils.AlertDialogCustom;
 
 public class InsertUserTask extends AsyncTask<String, String, String> {
 
@@ -91,14 +91,13 @@ public class InsertUserTask extends AsyncTask<String, String, String> {
 		try {
 			json = new JSONObject(result);
 			if(json.getString("error").equals("0"))
-				Toast.makeText(context,"Insertion Done",Toast.LENGTH_LONG).show();
+				AlertDialogCustom.show(context,"@string/confirm_inscription");
 			else
 			if(json.getString("error").equals("2"))
-				Toast.makeText(context,"Mail already exist",Toast.LENGTH_LONG).show();
-			//  String id=json.getString("client_id").toString();
+				AlertDialogCustom.show(context,"Mail déja existant");
 			else
 			if(json.getString("error").equals("-1"))
-				Toast.makeText(context,"Connexion problem",Toast.LENGTH_LONG).show();
+				AlertDialogCustom.show(context,"problème de connexion ");
 		}
 		catch (JSONException e)        {}
 

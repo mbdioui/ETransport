@@ -38,4 +38,5 @@
     <string name="passed_transport_title">Trajets passés</string>
     <string name="current_transport_title">Trajets en cours</string>
     <string name="offers_proposed_title">offres proposées</string>
+    <string name="confirm_inscription">Pour activer votre compte, veuillez consulter votre boite mail. Merci !</string>
 </resources>

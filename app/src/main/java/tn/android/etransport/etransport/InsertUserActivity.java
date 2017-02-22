@@ -98,7 +98,7 @@ public class InsertUserActivity extends Activity implements OnClickListener {
 						//Asyn task for inserting user
 						InsertUserTask user_insert_task = new InsertUserTask(InsertUserActivity.this);
 						//pass context in parameter
-						user_insert_task.setCntx(getApplicationContext());
+						user_insert_task.setCntx(InsertUserActivity.this);
 						user_insert_task.execute(Links.getRootFolder()+"insertusers.php", sprenom, sname, smail
 								, smdp, phone, status);
 						clearall();
