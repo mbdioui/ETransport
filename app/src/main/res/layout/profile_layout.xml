@@ -91,7 +91,7 @@
         android:id="@+id/update_profile_BTN"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/edit_address"
-        android:background="@drawable/buttonshapebackgroundcolored"
+        android:background="@drawable/buttonshapebackgroundcolor"
         app:rd_cornerRadius="35dp"
         app:rd_backgroundColor="@color/White"
         android:textColor="@color/White"

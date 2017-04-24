@@ -50,7 +50,7 @@
 
 
         <com.rey.material.widget.Button
-            android:background="@drawable/buttonshapebackgroundcolored"
+            android:background="@drawable/buttonshapebackgroundcolor"
             app:rd_cornerRadius="35dp"
             app:rd_enable="true"
             app:rd_backgroundColor="@color/White"
@@ -65,7 +65,7 @@
             android:layout_alignParentBottom="true"/>
 
         <com.rey.material.widget.Button
-            android:background="@drawable/buttonshapebackgroundcolored"
+            android:background="@drawable/buttonshapebackgroundcolor"
             app:rd_cornerRadius="35dp"
             app:rd_enable="true"
             android:layout_gravity="center"
